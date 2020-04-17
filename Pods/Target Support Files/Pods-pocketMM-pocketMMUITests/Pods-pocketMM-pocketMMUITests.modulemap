@@ -1,0 +1,6 @@
+framework module Pods_pocketMM_pocketMMUITests {
+  umbrella header "Pods-pocketMM-pocketMMUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
