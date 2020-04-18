@@ -1,6 +1,7 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Plaid"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AeroGearHttp" "${PODS_CONFIGURATION_BUILD_DIR}/AeroGearOAuth2" "${PODS_CONFIGURATION_BUILD_DIR}/OAuthSwift" "${PODS_ROOT}/Plaid"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-OTHER_LDFLAGS = $(inherited) -framework "Foundation" -framework "LinkKit" -framework "SafariServices" -framework "UIKit" -framework "WebKit"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AeroGearHttp/AeroGearHttp.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/AeroGearOAuth2/AeroGearOAuth2.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/OAuthSwift/OAuthSwift.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "AeroGearHttp" -framework "AeroGearOAuth2" -framework "Foundation" -framework "LinkKit" -framework "OAuthSwift" -framework "SafariServices" -framework "Security" -framework "UIKit" -framework "WebKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

@@ -1,0 +1,13 @@
+Pods/AeroGearHttp/
+Pods/AeroGearOAuth2/
+Pods/OAuthSwift/
+Pods/Pods.xcodeproj/xcuserdata/lycao.xcuserdatad/xcschemes/AeroGearHttp.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/lycao.xcuserdatad/xcschemes/AeroGearOAuth2.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/lycao.xcuserdatad/xcschemes/OAuthSwift.xcscheme
+Pods/Target Support Files/AeroGearHttp/
+Pods/Target Support Files/AeroGearOAuth2/
+Pods/Target Support Files/OAuthSwift/
+config.xml
+drive-download-20200418T011957Z-001.zip
+ionic.config.json
+resources/

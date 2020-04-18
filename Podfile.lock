@@ -1,16 +1,28 @@
 PODS:
+  - AeroGearHttp (2.0.0)
+  - AeroGearOAuth2 (2.1.0):
+    - AeroGearHttp (= 2.0.0)
+  - OAuthSwift (2.0.0)
   - Plaid (1.1.29)
 
 DEPENDENCIES:
+  - AeroGearOAuth2
+  - OAuthSwift (~> 2.0.0)
   - Plaid
 
 SPEC REPOS:
   trunk:
+    - AeroGearHttp
+    - AeroGearOAuth2
+    - OAuthSwift
     - Plaid
 
 SPEC CHECKSUMS:
+  AeroGearHttp: 65bf374aefd3521e1d8d33547e4db96047b745aa
+  AeroGearOAuth2: 4d14442db32625602fb2371f4739360801a1a260
+  OAuthSwift: 6805456763cf1c7ae0c16765257ed430b7aacae7
   Plaid: 8cebd80f77f400568028b6d66c97827b76c675f4
 
-PODFILE CHECKSUM: bd622bd09de2cc0522eb659613d74b82970beacd
+PODFILE CHECKSUM: b989877d6b5c71dbcdf6aa11fb6e0bc5d2992bad
 
 COCOAPODS: 1.9.1

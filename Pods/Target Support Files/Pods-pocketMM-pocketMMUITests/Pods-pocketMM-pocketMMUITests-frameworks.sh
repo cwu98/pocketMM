@@ -197,9 +197,15 @@ if [ -r "${ARTIFACT_LIST_FILE}" ]; then
 fi
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/AeroGearHttp/AeroGearHttp.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AeroGearOAuth2/AeroGearOAuth2.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework"
   install_framework "${PODS_ROOT}/Plaid/LinkKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/AeroGearHttp/AeroGearHttp.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AeroGearOAuth2/AeroGearOAuth2.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework"
   install_framework "${PODS_ROOT}/Plaid/LinkKit.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

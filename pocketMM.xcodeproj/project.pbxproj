@@ -10,6 +10,10 @@
 		571147585B32FE91B5078E25 /* Pods_pocketMM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0A46DACC518B5F85761BFE /* Pods_pocketMM.framework */; };
 		BE687A0CEDBFEEE714E8B9FE /* Pods_pocketMMTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5793DAC26627CB4C75B6EF4 /* Pods_pocketMMTests.framework */; };
 		D3F0B52BF8D5CDE27A5639FA /* Pods_pocketMM_pocketMMUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294A4BCAE669758AD0F51994 /* Pods_pocketMM_pocketMMUITests.framework */; };
+		E092DE92244A91F2005960FB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E092DE91244A91F2005960FB /* User.swift */; };
+		E092DE95244A921C005960FB /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E092DE94244A921C005960FB /* TransactionData.swift */; };
+		E092DE97244A9242005960FB /* PlaidAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E092DE96244A9242005960FB /* PlaidAPIManager.swift */; };
+		E092DE9B244B026B005960FB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E092DE9A244B026B005960FB /* WebKit.framework */; };
 		E0D54820243D8AF6009A9E27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D5481F243D8AF6009A9E27 /* AppDelegate.swift */; };
 		E0D54822243D8AF6009A9E27 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D54821243D8AF6009A9E27 /* ViewController.swift */; };
 		E0D54825243D8AF6009A9E27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D54823243D8AF6009A9E27 /* Main.storyboard */; };
@@ -46,6 +50,10 @@
 		A32105EE0DA9DD46B64FEC63 /* Pods-pocketMMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMMTests.release.xcconfig"; path = "Target Support Files/Pods-pocketMMTests/Pods-pocketMMTests.release.xcconfig"; sourceTree = "<group>"; };
 		B54FA31A9C6289ED2B8A4271 /* Pods-pocketMMTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMMTests.debug.xcconfig"; path = "Target Support Files/Pods-pocketMMTests/Pods-pocketMMTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C683C415D5ADE767F0056B16 /* Pods-pocketMM-pocketMMUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMM-pocketMMUITests.debug.xcconfig"; path = "Target Support Files/Pods-pocketMM-pocketMMUITests/Pods-pocketMM-pocketMMUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E092DE91244A91F2005960FB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E092DE94244A921C005960FB /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
+		E092DE96244A9242005960FB /* PlaidAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaidAPIManager.swift; sourceTree = "<group>"; };
+		E092DE9A244B026B005960FB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E0D5481C243D8AF6009A9E27 /* pocketMM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pocketMM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D5481F243D8AF6009A9E27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0D54821243D8AF6009A9E27 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E092DE9B244B026B005960FB /* WebKit.framework in Frameworks */,
 				571147585B32FE91B5078E25 /* Pods_pocketMM.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,11 +116,38 @@
 		601300FDEE2CA6F6A5951B29 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E092DE9A244B026B005960FB /* WebKit.framework */,
 				8C0A46DACC518B5F85761BFE /* Pods_pocketMM.framework */,
 				294A4BCAE669758AD0F51994 /* Pods_pocketMM_pocketMMUITests.framework */,
 				E5793DAC26627CB4C75B6EF4 /* Pods_pocketMMTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E092DE8F244A91CA005960FB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E0D54821243D8AF6009A9E27 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E092DE90244A91DB005960FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E0D54823243D8AF6009A9E27 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E092DE93244A9201005960FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E092DE96244A9242005960FB /* PlaidAPIManager.swift */,
+				E092DE94244A921C005960FB /* TransactionData.swift */,
+				E092DE91244A91F2005960FB /* User.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		E0D54813243D8AF6009A9E27 = {
@@ -140,8 +176,9 @@
 			isa = PBXGroup;
 			children = (
 				E0D5481F243D8AF6009A9E27 /* AppDelegate.swift */,
-				E0D54821243D8AF6009A9E27 /* ViewController.swift */,
-				E0D54823243D8AF6009A9E27 /* Main.storyboard */,
+				E092DE93244A9201005960FB /* Model */,
+				E092DE90244A91DB005960FB /* View */,
+				E092DE8F244A91CA005960FB /* Controller */,
 				E0D54829243D8AF7009A9E27 /* Assets.xcassets */,
 				E0D5482B243D8AF7009A9E27 /* LaunchScreen.storyboard */,
 				E0D5482E243D8AF7009A9E27 /* Info.plist */,
@@ -242,13 +279,16 @@
 				TargetAttributes = {
 					E0D5481B243D8AF6009A9E27 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1130;
 					};
 					E0D54832243D8AF7009A9E27 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1130;
 						TestTargetID = E0D5481B243D8AF6009A9E27;
 					};
 					E0D5483D243D8AF7009A9E27 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1130;
 						TestTargetID = E0D5481B243D8AF6009A9E27;
 					};
 				};
@@ -426,7 +466,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E092DE92244A91F2005960FB /* User.swift in Sources */,
+				E092DE95244A921C005960FB /* TransactionData.swift in Sources */,
 				E0D54822243D8AF6009A9E27 /* ViewController.swift in Sources */,
+				E092DE97244A9242005960FB /* PlaidAPIManager.swift in Sources */,
 				E0D54828243D8AF6009A9E27 /* pocketMM.xcdatamodeld in Sources */,
 				E0D54820243D8AF6009A9E27 /* AppDelegate.swift in Sources */,
 			);
@@ -610,10 +653,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PLAID_CLIENT_ID = 5e8ea71687c2a20011a44f45;
+				PLAID_DEVELOPMENT_SECRET = ef755aea84cb80790a9d58aaa184c7;
 				PLAID_PUBLIC_KEY = b2888251190f930f5060759a505ec8;
+				PLAID_SANDBOX_SECRET = 409a46449839b637a2fe0868f6e747;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nyu.pocketMM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -629,10 +675,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PLAID_CLIENT_ID = 5e8ea71687c2a20011a44f45;
+				PLAID_DEVELOPMENT_SECRET = ef755aea84cb80790a9d58aaa184c7;
 				PLAID_PUBLIC_KEY = b2888251190f930f5060759a505ec8;
+				PLAID_SANDBOX_SECRET = 409a46449839b637a2fe0868f6e747;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nyu.pocketMM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -652,7 +701,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nyu.pocketMMTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pocketMM.app/pocketMM";
 			};
@@ -673,7 +722,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nyu.pocketMMTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pocketMM.app/pocketMM";
 			};
@@ -693,7 +742,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nyu.pocketMMUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = pocketMM;
 			};
@@ -713,7 +762,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nyu.pocketMMUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = pocketMM;
 			};

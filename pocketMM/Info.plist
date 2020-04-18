@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>PLAID_CLIENT_ID</key>
+	<string>$(PLAID_CLIENT_ID)</string>
+	<key>PLAID_DEVELOPMENT_SECRET</key>
+	<string>$(PLAID_DEVELOPMENT_SECRET)</string>
+	<key>PLAID_SANDBOX_SECRET</key>
+	<string>$(PLAID_SANDBOX_SECRET)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

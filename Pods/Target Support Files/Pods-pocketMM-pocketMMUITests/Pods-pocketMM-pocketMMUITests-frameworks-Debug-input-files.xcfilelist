@@ -1,2 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-pocketMM-pocketMMUITests/Pods-pocketMM-pocketMMUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AeroGearHttp/AeroGearHttp.framework
+${BUILT_PRODUCTS_DIR}/AeroGearOAuth2/AeroGearOAuth2.framework
+${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework
 ${PODS_ROOT}/Plaid/LinkKit.framework
