@@ -9,7 +9,8 @@
 import UIKit
 
 class MainPageController: UIViewController {
-
+    
+    var user : User?
     override func viewDidLoad() {
         super.viewDidLoad()
        

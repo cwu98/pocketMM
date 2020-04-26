@@ -9,7 +9,7 @@
 import UIKit
 
 class AlertPageController: UIViewController {
-
+    var user : User?
     override func viewDidLoad() {
         super.viewDidLoad()
        

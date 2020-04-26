@@ -15,7 +15,8 @@ let PLAID_SANDBOX_SECRET : String =  Bundle.main.object(forInfoDictionaryKey: "P
 let PLAID_CLIENT_ID : String =  Bundle.main.object(forInfoDictionaryKey: "PLAID_CLIENT_ID") as! String
 
 class CreateUserController: UIViewController {
-
+    
+    var user : User?
     var plaidAPIManager : PlaidAPIManager = PlaidAPIManager()
     var timer : Timer = Timer()
     override func viewDidLoad() {

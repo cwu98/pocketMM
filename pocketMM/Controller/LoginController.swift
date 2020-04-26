@@ -10,6 +10,7 @@ import UIKit
 
 class LoginController: UIViewController {
     
+    var user : User?
     override func viewDidLoad() {
         super.viewDidLoad()
        

@@ -9,6 +9,6 @@
 import UIKit
 
 class GoalPageController: UITableViewController {
-
+    var user : User?
 
 }
