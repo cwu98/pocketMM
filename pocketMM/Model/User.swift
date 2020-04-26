@@ -36,6 +36,14 @@ struct User {
         self.itemId = itemId
         self.transactions = transactions
     }
+    //date range
+    //an array of transactions
+    /*
+     name
+     amount
+     date
+     category
+     */
     
     
 }

@@ -10,12 +10,19 @@
 		571147585B32FE91B5078E25 /* Pods_pocketMM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0A46DACC518B5F85761BFE /* Pods_pocketMM.framework */; };
 		BE687A0CEDBFEEE714E8B9FE /* Pods_pocketMMTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5793DAC26627CB4C75B6EF4 /* Pods_pocketMMTests.framework */; };
 		D3F0B52BF8D5CDE27A5639FA /* Pods_pocketMM_pocketMMUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294A4BCAE669758AD0F51994 /* Pods_pocketMM_pocketMMUITests.framework */; };
+		E06E730C24556FF600797988 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06E730B24556FF600797988 /* LoginController.swift */; };
+		E06E730E245571BC00797988 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06E730D245571BC00797988 /* MainPageController.swift */; };
+		E06E7310245576E900797988 /* GoalPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06E730F245576E900797988 /* GoalPageController.swift */; };
+		E06E731224557CA400797988 /* AddGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06E731124557CA400797988 /* AddGoalController.swift */; };
+		E06E731424557CF500797988 /* SummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06E731324557CF500797988 /* SummaryController.swift */; };
+		E06E731624557DB400797988 /* AlertPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06E731524557DB400797988 /* AlertPageController.swift */; };
+		E06E731824557DDA00797988 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06E731724557DDA00797988 /* SettingsController.swift */; };
 		E092DE92244A91F2005960FB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E092DE91244A91F2005960FB /* User.swift */; };
 		E092DE95244A921C005960FB /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E092DE94244A921C005960FB /* TransactionData.swift */; };
 		E092DE97244A9242005960FB /* PlaidAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E092DE96244A9242005960FB /* PlaidAPIManager.swift */; };
 		E092DE9B244B026B005960FB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E092DE9A244B026B005960FB /* WebKit.framework */; };
 		E0D54820243D8AF6009A9E27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D5481F243D8AF6009A9E27 /* AppDelegate.swift */; };
-		E0D54822243D8AF6009A9E27 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D54821243D8AF6009A9E27 /* ViewController.swift */; };
+		E0D54822243D8AF6009A9E27 /* CreateUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D54821243D8AF6009A9E27 /* CreateUserController.swift */; };
 		E0D54825243D8AF6009A9E27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D54823243D8AF6009A9E27 /* Main.storyboard */; };
 		E0D54828243D8AF6009A9E27 /* pocketMM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0D54826243D8AF6009A9E27 /* pocketMM.xcdatamodeld */; };
 		E0D5482A243D8AF7009A9E27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0D54829243D8AF7009A9E27 /* Assets.xcassets */; };
@@ -50,13 +57,20 @@
 		A32105EE0DA9DD46B64FEC63 /* Pods-pocketMMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMMTests.release.xcconfig"; path = "Target Support Files/Pods-pocketMMTests/Pods-pocketMMTests.release.xcconfig"; sourceTree = "<group>"; };
 		B54FA31A9C6289ED2B8A4271 /* Pods-pocketMMTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMMTests.debug.xcconfig"; path = "Target Support Files/Pods-pocketMMTests/Pods-pocketMMTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C683C415D5ADE767F0056B16 /* Pods-pocketMM-pocketMMUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMM-pocketMMUITests.debug.xcconfig"; path = "Target Support Files/Pods-pocketMM-pocketMMUITests/Pods-pocketMM-pocketMMUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E06E730B24556FF600797988 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		E06E730D245571BC00797988 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
+		E06E730F245576E900797988 /* GoalPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalPageController.swift; sourceTree = "<group>"; };
+		E06E731124557CA400797988 /* AddGoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalController.swift; sourceTree = "<group>"; };
+		E06E731324557CF500797988 /* SummaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryController.swift; sourceTree = "<group>"; };
+		E06E731524557DB400797988 /* AlertPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPageController.swift; sourceTree = "<group>"; };
+		E06E731724557DDA00797988 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		E092DE91244A91F2005960FB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E092DE94244A921C005960FB /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
 		E092DE96244A9242005960FB /* PlaidAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaidAPIManager.swift; sourceTree = "<group>"; };
 		E092DE9A244B026B005960FB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E0D5481C243D8AF6009A9E27 /* pocketMM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pocketMM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D5481F243D8AF6009A9E27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E0D54821243D8AF6009A9E27 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E0D54821243D8AF6009A9E27 /* CreateUserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserController.swift; sourceTree = "<group>"; };
 		E0D54824243D8AF6009A9E27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E0D54827243D8AF6009A9E27 /* pocketMM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pocketMM.xcdatamodel; sourceTree = "<group>"; };
 		E0D54829243D8AF7009A9E27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,7 +141,14 @@
 		E092DE8F244A91CA005960FB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E0D54821243D8AF6009A9E27 /* ViewController.swift */,
+				E06E731124557CA400797988 /* AddGoalController.swift */,
+				E0D54821243D8AF6009A9E27 /* CreateUserController.swift */,
+				E06E730B24556FF600797988 /* LoginController.swift */,
+				E06E730D245571BC00797988 /* MainPageController.swift */,
+				E06E730F245576E900797988 /* GoalPageController.swift */,
+				E06E731324557CF500797988 /* SummaryController.swift */,
+				E06E731524557DB400797988 /* AlertPageController.swift */,
+				E06E731724557DDA00797988 /* SettingsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -466,12 +487,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E06E7310245576E900797988 /* GoalPageController.swift in Sources */,
+				E06E731824557DDA00797988 /* SettingsController.swift in Sources */,
 				E092DE92244A91F2005960FB /* User.swift in Sources */,
+				E06E731224557CA400797988 /* AddGoalController.swift in Sources */,
+				E06E730E245571BC00797988 /* MainPageController.swift in Sources */,
 				E092DE95244A921C005960FB /* TransactionData.swift in Sources */,
-				E0D54822243D8AF6009A9E27 /* ViewController.swift in Sources */,
+				E0D54822243D8AF6009A9E27 /* CreateUserController.swift in Sources */,
+				E06E731424557CF500797988 /* SummaryController.swift in Sources */,
 				E092DE97244A9242005960FB /* PlaidAPIManager.swift in Sources */,
 				E0D54828243D8AF6009A9E27 /* pocketMM.xcdatamodeld in Sources */,
+				E06E731624557DB400797988 /* AlertPageController.swift in Sources */,
 				E0D54820243D8AF6009A9E27 /* AppDelegate.swift in Sources */,
+				E06E730C24556FF600797988 /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,7 @@ let PLAID_PUBLIC_KEY : String =  Bundle.main.object(forInfoDictionaryKey: "PLAID
 let PLAID_SANDBOX_SECRET : String =  Bundle.main.object(forInfoDictionaryKey: "PLAID_SANDBOX_SECRET") as! String
 let PLAID_CLIENT_ID : String =  Bundle.main.object(forInfoDictionaryKey: "PLAID_CLIENT_ID") as! String
 
-class ViewController: UIViewController {
+class CreateUserController: UIViewController {
 
     var plaidAPIManager : PlaidAPIManager = PlaidAPIManager()
     var timer : Timer = Timer()
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController : PLKPlaidLinkViewDelegate, WKNavigationDelegate {
+extension CreateUserController : PLKPlaidLinkViewDelegate, WKNavigationDelegate {
     
     
     func handleSuccessWithToken(_ publicToken: String, metadata: [String : Any]?) {
