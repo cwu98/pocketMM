@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>665408476717-0u4v9d0doak5snft1be1d6up175ce7vk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.665408476717-0u4v9d0doak5snft1be1d6up175ce7vk</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBjYdvpL53dpIxTSRyRVyrbuR05QTAPVUg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>665408476717</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.nyu.pocketMM</string>
+	<key>PROJECT_ID</key>
+	<string>pocketmm-d5886</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pocketmm-d5886.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:665408476717:ios:fd7f543b37199a2e8b8aa4</string>
+	<key>DATABASE_URL</key>
+	<string>https://pocketmm-d5886.firebaseio.com</string>
+</dict>
+</plist>

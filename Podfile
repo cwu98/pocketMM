@@ -7,9 +7,8 @@ target 'pocketMM' do
 
   # Pods for pocketMM
   pod 'Plaid'
-  pod 'AeroGearOAuth2'
-  pod 'OAuthSwift', '~> 2.0.0'
-
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
   target 'pocketMMTests' do
     inherit! :search_paths
     # Pods for testing

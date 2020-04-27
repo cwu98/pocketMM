@@ -9,6 +9,7 @@
 import UIKit
 import LinkKit
 import WebKit
+import Firebase
 
 let PLAID_PUBLIC_KEY : String =  Bundle.main.object(forInfoDictionaryKey: "PLAID_PUBLIC_KEY") as! String
 let PLAID_SANDBOX_SECRET : String =  Bundle.main.object(forInfoDictionaryKey: "PLAID_SANDBOX_SECRET") as! String
@@ -16,16 +17,32 @@ let PLAID_CLIENT_ID : String =  Bundle.main.object(forInfoDictionaryKey: "PLAID_
 
 class CreateUserController: UIViewController {
     
+    @IBOutlet weak var errorTextView: UITextView!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     var user : User?
     var plaidAPIManager : PlaidAPIManager = PlaidAPIManager()
     var timer : Timer = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        print(PLAID_PUBLIC_KEY)
-//        plaidAPIManager
+        errorTextView.isHidden = true
     }
 
+    @IBAction func createAccountPressed(_ sender: UIButton) {
+        if let email = emailTextField.text, let password = passwordTextField.text{
+            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                if let e = error{
+                    self.errorTextView.text = e.localizedDescription
+                    self.errorTextView.isHidden = false
+                }
+                else{
+                    self.errorTextView.isHidden = true
+                    self.performSegue(withIdentifier: "createAccount", sender: self)
+                }
+            }
+        }
+        
+    }
     @IBAction func linkButtonPressed(_ sender: UIButton) {
         let linkConfiguration = PLKConfiguration(key: PLAID_PUBLIC_KEY, env: .sandbox, product: .auth)
         linkConfiguration.clientName = "Link Demo"
@@ -34,8 +51,7 @@ class CreateUserController: UIViewController {
         if (UI_USER_INTERFACE_IDIOM() == .pad) {
             linkViewController.modalPresentationStyle = .formSheet;
         }
-//        let linkViewController = LinkViewController()
-//        linkViewController.modalPresentationStyle = .formSheet;
+
         present(linkViewController, animated: true)
     }
     
@@ -46,24 +62,10 @@ extension CreateUserController : PLKPlaidLinkViewDelegate, WKNavigationDelegate 
     
     func handleSuccessWithToken(_ publicToken: String, metadata: [String : Any]?) {
         print("Success " + publicToken)
-//        let group = DispatchGroup()
-//        group.enter()
-//        let webView = WKWebView()
-//        let itemData = plaidAPIManager.getItem(publicToken: publicToken, webView : webView)
-        
+     
         getItemAndTransaction(publicToken)
 //        plaidAPIManager.getTransaction(accessToken: "access-sandbox-7fe89844-5899-4597-b772-12bb86740dd4", itemId: "Zn1kvnglLbIjgx7Gkv4JS9nxaD7ww5igG1BZm")
-//        group.leave()
-//        group.wait()
-        
-//        webView.navigationDelegate = self
-//        webView.allowsBackForwardNavigationGestures = false
-//        let radQueue = OperationQueue()
-//        radQueue
-        
-        
-//        plaidAPIManager.getTransaction(accessToken: "access-sandbox-7fe89844-5899-4597-b772-12bb86740dd4", itemId: "Zn1kvnglLbIjgx7Gkv4JS9nxaD7ww5igG1BZm")
-//        presentAlertViewWithTitle("Success", message: "token: \(publicToken)\nmetadata: \(metadata ?? [:])")
+
     }
     func getItemAndTransaction(_ publicToken: String){
         var itemData : ItemData?

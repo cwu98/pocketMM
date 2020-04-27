@@ -29,6 +29,8 @@
 		E0D5482D243D8AF7009A9E27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D5482B243D8AF7009A9E27 /* LaunchScreen.storyboard */; };
 		E0D54838243D8AF7009A9E27 /* pocketMMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D54837243D8AF7009A9E27 /* pocketMMTests.swift */; };
 		E0D54843243D8AF7009A9E27 /* pocketMMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D54842243D8AF7009A9E27 /* pocketMMUITests.swift */; };
+		E0E0D4D32456B7D000852284 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0E0D4D22456B7CF00852284 /* GoogleService-Info.plist */; };
+		E0E0D4D52456C1F300852284 /* StartPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4D42456C1F300852284 /* StartPageController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		E0D5483E243D8AF7009A9E27 /* pocketMMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pocketMMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D54842243D8AF7009A9E27 /* pocketMMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pocketMMUITests.swift; sourceTree = "<group>"; };
 		E0D54844243D8AF7009A9E27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0E0D4D22456B7CF00852284 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E0E0D4D42456C1F300852284 /* StartPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageController.swift; sourceTree = "<group>"; };
 		E5793DAC26627CB4C75B6EF4 /* Pods_pocketMMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pocketMMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -149,6 +153,7 @@
 				E06E731324557CF500797988 /* SummaryController.swift */,
 				E06E731524557DB400797988 /* AlertPageController.swift */,
 				E06E731724557DDA00797988 /* SettingsController.swift */,
+				E0E0D4D42456C1F300852284 /* StartPageController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -201,6 +206,7 @@
 				E092DE90244A91DB005960FB /* View */,
 				E092DE8F244A91CA005960FB /* Controller */,
 				E0D54829243D8AF7009A9E27 /* Assets.xcassets */,
+				E0E0D4D22456B7CF00852284 /* GoogleService-Info.plist */,
 				E0D5482B243D8AF7009A9E27 /* LaunchScreen.storyboard */,
 				E0D5482E243D8AF7009A9E27 /* Info.plist */,
 				E0D54826243D8AF6009A9E27 /* pocketMM.xcdatamodeld */,
@@ -340,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0D5482D243D8AF7009A9E27 /* LaunchScreen.storyboard in Resources */,
+				E0E0D4D32456B7D000852284 /* GoogleService-Info.plist in Resources */,
 				E0D5482A243D8AF7009A9E27 /* Assets.xcassets in Resources */,
 				E0D54825243D8AF6009A9E27 /* Main.storyboard in Resources */,
 			);
@@ -490,6 +497,7 @@
 				E06E7310245576E900797988 /* GoalPageController.swift in Sources */,
 				E06E731824557DDA00797988 /* SettingsController.swift in Sources */,
 				E092DE92244A91F2005960FB /* User.swift in Sources */,
+				E0E0D4D52456C1F300852284 /* StartPageController.swift in Sources */,
 				E06E731224557CA400797988 /* AddGoalController.swift in Sources */,
 				E06E730E245571BC00797988 /* MainPageController.swift in Sources */,
 				E092DE95244A921C005960FB /* TransactionData.swift in Sources */,
