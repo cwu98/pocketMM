@@ -37,7 +37,7 @@ class CreateUserController: UIViewController {
                 }
                 else{
                     self.errorTextView.isHidden = true
-                    self.performSegue(withIdentifier: "createAccount", sender: self)
+                    self.performSegue(withIdentifier: Const.registerSegue, sender: self)
                 }
             }
         }

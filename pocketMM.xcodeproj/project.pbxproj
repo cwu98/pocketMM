@@ -31,6 +31,11 @@
 		E0D54843243D8AF7009A9E27 /* pocketMMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D54842243D8AF7009A9E27 /* pocketMMUITests.swift */; };
 		E0E0D4D32456B7D000852284 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0E0D4D22456B7CF00852284 /* GoogleService-Info.plist */; };
 		E0E0D4D52456C1F300852284 /* StartPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4D42456C1F300852284 /* StartPageController.swift */; };
+		E0E0D4D72456E20800852284 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4D62456E20800852284 /* Constants.swift */; };
+		E0E0D4DA2457083D00852284 /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4D82457083D00852284 /* SummaryCell.swift */; };
+		E0E0D4DB2457083D00852284 /* SummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0E0D4D92457083D00852284 /* SummaryCell.xib */; };
+		E0E0D4DE2457085200852284 /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4DC2457085200852284 /* GoalCell.swift */; };
+		E0E0D4DF2457085200852284 /* GoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0E0D4DD2457085200852284 /* GoalCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +91,11 @@
 		E0D54844243D8AF7009A9E27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0E0D4D22456B7CF00852284 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0E0D4D42456C1F300852284 /* StartPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageController.swift; sourceTree = "<group>"; };
+		E0E0D4D62456E20800852284 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E0E0D4D82457083D00852284 /* SummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCell.swift; sourceTree = "<group>"; };
+		E0E0D4D92457083D00852284 /* SummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SummaryCell.xib; sourceTree = "<group>"; };
+		E0E0D4DC2457085200852284 /* GoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
+		E0E0D4DD2457085200852284 /* GoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoalCell.xib; sourceTree = "<group>"; };
 		E5793DAC26627CB4C75B6EF4 /* Pods_pocketMMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pocketMMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -162,6 +172,10 @@
 			isa = PBXGroup;
 			children = (
 				E0D54823243D8AF6009A9E27 /* Main.storyboard */,
+				E0E0D4D82457083D00852284 /* SummaryCell.swift */,
+				E0E0D4D92457083D00852284 /* SummaryCell.xib */,
+				E0E0D4DC2457085200852284 /* GoalCell.swift */,
+				E0E0D4DD2457085200852284 /* GoalCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,6 +224,7 @@
 				E0D5482B243D8AF7009A9E27 /* LaunchScreen.storyboard */,
 				E0D5482E243D8AF7009A9E27 /* Info.plist */,
 				E0D54826243D8AF6009A9E27 /* pocketMM.xcdatamodeld */,
+				E0E0D4D62456E20800852284 /* Constants.swift */,
 			);
 			path = pocketMM;
 			sourceTree = "<group>";
@@ -347,8 +362,10 @@
 			files = (
 				E0D5482D243D8AF7009A9E27 /* LaunchScreen.storyboard in Resources */,
 				E0E0D4D32456B7D000852284 /* GoogleService-Info.plist in Resources */,
+				E0E0D4DF2457085200852284 /* GoalCell.xib in Resources */,
 				E0D5482A243D8AF7009A9E27 /* Assets.xcassets in Resources */,
 				E0D54825243D8AF6009A9E27 /* Main.storyboard in Resources */,
+				E0E0D4DB2457083D00852284 /* SummaryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,10 +516,13 @@
 				E092DE92244A91F2005960FB /* User.swift in Sources */,
 				E0E0D4D52456C1F300852284 /* StartPageController.swift in Sources */,
 				E06E731224557CA400797988 /* AddGoalController.swift in Sources */,
+				E0E0D4D72456E20800852284 /* Constants.swift in Sources */,
 				E06E730E245571BC00797988 /* MainPageController.swift in Sources */,
 				E092DE95244A921C005960FB /* TransactionData.swift in Sources */,
 				E0D54822243D8AF6009A9E27 /* CreateUserController.swift in Sources */,
+				E0E0D4DE2457085200852284 /* GoalCell.swift in Sources */,
 				E06E731424557CF500797988 /* SummaryController.swift in Sources */,
+				E0E0D4DA2457083D00852284 /* SummaryCell.swift in Sources */,
 				E092DE97244A9242005960FB /* PlaidAPIManager.swift in Sources */,
 				E0D54828243D8AF6009A9E27 /* pocketMM.xcdatamodeld in Sources */,
 				E06E731624557DB400797988 /* AlertPageController.swift in Sources */,
