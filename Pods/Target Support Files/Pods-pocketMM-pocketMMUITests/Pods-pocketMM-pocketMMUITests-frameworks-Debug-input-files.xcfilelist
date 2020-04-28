@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-pocketMM-pocketMMUITests/Pods-pocketMM-pocketMMUITests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework
+${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework
 ${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework
 ${PODS_ROOT}/Plaid/LinkKit.framework

@@ -36,6 +36,7 @@
 		E0E0D4DB2457083D00852284 /* SummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0E0D4D92457083D00852284 /* SummaryCell.xib */; };
 		E0E0D4DE2457085200852284 /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4DC2457085200852284 /* GoalCell.swift */; };
 		E0E0D4DF2457085200852284 /* GoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0E0D4DD2457085200852284 /* GoalCell.xib */; };
+		E782947924579BAB00C7B63E /* NSUIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E782947824579BAB00C7B63E /* NSUIColorHex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		E0E0D4DC2457085200852284 /* GoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
 		E0E0D4DD2457085200852284 /* GoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoalCell.xib; sourceTree = "<group>"; };
 		E5793DAC26627CB4C75B6EF4 /* Pods_pocketMMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pocketMMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E782947824579BAB00C7B63E /* NSUIColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUIColorHex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				E0D54823243D8AF6009A9E27 /* Main.storyboard */,
+				E782947824579BAB00C7B63E /* NSUIColorHex.swift */,
 				E0E0D4D82457083D00852284 /* SummaryCell.swift */,
 				E0E0D4D92457083D00852284 /* SummaryCell.xib */,
 				E0E0D4DC2457085200852284 /* GoalCell.swift */,
@@ -525,6 +528,7 @@
 				E0E0D4DA2457083D00852284 /* SummaryCell.swift in Sources */,
 				E092DE97244A9242005960FB /* PlaidAPIManager.swift in Sources */,
 				E0D54828243D8AF6009A9E27 /* pocketMM.xcdatamodeld in Sources */,
+				E782947924579BAB00C7B63E /* NSUIColorHex.swift in Sources */,
 				E06E731624557DB400797988 /* AlertPageController.swift in Sources */,
 				E0D54820243D8AF6009A9E27 /* AppDelegate.swift in Sources */,
 				E06E730C24556FF600797988 /* LoginController.swift in Sources */,
