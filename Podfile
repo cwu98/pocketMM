@@ -6,6 +6,7 @@ target 'pocketMM' do
   use_frameworks!
 
   # Pods for pocketMM
+pod 'Charts' 
   pod 'Plaid'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
