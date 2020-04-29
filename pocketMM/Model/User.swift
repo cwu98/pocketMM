@@ -7,44 +7,26 @@
 //
 
 import Foundation
+import Firebase
 
 enum Category{
 //    case
 }
-struct User {
-//    var userName : String {
-//        get {
-//            return "user_good"
-//        }
-//    }
-//    var passWord : String {
-//        get {
-//            return "pass_good"
-//        }
-//    }
+struct User : Codable{
+    let email : String
     let accessToken : String
     let itemId : String
-//    var categories :
-    var transactions : [Transaction]?
-//    init(userName: String, passWord: String, accessToken: String,
-//         itemId : Int, transactions : [Transaction]?){
-//        self.
-//    }
-    init(accessToken: String,
-         itemId : String, transactions : [Transaction]?){
+    let transactions: [Transaction]
+    let goals : [Goal]
+    init(email: String, accessToken: String,
+         itemId : String, transactions: [Transaction],
+         goals: [Goal]){
+        self.email = email
         self.accessToken = accessToken
         self.itemId = itemId
         self.transactions = transactions
+        self.goals = goals
     }
-    //date range
-    //an array of transactions
-    /*
-     name
-     amount
-     date
-     category
-     */
-    
     
 }
 struct Item {
@@ -52,15 +34,26 @@ struct Item {
     let itemId : String
 }
 
-struct Transaction {
+struct Transaction : Codable {
+    let item_id: String
+    let transaction_id : String
     let name : String
     let amount : Double
+    let date : String
     let category : [String]?
-    let category_id : String
-    init(name: String, amount: Double, category: [String]?, category_id : String){
+    init(name: String, amount: Double, category: [String]?, item_id : String, transaction_id: String,
+         date: String){
         self.name = name
         self.amount = amount
         self.category = category
-        self.category_id = category_id
+        self.item_id  = item_id
+        self.transaction_id = transaction_id
+        self.date = date
     }
+}
+
+struct Goal :Codable {
+    let name : String
+    let monthlyAmount: Double
+    let image: Data
 }
