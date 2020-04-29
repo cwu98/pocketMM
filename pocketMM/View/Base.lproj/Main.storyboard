@@ -126,7 +126,7 @@
             </objects>
             <point key="canvasLocation" x="-11433.333333333334" y="1213.3928571428571"/>
         </scene>
-        <!--Main Page Controller-->
+        <!--Home-->
         <scene sceneID="tCd-Rm-oqE">
             <objects>
                 <viewController id="arW-aE-Y7o" customClass="MainPageController" sceneMemberID="viewController">
@@ -200,7 +200,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                         <state key="normal" title="Summary"/>
                                                         <connections>
-                                                            <segue destination="UQA-a2-XXv" kind="show" id="1Ov-sb-ad8"/>
+                                                            <action selector="summaryButtonPressed:" destination="arW-aE-Y7o" eventType="touchUpInside" id="Vii-t2-ypO"/>
+                                                            <segue destination="UQA-a2-XXv" kind="show" identifier="summarySegue" id="1Ov-sb-ad8"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -240,13 +241,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Tj-G5-oj3"/>
                     </view>
-                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="Qyq-Nq-SjU">
+                    <navigationItem key="navigationItem" title="Home" leftItemsSupplementBackButton="YES" id="Qyq-Nq-SjU">
                         <barButtonItem key="rightBarButtonItem" title="Log Out" id="XpC-h4-TLA">
                             <connections>
                                 <action selector="logOutPressed:" destination="arW-aE-Y7o" id="Xj4-DY-ANA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="summaryButton" destination="0wS-yr-dBK" id="Iti-U9-iVL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0yf-Ev-ace" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -291,7 +295,7 @@
             </objects>
             <point key="canvasLocation" x="-7925" y="294"/>
         </scene>
-        <!--Summary Controller-->
+        <!--Spending-->
         <scene sceneID="jgc-Ay-tzB">
             <objects>
                 <viewController id="UQA-a2-XXv" customClass="SummaryController" customModule="pocketMM" customModuleProvider="target" sceneMemberID="viewController">
@@ -303,18 +307,39 @@
                                 <rect key="frame" x="26.5" y="313" width="361" height="324"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="yearLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IS5-KC-kjp">
+                                <rect key="frame" x="164.5" y="161.5" width="85.5" height="24"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progressViewStyle="bar" progress="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="xvS-8j-dhv">
+                                <rect key="frame" x="123" y="282.5" width="150" height="2.5"/>
+                                <color key="progressTintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
+                            <textField opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="monthLabel" placeholder="Select date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sf6-1B-Wri">
+                                <rect key="frame" x="135" y="128" width="144" height="34"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" name="backgroundGreen"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="IS5-KC-kjp" firstAttribute="centerX" secondItem="IXU-3c-33W" secondAttribute="centerX" id="0r5-BI-N5Z"/>
                             <constraint firstItem="HI5-WY-KIP" firstAttribute="centerY" secondItem="IXU-3c-33W" secondAttribute="centerY" id="1kH-DB-osm"/>
+                            <constraint firstItem="xvS-8j-dhv" firstAttribute="centerX" secondItem="IXU-3c-33W" secondAttribute="centerX" id="ABO-qr-hle"/>
+                            <constraint firstItem="sf6-1B-Wri" firstAttribute="top" secondItem="IXU-3c-33W" secondAttribute="top" constant="40" id="EXs-9K-YgV"/>
+                            <constraint firstItem="IS5-KC-kjp" firstAttribute="top" secondItem="sf6-1B-Wri" secondAttribute="bottom" constant="-0.5" id="MNt-bS-rzI"/>
                             <constraint firstItem="HI5-WY-KIP" firstAttribute="width" secondItem="juF-pT-HfI" secondAttribute="width" multiplier="0.871981" id="S5G-rc-DVo"/>
+                            <constraint firstItem="sf6-1B-Wri" firstAttribute="centerX" secondItem="IXU-3c-33W" secondAttribute="centerX" id="gwT-x8-1Mg"/>
                             <constraint firstItem="HI5-WY-KIP" firstAttribute="centerX" secondItem="IXU-3c-33W" secondAttribute="centerX" id="lCN-7M-caj"/>
                             <constraint firstItem="HI5-WY-KIP" firstAttribute="height" secondItem="juF-pT-HfI" secondAttribute="height" multiplier="0.361607" id="oc6-Do-czP"/>
+                            <constraint firstItem="HI5-WY-KIP" firstAttribute="top" secondItem="xvS-8j-dhv" secondAttribute="bottom" constant="29" id="waR-Bf-XKp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IXU-3c-33W"/>
                     </view>
-                    <navigationItem key="navigationItem" id="wbZ-Za-QqC">
+                    <navigationItem key="navigationItem" title="Spending" leftItemsSupplementBackButton="YES" id="wbZ-Za-QqC">
                         <barButtonItem key="rightBarButtonItem" title="Log Out" id="QPA-Ql-UOg">
                             <connections>
                                 <action selector="logOutPressed:" destination="UQA-a2-XXv" id="wjI-tp-xN6"/>
@@ -323,6 +348,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="PieChartView" destination="HI5-WY-KIP" id="oLf-vi-aY8"/>
+                        <outlet property="monthLabel" destination="sf6-1B-Wri" id="jUd-eL-BfS"/>
+                        <outlet property="pieChart" destination="HI5-WY-KIP" id="NbI-6n-1nI"/>
+                        <outlet property="yearLabel" destination="IS5-KC-kjp" id="OXN-3m-V00"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7AW-FB-rFT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
