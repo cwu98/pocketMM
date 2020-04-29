@@ -16,7 +16,9 @@ class MainPageController: UIViewController {
         title = "💰Home"
         navigationItem.hidesBackButton = true
         print("loading transactions")
-        if let transactions = getTransactionFromRange(startDate: "2020-01-01", endDate: "2020-04-26"){
+        let transactions = getTransactionFromRange(startDate: "2020-01-01", endDate: "2020-04-26")
+        print(transactions.count, allTransactions.count)
+        if transactions.count > 0{
             print("retrieved transactions")
             print(transactions.description)
         }

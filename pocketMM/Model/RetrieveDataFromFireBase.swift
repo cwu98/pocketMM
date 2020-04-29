@@ -8,10 +8,9 @@
 
 import Foundation
 import Firebase
-func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]?{
-    var allTransactions : [Transaction]?
-    
-    
+var allTransactions : [Transaction] = []
+func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]{
+     
     let dateFormatterGet = DateFormatter()
     dateFormatterGet.dateFormat = "yyyy-MM-dd"
     
@@ -29,18 +28,32 @@ func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]?
                     print(e.localizedDescription)
                     return
                 }
-                allTransactions = []
                 if let data = querySnapshot?.data(){
-                    
-                    let transactions = data[CONST.FSTORE.transactions] as! Array<Transaction>
-                    print(transactions.description)
-                    for transaction in transactions{
-                        if let date = dateFormatterGet.date(from: transaction.date){
-                            if(dateInterval.contains(date)){
-                                allTransactions?.append(transaction)
-                            }
+//                    print(data)
+                    let decoder = JSONDecoder()
+                    do{
+                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.prettyPrinted)
+
+                        let decodedData = try decoder.decode(Transactions.self, from: jsonData)
+//                        print(decodedData)
+                        for transaction in decodedData.transactions {
+                            print(allTransactions.count)
+                            allTransactions.append(
+                                Transaction(
+                                amount: transaction.amount,
+                                category: transaction.category,
+                                item_id : transaction.item_id,
+                                transaction_id: transaction.transaction_id,
+                                date: transaction.date)
+                            )
                         }
+                        print(allTransactions.count)
                     }
+                    catch{
+                        print("error from parsing transactions json : ", error)
+                      
+                    }
+                    
                 }
             }
         }
@@ -49,5 +62,6 @@ func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]?
        print("There was an error decoding the string")
         return allTransactions
     }
+    print(allTransactions.count)
     return allTransactions
 }

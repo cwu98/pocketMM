@@ -12,7 +12,7 @@ import Firebase
 enum Category{
 //    case
 }
-struct User : Codable{
+struct User {
     let email : String
     let accessToken : String
     let itemId : String
@@ -33,22 +33,22 @@ struct Item {
     let accessToken: String
     let itemId : String
 }
-
-struct Transaction : Codable {
-    let item_id: String
+struct Transactions : Decodable{
+    let transactions : [Transaction]
+}
+struct Transaction : Decodable {
     let transaction_id : String
-    let name : String
     let amount : Double
     let date : String
-    let category : [String]?
-    init(name: String, amount: Double, category: [String]?, item_id : String, transaction_id: String,
+    let category : [String]
+    let item_id : String
+    init(amount: Double, category: [String], item_id: String, transaction_id: String,
          date: String){
-        self.name = name
         self.amount = amount
         self.category = category
-        self.item_id  = item_id
         self.transaction_id = transaction_id
         self.date = date
+        self.item_id = item_id
     }
 }
 

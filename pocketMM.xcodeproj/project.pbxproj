@@ -36,7 +36,6 @@
 		E0E0D4DB2457083D00852284 /* SummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0E0D4D92457083D00852284 /* SummaryCell.xib */; };
 		E0E0D4DE2457085200852284 /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4DC2457085200852284 /* GoalCell.swift */; };
 		E0E0D4DF2457085200852284 /* GoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0E0D4DD2457085200852284 /* GoalCell.xib */; };
-		E0E0D4E12459A1C300852284 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4E02459A1C300852284 /* ImagePicker.swift */; };
 		E0E0D4E32459BDBD00852284 /* RetrieveDataFromFireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4E22459BDBC00852284 /* RetrieveDataFromFireBase.swift */; };
 		E782947924579BAB00C7B63E /* NSUIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E782947824579BAB00C7B63E /* NSUIColorHex.swift */; };
 /* End PBXBuildFile section */
@@ -99,7 +98,6 @@
 		E0E0D4D92457083D00852284 /* SummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SummaryCell.xib; sourceTree = "<group>"; };
 		E0E0D4DC2457085200852284 /* GoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
 		E0E0D4DD2457085200852284 /* GoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoalCell.xib; sourceTree = "<group>"; };
-		E0E0D4E02459A1C300852284 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		E0E0D4E22459BDBC00852284 /* RetrieveDataFromFireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveDataFromFireBase.swift; sourceTree = "<group>"; };
 		E5793DAC26627CB4C75B6EF4 /* Pods_pocketMMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pocketMMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E782947824579BAB00C7B63E /* NSUIColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUIColorHex.swift; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 				E06E731724557DDA00797988 /* SettingsController.swift */,
 				E06E730F245576E900797988 /* GoalPageController.swift */,
 				E06E731124557CA400797988 /* AddGoalController.swift */,
-				E0E0D4E02459A1C300852284 /* ImagePicker.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -528,7 +525,6 @@
 				E0E0D4D72456E20800852284 /* Constants.swift in Sources */,
 				E0E0D4E32459BDBD00852284 /* RetrieveDataFromFireBase.swift in Sources */,
 				E06E730E245571BC00797988 /* MainPageController.swift in Sources */,
-				E0E0D4E12459A1C300852284 /* ImagePicker.swift in Sources */,
 				E092DE95244A921C005960FB /* TransactionData.swift in Sources */,
 				E0D54822243D8AF6009A9E27 /* CreateUserController.swift in Sources */,
 				E0E0D4DE2457085200852284 /* GoalCell.swift in Sources */,
