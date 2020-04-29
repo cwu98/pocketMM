@@ -99,7 +99,7 @@ extension CreateUserController : PLKPlaidLinkViewDelegate, WKNavigationDelegate 
         print("Success " + publicToken)
         itemData = self.plaidAPIManager.getItem(publicToken: publicToken)
         if let item = itemData {
-            print("fucking item is available")
+            
         }
         addTransactionsToFirebaseDb()
         

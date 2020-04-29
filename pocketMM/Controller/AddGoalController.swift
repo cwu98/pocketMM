@@ -8,10 +8,11 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class AddGoalController: UIViewController {
     @IBOutlet weak var uploadTextView: UITextView!
-    
+    var imageName : String?
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var uploadImageView: UIImageView!
@@ -19,21 +20,30 @@ class AddGoalController: UIViewController {
         super.viewDidLoad()
         title = "💰Add Goals"
         uploadImageView.isUserInteractionEnabled = true
-//        uploadImageView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleUpload)))
+        uploadImageView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleUpload)))
     }
     
     @IBAction func createGoalClicked(_ sender: UIButton) {
         let name = nameTextField.text
         let amount = amountTextField.text
-        if let image = uploadImageView.image!.pngData(){
+        //String(data: image, encoding: .utf8)
+        
+        if let image = imageName {
+//            print(String(data: image, encoding: .utf8), image.base64EncodedString () )
+            //let imageData = Data (base64Encoded: imageString)!
+//            let image = NSImage (data: imageData)!
+            
+            
             let docData = [
                 CONST.FSTORE.goal_name : name,
                 CONST.FSTORE.goal_amount : amount,
-                CONST.FSTORE.goal_image : String(data: image, encoding: .utf8)
+                CONST.FSTORE.goal_image : image
             ]
         db.collection(CONST.FSTORE.usersCollection).document("user_good@nyu.com").updateData([
             CONST.FSTORE.goals : FieldValue.arrayUnion([docData])
             ])
+            uploadTextView.isHidden = false
+            uploadTextView.text = "Successfully uploaded goal"
         }
         
     }
@@ -51,8 +61,8 @@ class AddGoalController: UIViewController {
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary;
-//        uploadTextView.isHidden = false
-//        uploadTextView.text = "tapped"
+        uploadTextView.isHidden = false
+        uploadTextView.text = "tapped"
         print("handling here\n ")
         present(picker, animated: true, completion: nil)
     }
@@ -64,7 +74,8 @@ extension AddGoalController: UIImagePickerControllerDelegate, UINavigationContro
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary;
-//        uploadTextView.isHidden = false
+        uploadTextView.isHidden = false
+               uploadTextView.text = "tapped"
         print("handling here\n ")
         present(picker, animated: true, completion: nil)
     }
@@ -90,6 +101,7 @@ extension AddGoalController: UIImagePickerControllerDelegate, UINavigationContro
         if let selectedImage = selectedImageFromPicker{
 //            self.uploadImageView.image = selectedImage
 //            print("selected image gesture")
+            uploadImageToFirebase(image: selectedImage)
            DispatchQueue.main.async() {
                 self.uploadImageView.image = selectedImage
                 print("selected image gesture")
@@ -101,50 +113,51 @@ extension AddGoalController: UIImagePickerControllerDelegate, UINavigationContro
     
     func uploadImageToFirebase(image: UIImage){
        // Create a root reference
-//        let storage = Storage.storage()
-//        let storageRef = storage.reference()
-//        // Data in memory
-//
-//        let imageName = NSUUID().uuidString
-//        // Create a reference to the file you want to upload
-//        let riversRef = storageRef.child("images/\(imageName).png")
-//
-//        // Upload the file to the path "images/rivers.jpg"
-//        if let data = image.pngData(){
-//            let uploadTask = riversRef.putData(data, metadata: nil) { (metadata, error) in
-//              guard let metadata = metadata else {
-//                // Uh-oh, an error occurred!
-//                self.uploadTextView.isHidden = false
-//                self.uploadTextView.text = error!.localizedDescription
-//                return
-//              }
-//
-//              // Metadata contains file metadata such as size, content-type.
-//              let size = metadata.size
-//              // You can also access to download URL after upload.
-//              riversRef.downloadURL { (url, error) in
-//                guard let downloadURL = url else {
-//                  // Uh-oh, an error occurred!
-//                  return
-//                }
-//                db.collection(CONST.FSTORE.usersCollection).document("user_good@nyu.com").updateData([
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        // Data in memory
+
+        let image_name = NSUUID().uuidString
+        // Create a reference to the file you want to upload
+        let riversRef = storageRef.child("images/\(image_name).png")
+
+        // Upload the file to the path "images/rivers.jpg"
+        if let data = image.pngData(){
+            let uploadTask = riversRef.putData(data, metadata: nil) { (metadata, error) in
+              guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                self.uploadTextView.isHidden = false
+                self.uploadTextView.text = error!.localizedDescription
+                return
+              }
+
+              // Metadata contains file metadata such as size, content-type.
+              let size = metadata.size
+              // You can also access to download URL after upload.
+              riversRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                  // Uh-oh, an error occurred!
+                  return
+                }
+                self.imageName = image_name
+//           db.collection(CONST.FSTORE.usersCollection).document("user_good@nyu.com").updateData([
 //                    CONST.FSTORE.goals : FieldValue.arrayUnion([imageName])
 //                ])
-//                print(downloadURL, size)
-//              }
-//            }
-//            uploadTask.observe(.progress) { snapshot in
-//            // Upload reported progress
-//                let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
-//                  / Double(snapshot.progress!.totalUnitCount)
-//                  print("progress: ", percentComplete)
-//            }
-//
-//          uploadTask.observe(.success) { snapshot in
-//            // Upload completed successfully
-//              print("uploaded successfully")
-//          }
-//        }
-            
+                print(downloadURL, size)
+              }
+            }
+            uploadTask.observe(.progress) { snapshot in
+            // Upload reported progress
+                let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
+                  / Double(snapshot.progress!.totalUnitCount)
+                  print("progress: ", percentComplete)
+            }
+
+          uploadTask.observe(.success) { snapshot in
+            // Upload completed successfully
+              print("uploaded successfully")
+          }
+        }
+
     }
 }
