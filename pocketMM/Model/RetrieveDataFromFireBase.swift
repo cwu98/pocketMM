@@ -33,9 +33,15 @@ func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]{
                     let decoder = JSONDecoder()
                     do{
                         let jsonData = try JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.prettyPrinted)
-
+                        
+//                        let str = jsonData.description
+//                        let data = str.data(using: String.Encoding.utf8)!
+//                        if let file = FileHandle(forWritingAtPath:"./transactions") {
+//                            file.write(data)
+//                        }
+                        
                         let decodedData = try decoder.decode(Transactions.self, from: jsonData)
-//                        print(decodedData)
+                        print("transactions ", decodedData)
                         for transaction in decodedData.transactions {
                             print(allTransactions.count)
                             allTransactions.append(

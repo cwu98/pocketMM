@@ -12,6 +12,9 @@ struct CONST{
     static let registerSegue = "createAccount"
     static let loginSegue = "login"
     
+    static let cellReusableIdentifier = "ReusableCell"
+    static let GoalCell = "GoalCell"
+    
     struct FSTORE{
         static let usersCollection = "users"
         static let userEmail = "email"

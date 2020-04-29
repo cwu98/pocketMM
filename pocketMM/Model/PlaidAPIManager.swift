@@ -211,17 +211,17 @@ struct PlaidAPIManager{
                                     date: transactionData.date)
                 transactions.append(transaction)
                 
-                let docData : [String: Any] = [
-                    CONST.FSTORE.transaction_id : transaction.transaction_id,
-                    CONST.FSTORE.item_id : transaction.item_id,
-                    CONST.FSTORE.transaction_date : transaction.date,
-                    CONST.FSTORE.transaction_amount : transaction.amount,
-                    CONST.FSTORE.transaction_category : transaction.category
-                    ]
-
-                db.collection(CONST.FSTORE.usersCollection).document("user_good@nyu.com").updateData([
-                    CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
-                ])
+//                let docData : [String: Any] = [
+//                    CONST.FSTORE.transaction_id : transaction.transaction_id,
+//                    CONST.FSTORE.item_id : transaction.item_id,
+//                    CONST.FSTORE.transaction_date : transaction.date,
+//                    CONST.FSTORE.transaction_amount : transaction.amount,
+//                    CONST.FSTORE.transaction_category : transaction.category
+//                    ]
+//
+//                db.collection(CONST.FSTORE.usersCollection).document("user_good@nyu.com").updateData([
+//                    CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
+//                ])
 
             }
             return transactions

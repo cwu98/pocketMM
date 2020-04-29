@@ -52,8 +52,16 @@ struct Transaction : Decodable {
     }
 }
 
-struct Goal :Codable {
+struct Goals: Decodable{
+    let goals : [Goal]
+}
+struct Goal :Decodable {
     let name : String
-    let monthlyAmount: Double
-    let image: Data
+    let amount: Double
+    let image: String
+    init(name: String, amount: Double, image: String){
+        self.name = name
+        self.amount = amount
+        self.image = image
+    }
 }

@@ -12,7 +12,7 @@ import FirebaseStorage
 
 class AddGoalController: UIViewController {
     @IBOutlet weak var uploadTextView: UITextView!
-    var imageName : String?
+    var imageUrl : String?
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var uploadImageView: UIImageView!
@@ -25,26 +25,28 @@ class AddGoalController: UIViewController {
     
     @IBAction func createGoalClicked(_ sender: UIButton) {
         let name = nameTextField.text
-        let amount = amountTextField.text
+        let amountStr = amountTextField.text
         //String(data: image, encoding: .utf8)
         
-        if let image = imageName {
+        if let image = imageUrl,  let amount = amountStr {
 //            print(String(data: image, encoding: .utf8), image.base64EncodedString () )
             //let imageData = Data (base64Encoded: imageString)!
 //            let image = NSImage (data: imageData)!
             
+            if let email = Auth.auth().currentUser?.email {
+                let docData : [String: Any] = [
+                        CONST.FSTORE.goal_name : name,
+                        CONST.FSTORE.goal_amount : Double(amount),
+                        CONST.FSTORE.goal_image : image
+                    ]
+                db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
+                    CONST.FSTORE.goals : FieldValue.arrayUnion([docData])
+                    ])
+                    uploadTextView.isHidden = false
+                    uploadTextView.text = "Successfully uploaded goal"
+                }
+            }
             
-            let docData = [
-                CONST.FSTORE.goal_name : name,
-                CONST.FSTORE.goal_amount : amount,
-                CONST.FSTORE.goal_image : image
-            ]
-        db.collection(CONST.FSTORE.usersCollection).document("user_good@nyu.com").updateData([
-            CONST.FSTORE.goals : FieldValue.arrayUnion([docData])
-            ])
-            uploadTextView.isHidden = false
-            uploadTextView.text = "Successfully uploaded goal"
-        }
         
     }
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
@@ -139,7 +141,7 @@ extension AddGoalController: UIImagePickerControllerDelegate, UINavigationContro
                   // Uh-oh, an error occurred!
                   return
                 }
-                self.imageName = image_name
+                self.imageUrl = downloadURL.absoluteString
 //           db.collection(CONST.FSTORE.usersCollection).document("user_good@nyu.com").updateData([
 //                    CONST.FSTORE.goals : FieldValue.arrayUnion([imageName])
 //                ])
