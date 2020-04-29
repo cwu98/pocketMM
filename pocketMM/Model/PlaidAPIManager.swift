@@ -8,8 +8,10 @@
 
 import Foundation
 import WebKit
+import Firebase
 
 
+let db = Firestore.firestore()
 struct PlaidAPIManager{
     let hostURL : String = "https://sandbox.plaid.com"
 //    lazy var itemData : ItemData? = nil
@@ -17,7 +19,13 @@ struct PlaidAPIManager{
         let config = [
             "client_id": PLAID_CLIENT_ID,
             "secret": PLAID_SANDBOX_SECRET,
-            "public_token":  PLAID_PUBLIC_KEY
+            "public_token":  PLAID_PUBLIC_KEY,
+            "product": "[auth, transactions]",
+            "selectAccount": "true",
+            "clientName": "Test App",
+            "isMobile": "true",
+            "isWebview": "true",
+            "webhook": "https://us-central1-pocketmm-d5886.cloudfunctions.net/webhook",
         ]
 
         var components = URLComponents()
@@ -115,10 +123,11 @@ struct PlaidAPIManager{
         return itemData
     }
     
-    func getTransaction(accessToken: String, itemId : String) -> Bool? {
+    func getTransaction(accessToken: String, itemId : String, startDate: String, endDate: String)
+    -> [Transaction]?{
         print("get transaction " + accessToken + " " + itemId)
+        var transactions : [Transaction]?
 //        let transactionUrl = generateTransactionURL(accessToken)
-        var res : Bool?
         if let url = URL(string: hostURL + "/transactions/get"){
 //         if let url = URL(string: transactionUrl){
             
@@ -130,22 +139,14 @@ struct PlaidAPIManager{
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
-            
-            //            "client_id": String,
-            //            "secret": String,
-            //            "access_token": String,
-            //            "start_date": "2018-01-01",
-            //            "end_date": "2018-02-01",
-            //            "options": {
-            //              "count": 250,
-            //              "offset": 100
-            //            }
+    
+            //2020-01-01", "2020-04-18"
             let parameters: [String: Any] = [
                 "client_id": PLAID_CLIENT_ID,
                 "secret": PLAID_SANDBOX_SECRET,
                 "access_token" : accessToken,
-                "start_date": "2020-01-01",
-                "end_date": "2020-04-18"
+                "start_date": startDate,
+                "end_date": endDate
             ]
 //            request.httpBody = parameters.percentEncoded()
             do{
@@ -165,9 +166,12 @@ struct PlaidAPIManager{
                             print(error.localizedDescription)
                         }
                         
-                        if self.parseJsonUser(safeData, accessToken, itemId) != nil {
-    //                        self.delegate?.didFinishRequest(weather: weatherModel)
-                            res = true
+//                        if self.parseJsonUser(safeData, accessToken, itemId) != nil {
+//    //                        self.delegate?.didFinishRequest(weather: weatherModel)
+//                            res = true
+//                        }
+                        if let parsedTransactions = self.parseTransactions(safeData, itemId: itemId) {
+                            transactions = parsedTransactions
                         }
                     }
                 }
@@ -176,7 +180,7 @@ struct PlaidAPIManager{
                 print("error get transaction ", error.localizedDescription)
             }
         }
-        return res
+        return transactions
     }
     func parseJsonItem(_ data : Data) -> ItemData? {
             print("parsing Json Item")
@@ -192,29 +196,43 @@ struct PlaidAPIManager{
                 return nil
             }
         }
-    func parseJsonUser(_ data : Data, _ acessToken: String,
-        _ itemId : String) -> User? {
-        print("parsing Json User")
+    func parseTransactions(_ data : Data, itemId: String)-> [Transaction]?{
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode(TransactionsData.self, from: data)
             print("transaction is ", decodedData.transactions[0])
             var transactions : [Transaction] = []
             for transactionData in decodedData.transactions {
-                transactions.append(Transaction(name: transactionData.name,
-                                                amount: transactionData.amount,
-                                                category: transactionData.category,
-                                                category_id: transactionData.category_id))
+                let transaction = Transaction(name: transactionData.name,
+                                    amount: transactionData.amount,
+                                    category: transactionData.category,
+                                    item_id : itemId,
+                                    transaction_id: transactionData.transaction_id,
+                                    date: transactionData.date)
+                transactions.append(transaction)
+                
+                let docData = [
+                    CONST.FSTORE.transaction_id : transaction.transaction_id,
+                    CONST.FSTORE.item_id : transaction.item_id,
+                    CONST.FSTORE.transaction_date : transaction.date,
+                    CONST.FSTORE.transaction_amount : String(format: "%f",transaction.amount),
+                    CONST.FSTORE.transaction_category : transaction.category!.description
+                ]
+
+                db.collection(CONST.FSTORE.usersCollection).document("user_good@nyu.com").updateData([
+                    CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
+                ])
+
             }
-            let user = User(accessToken: acessToken, itemId : itemId, transactions: transactions)
-            return user
+            return transactions
         }
         catch{
-            print("error from parsing user json : ", error)
+            print("error from parsing transactions json : ", error)
 //            delegate?.didFailToGetWeather(error)
             return nil
         }
     }
+
     
     
     

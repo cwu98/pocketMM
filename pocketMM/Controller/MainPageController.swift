@@ -10,12 +10,16 @@ import UIKit
 import Firebase
 
 class MainPageController: UIViewController {
-    
-    var user : User?
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "💰Home"
         navigationItem.hidesBackButton = true
+        print("loading transactions")
+        if let transactions = getTransactionFromRange(startDate: "2020-01-01", endDate: "2020-04-26"){
+            print("retrieved transactions")
+            print(transactions.description)
+        }
     }
 
     @IBAction func logOutPressed(_ sender: Any) {

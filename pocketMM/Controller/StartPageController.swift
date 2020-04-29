@@ -9,7 +9,6 @@
 import UIKit
 
 class StartPageController: UIViewController {
-    var user : User?
     override func viewDidLoad() {
         super.viewDidLoad()
        

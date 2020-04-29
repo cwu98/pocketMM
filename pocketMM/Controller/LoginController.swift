@@ -13,7 +13,6 @@ class LoginController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
-    var user : User?
     
     @IBOutlet weak var errorTextView: UITextView!
     override func viewDidLoad() {
@@ -31,7 +30,7 @@ class LoginController: UIViewController {
                 }
                 else{
                     self.errorTextView.isHidden = true
-                    self.performSegue(withIdentifier: Const.loginSegue, sender: self)
+                    self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
                 }
               
             }
