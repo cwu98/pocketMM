@@ -164,6 +164,9 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - Charts (3.5.0):
+    - Charts/Core (= 3.5.0)
+  - Charts/Core (3.5.0)
   - Firebase/Auth (6.23.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.5.2)
@@ -250,6 +253,7 @@ PODS:
   - PromisesObjC (1.2.8)
 
 DEPENDENCIES:
+  - Charts
   - Firebase/Auth
   - Firebase/Firestore
   - Plaid
@@ -258,6 +262,7 @@ SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
+    - Charts
     - Firebase
     - FirebaseAuth
     - FirebaseAuthInterop
@@ -279,6 +284,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
   Firebase: 585ae467b3edda6a5444e788fda6888f024d8d6f
   FirebaseAuth: e50319ecc114acf93c2b9581e15d6604ddd7eeb2
   FirebaseAuthInterop: a0f37ae05833af156e72028f648d313f7e7592e9
@@ -297,6 +303,6 @@ SPEC CHECKSUMS:
   Plaid: 8cebd80f77f400568028b6d66c97827b76c675f4
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
 
-PODFILE CHECKSUM: 45936dd71f85ed817a714f409b1f3a3cdd4cc584
+PODFILE CHECKSUM: ee301d388b826126123b896cd0550bdcfc941b8b
 
 COCOAPODS: 1.9.1

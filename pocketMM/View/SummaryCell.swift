@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Charts
 class SummaryCell: UITableViewCell {
 
     override func awakeFromNib() {
