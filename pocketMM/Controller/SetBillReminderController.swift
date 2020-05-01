@@ -16,6 +16,7 @@ class SetBillReminderController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Set Bill"
         errorTextView.isHidden = false
     }
     

@@ -14,7 +14,9 @@ struct CONST{
     
     static let cellReusableIdentifier = "ReusableCell"
     static let GoalCell = "GoalCell"
-    
+    static let settingsCellIdentifer = "SettingsCell"
+    static let billSeque = "billSegue"
+    static let limitSeque = "limitSegue"
     
     
     
