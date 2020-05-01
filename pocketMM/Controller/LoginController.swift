@@ -30,7 +30,8 @@ class LoginController: UIViewController {
                 }
                 else{
                     self.errorTextView.isHidden = true
-                    self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
+                    NSLog("login success!")
+                    self.performSegue(withIdentifier: "login", sender: self)
                 }
               
             }
