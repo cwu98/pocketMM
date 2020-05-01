@@ -49,18 +49,16 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         monthLabel.leftViewMode = UITextField.ViewMode.always
         monthLabel.leftViewMode = .always
         monthLabel.text = arrayOfMonths[month]
-        //monthLabel.leftView = UIImageView(image: UIImage(named: "downArrow.png"))
+        monthLabel.leftView = UIImageView(image: UIImage(named: "downArrow.png"))
         yearLabel.text = "\(year)"
         
-        //get transaction data
-        //transactionData =
-        
         //group based on category into dict [category_id : [...list of TransactionData objects with this category_id ] ]
+
         var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category} )
 
         for (categoryID, transaction) in groupByCategory{
             var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
-           // totalSpendingByCategory.insert(total, at: categoryID)
+            totalSpendingByCategory.insert(total, at: categoryID)
         }
 
         

@@ -10,25 +10,17 @@ import UIKit
 import Firebase
 
 class MainPageController: UIViewController {
-    
-    @IBOutlet weak var summaryButton: UIButton!
-    var user : User?
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "💰Home"
        
         navigationItem.hidesBackButton = true
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Main",style: .plain, target: nil, action: nil)
+
         print("loading transactions")
-        let transactions = getTransactionFromRange(startDate: "2020-01-01", endDate: "2020-04-26")
-        print(transactions.count, allTransactions.count)
-       /* if let transactions = getTransactionFromRange(startDate: "2020-01-01", endDate: "2020-04-26"){
-            print("retrieved transactions")
-            print(transactions.description)
-        }
- */
- 
+        print("retrieved transactions")
+        print(transactions.description)
     }
 
     

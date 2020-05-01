@@ -11,3 +11,4 @@ config.xml
 drive-download-20200418T011957Z-001.zip
 ionic.config.json
 resources/
+.DS_Store
