@@ -10,9 +10,18 @@ import UIKit
 import Firebase
 
 class MainPageController: UIViewController {
-
+    
+    
+    @IBOutlet weak var textview: UITextView!
+    
+    @IBOutlet weak var topview: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //self.topview.layer.cornerRadius = 40;
+        //self.view.bringSubviewToFront(textview);
+        //view.sendSubviewToBack(imageView);
         title = "💰Home"
        print("in main page controller")
         navigationItem.hidesBackButton = true
@@ -25,6 +34,7 @@ class MainPageController: UIViewController {
 
     
 
+    
     
     @IBAction func logOutPressed(_ sender: Any) {
         let firebaseAuth = Auth.auth()
