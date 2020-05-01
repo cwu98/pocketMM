@@ -29,6 +29,7 @@ class LoginController: UIViewController {
                     self.errorTextView.text = e.localizedDescription
                 }
                 else{
+                    print("logged in")
                     self.errorTextView.isHidden = true
                     self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
                 }

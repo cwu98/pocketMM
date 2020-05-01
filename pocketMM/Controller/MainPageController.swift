@@ -14,22 +14,17 @@ class MainPageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "💰Home"
-       
+       print("in main page controller")
         navigationItem.hidesBackButton = true
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Main",style: .plain, target: nil, action: nil)
-
+//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Main",style: .plain, target: nil, action: nil)
+        getTransactionFromRange(startDate: "2020-01-01", endDate: "2020-01-26")
         print("loading transactions")
         print("retrieved transactions")
-        print(transactions.description)
+//        print(allTransactions.count)
     }
 
     
-    //segue to summary page
-//    @IBAction func summaryButtonPressed(_ sender: Any) {
-//        performSegue(withIdentifier: "summarySegue", sender: nil)
-//    }
-    
-    
+
     
     @IBAction func logOutPressed(_ sender: Any) {
         let firebaseAuth = Auth.auth()
