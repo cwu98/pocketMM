@@ -8,7 +8,12 @@
 
 import Foundation
 import Firebase
+
 var allTransactions : [Transaction] = []
+var allBills : [Bill] = []
+var limit: [String : Double] = Dictionary()
+
+
 func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]{
      
     let dateFormatterGet = DateFormatter()
@@ -77,3 +82,60 @@ func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]{
     print(allTransactions.count)
     return allTransactions
 }
+
+func getBills(){
+    if let email = Auth.auth().currentUser?.email{
+        db.collection(CONST.FSTORE.usersCollection).document(email).getDocument{
+           (querySnapshot, error) in
+            if let e = error{
+                print(e.localizedDescription)
+                return
+            }
+            if let jsonData = querySnapshot?.data(){
+                let decoder = JSONDecoder()
+                do{
+                    let data = try JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
+
+                    let decodedData = try decoder.decode(Bills.self, from: data)
+                    
+                    for bill in decodedData.bills {
+                        allBills.append(bill)
+                    }
+                }
+                catch{
+                    print("error from parsing bills json : ", error)
+                  
+                }
+                
+            }
+        }
+    }
+}
+
+
+func getLimit(){
+    if let email = Auth.auth().currentUser?.email{
+        db.collection(CONST.FSTORE.usersCollection).document(email).getDocument{
+           (querySnapshot, error) in
+            if let e = error{
+                print(e.localizedDescription)
+                return
+            }
+            if let jsonData = querySnapshot?.data(){
+                let decoder = JSONDecoder()
+                do{
+                    let data = try JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
+
+                    let decodedData = try decoder.decode(Limit.self, from: data)
+                    limit = decodedData.limits
+                }
+                catch{
+                    print("error from parsing bills json : ", error)
+                  
+                }
+                
+            }
+        }
+    }
+}
+

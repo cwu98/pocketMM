@@ -43,12 +43,15 @@ class CreateUserController: UIViewController {
                 }
                 else{
                     self.errorTextView.isHidden = true
-                    let docData = [
+                    let docData : [String: Any] = [
                             CONST.FSTORE.userEmail : email,
                             CONST.FSTORE.userAcessToken : access_token,
                             CONST.FSTORE.item_id : item_id,
-                            CONST.FSTORE.transactions : "[]",
-                            CONST.FSTORE.goals :"[]"
+                            CONST.FSTORE.transactions : [],
+                            CONST.FSTORE.goals : [],
+                            CONST.FSTORE.bills : [],
+                            CONST.FSTORE.limit : CONST.Category.limits
+                            
                         ]
                     self.db!.collection(CONST.FSTORE.usersCollection).document(email).setData(docData) { err in
                             if let err = err {

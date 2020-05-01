@@ -484,14 +484,59 @@
                     <view key="view" contentMode="scaleToFill" id="LG2-v9-NSn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What kind of bill is this?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tPR-Ym-VES">
+                                <rect key="frame" x="45" y="307" width="313" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Due date : YYYY-MM-DD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O7P-HD-Q96">
+                                <rect key="frame" x="45" y="398" width="313" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How often should I remind you? (monthly/ weekly)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BX5-2d-tjj">
+                                <rect key="frame" x="45" y="486" width="313" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zH2-Mx-nsh">
+                                <rect key="frame" x="120" y="588" width="200" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                <state key="normal" title="Set Bill">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="setBillPressed:" destination="g3e-JE-kBZ" eventType="touchUpInside" id="EoQ-bj-2Un"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ceE-MW-QY0">
+                                <rect key="frame" x="87" y="654" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="backgroundGreen"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" name="backgroundGreen"/>
                         <viewLayoutGuide key="safeArea" id="kbv-p9-luT"/>
                     </view>
                     <navigationItem key="navigationItem" id="CxI-Hr-u2g"/>
+                    <connections>
+                        <outlet property="dueDateTextField" destination="O7P-HD-Q96" id="P0n-Ts-mKL"/>
+                        <outlet property="errorTextView" destination="ceE-MW-QY0" id="vNs-JQ-z2l"/>
+                        <outlet property="frequencyTextField" destination="BX5-2d-tjj" id="y1K-aN-nw5"/>
+                        <outlet property="nameTextField" destination="tPR-Ym-VES" id="lM8-nn-GNL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="835-Ud-djw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8643" y="1707"/>
+            <point key="canvasLocation" x="-8643.4782608695659" y="1706.9196428571429"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="zRb-eS-zfV">
@@ -553,7 +598,7 @@
                                         <rect key="frame" x="0.0" y="534" width="414" height="308"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SyK-wL-u9D">
-                                                <rect key="frame" x="105" y="8" width="204.5" height="102"/>
+                                                <rect key="frame" x="2.5" y="8" width="409" height="102"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                                 <state key="normal" backgroundImage="loginButton"/>
                                                 <connections>

@@ -9,9 +9,6 @@
 import Foundation
 import Firebase
 
-enum Category{
-//    case
-}
 struct User {
     let email : String
     let accessToken : String
@@ -65,3 +62,22 @@ struct Goal :Decodable {
         self.image = image
     }
 }
+
+struct Bills: Decodable{
+    let bills : [Bill]
+}
+struct Bill : Decodable {
+    let name : String
+    let due_date : String
+    let frequency : String
+    init(name: String, due_date : String, frequency: String){
+        self.name = name
+        self.due_date = due_date
+        self.frequency = frequency
+    }
+}
+
+struct Limit : Decodable {
+    let limits : [String: Double]
+}
+

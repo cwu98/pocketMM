@@ -15,6 +15,9 @@ struct CONST{
     static let cellReusableIdentifier = "ReusableCell"
     static let GoalCell = "GoalCell"
     
+    
+    
+    
     struct FSTORE{
         static let usersCollection = "users"
         static let userEmail = "email"
@@ -25,6 +28,13 @@ struct CONST{
         static let goal_amount = "amount"
         static let goal_image = "image"
         
+        static let limit = "limit"
+        
+        static let bills = "bills"
+        static let bill_name = "name"
+        static let bill_due_date = "due_date"
+        static let bill_frequency = "frequency"
+        
         static let transactions = "transactions"
         static let item_id = "item_id"
          static let transaction_id = "transaction_id"
@@ -34,5 +44,26 @@ struct CONST{
         static let transaction_category = "category"
 
         
+    }
+    
+    struct Category{
+        static let entertainment = "entertainment"
+        static let groceries = "groceries"
+        static let shopping = "shopping"
+        static let dining = "dining"
+        static let utilities = "utilities"
+        static let rent = "rent"
+        static let goals = "goals"
+        static let miscellaneous = "miscellaneous"
+        static let limits = [
+            entertainment : -1.0,
+            groceries : -1.0,
+            shopping : -1.0,
+            dining : -1.0,
+            utilities : -1.0,
+            rent : -1.0,
+            goals : -1.0,
+            miscellaneous : -1.0
+        ]
     }
 }
