@@ -14,12 +14,13 @@ class MainPageController: UIViewController {
     
     @IBOutlet weak var textview: UITextView!
     
+   
     @IBOutlet weak var topview: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.topview.layer.cornerRadius = 40;
+        self.topview.layer.cornerRadius = 40;
         //self.view.bringSubviewToFront(textview);
         //view.sendSubviewToBack(imageView);
         title = "💰Home"
