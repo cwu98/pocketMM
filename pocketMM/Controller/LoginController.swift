@@ -31,6 +31,7 @@ class LoginController: UIViewController {
                 else{
                     print("logged in")
                     self.errorTextView.isHidden = true
+                    getUser()
                     self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
                 }
               

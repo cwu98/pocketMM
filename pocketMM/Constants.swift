@@ -18,7 +18,8 @@ struct CONST{
     static let billSeque = "billSegue"
     static let limitSeque = "limitSegue"
     
-    
+    static let balance = "balance"
+    static let goalTableViewCell = "goalTableViewCell"
     
     struct FSTORE{
         static let usersCollection = "users"

@@ -9,10 +9,12 @@
 import Foundation
 import Firebase
 
+
 var allTransactions : [Transaction] = []
 var allBills : [Bill] = []
 var limit: [String : Double] = Dictionary()
-
+var balance : Double = -1.0
+var user : User?
 
 func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]{
      
@@ -101,6 +103,7 @@ func getBills(){
                     for bill in decodedData.bills {
                         allBills.append(bill)
                     }
+                    print("all bills ", allBills)
                 }
                 catch{
                     print("error from parsing bills json : ", error)
@@ -127,7 +130,8 @@ func getLimit(){
                     let data = try JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
 
                     let decodedData = try decoder.decode(Limit.self, from: data)
-                    limit = decodedData.limits
+                
+                    print("limits ", decodedData)
                 }
                 catch{
                     print("error from parsing bills json : ", error)
@@ -138,4 +142,34 @@ func getLimit(){
         }
     }
 }
+
+func getUser(){
+    if let email = Auth.auth().currentUser?.email{
+        db.collection(CONST.FSTORE.usersCollection).document(email).getDocument{
+           (querySnapshot, error) in
+            if let e = error{
+                print(e.localizedDescription)
+                return
+            }
+            if let jsonData = querySnapshot?.data(){
+                let decoder = JSONDecoder()
+                do{
+                    let data = try JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
+
+                    user = try decoder.decode(User.self, from: data)
+                    
+                    PlaidAPIManager.getBalance(access_token: user!.access_token)
+//                    print(user!.transactions, balance, user!.limit, user!.bills, user!.goals)
+                   
+                }
+                catch{
+                    print("error from parsing user json : ", error)
+                  
+                }
+                
+            }
+        }
+    }
+}
+
 

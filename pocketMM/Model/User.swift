@@ -9,21 +9,23 @@
 import Foundation
 import Firebase
 
-struct User {
+struct User : Decodable{
     let email : String
-    let accessToken : String
-    let itemId : String
+    let access_token : String
+    let item_id : String
     let transactions: [Transaction]
     let goals : [Goal]
-    init(email: String, accessToken: String,
-         itemId : String, transactions: [Transaction],
-         goals: [Goal]){
-        self.email = email
-        self.accessToken = accessToken
-        self.itemId = itemId
-        self.transactions = transactions
-        self.goals = goals
-    }
+    let bills : [Bill]
+    let limit : Limit
+//    init(email: String, accessToken: String,
+//         itemId : String, transactions: [Transaction],
+//         goals: [Goal], bills : [Bill]){
+//        self.email = email
+//        self.accessToken = accessToken
+//        self.itemId = itemId
+//        self.transactions = transactions
+//        self.goals = goals
+//    }
     
 }
 struct Item {
@@ -49,9 +51,21 @@ struct Transaction : Decodable {
     }
 }
 
+struct AccountsData : Decodable {
+    let accounts : [AccountData]
+}
+struct AccountData : Decodable{
+    let balances : BalanceData
+}
+struct BalanceData : Decodable{
+    let current : Double
+}
+
+
 struct Goals: Decodable{
     let goals : [Goal]
 }
+//add [progress:current saved amount / goal item price, price], [save: # of money/frequency],[ a progress bar]
 struct Goal :Decodable {
     let name : String
     let amount: Double
@@ -78,6 +92,13 @@ struct Bill : Decodable {
 }
 
 struct Limit : Decodable {
-    let limits : [String: Double]
+    let entertainment : Double
+    let groceries : Double
+    let shopping : Double
+    let dining : Double
+    let utilities : Double
+    let rent : Double
+    let goals : Double
+    let miscellaneous : Double
 }
 

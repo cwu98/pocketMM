@@ -10,6 +10,14 @@
 import UIKit
 import Firebase
 import Charts
+//table cell of bottom table view
+struct tablecelldata {
+    let cell : Int!
+    let index : String!     //number + .
+    let percent : String!   //number + %
+    let name : String!
+    let amount : String!    //$ + number 
+}
 
 class SummaryController: UIViewController, UITextFieldDelegate {
     

@@ -10,6 +10,12 @@ import UIKit
 import Charts
 class SummaryCell: UITableViewCell {
 
+    @IBOutlet weak var index: UILabel!
+    @IBOutlet weak var percent: UILabel!
+    @IBOutlet weak var Name: UILabel!
+    @IBOutlet weak var amount: UILabel!
+    @IBOutlet weak var C_image: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +25,12 @@ class SummaryCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    private func commonInit(){
+        self.index.sizeToFit()
+        self.amount.sizeToFit()
+        self.Name.sizeToFit()
+        self.percent.sizeToFit()
     }
     
 }

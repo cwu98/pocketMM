@@ -23,6 +23,10 @@ class CreateUserController: UIViewController {
     @IBOutlet weak var errorTextView: UITextView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBOutlet weak var newAccount: UIButton!
+    @IBOutlet weak var loginBA: UIButton!
+    
     var itemData : ItemData?
     var plaidAPIManager : PlaidAPIManager = PlaidAPIManager()
     var timer : Timer = Timer()
@@ -32,6 +36,9 @@ class CreateUserController: UIViewController {
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
+        
+        self.newAccount.layer.cornerRadius = 15
+        self.loginBA.layer.cornerRadius = 15
     }
 
     @IBAction func createAccountPressed(_ sender: UIButton) {

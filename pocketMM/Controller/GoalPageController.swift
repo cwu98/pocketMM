@@ -20,9 +20,16 @@ class GoalPageController: UIViewController {
         super.viewDidLoad()
         title = "💰Goals"
         
-        tableView.register(UINib(nibName: CONST.GoalCell, bundle: nil), forCellReuseIdentifier: CONST.cellReusableIdentifier)
-        loadGoals()
-        
+        tableView.register(UINib(nibName: CONST.goalTableViewCell, bundle: nil), forCellReuseIdentifier: CONST.cellReusableIdentifier)
+//        loadGoals()
+        print(goalTableViewCell.description())
+        if let currentUser = user{
+            goals = currentUser.goals
+            tableView.dataSource = self
+        }
+        else{
+            loadGoals()
+        }
     }
    
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
@@ -44,25 +51,29 @@ extension GoalPageController : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CONST.cellReusableIdentifier, for: indexPath) as! GoalCell
-        cell.nameLabel.text = goals[indexPath.row].name
-        cell.amountLabel.text = "\(goals[indexPath.row].amount)"
-//        cell.imageView.image =
+        let cell = tableView.dequeueReusableCell(withIdentifier: CONST.cellReusableIdentifier, for: indexPath) as! goalTableViewCell
+        
+        print("at index ", indexPath.row, goals[indexPath.row])
+//        cell.name.text = goals[indexPath.row].name
+//        cell.progress.text = "\(goals[indexPath.row].amount)"
        
-        let url = URL(string: goals[indexPath.row].image)
-         let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: url!){
-            (data, response, error) in
-            if let e = error{
-                print(e.localizedDescription)
-                return
+        if let url = URL(string: goals[indexPath.row].image){
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url){
+                (data, response, error) in
+                if let e = error{
+                    print(e.localizedDescription)
+                    return
+                }
+               
+//                DispatchQueue.main.async() {
+//                    print("setting image")
+//                    cell.goalImage.image = UIImage(data: data!)
+//               }
             }
-           
-            DispatchQueue.main.async() {
-                cell.goalImageView.image = UIImage(data: data!)
-           }
+            task.resume()
         }
-        task.resume()
+         
         
         return cell
     }

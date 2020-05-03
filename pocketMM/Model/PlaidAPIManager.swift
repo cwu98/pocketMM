@@ -13,7 +13,7 @@ import Firebase
 
 let db = Firestore.firestore()
 struct PlaidAPIManager{
-    let hostURL : String = "https://sandbox.plaid.com"
+    static let hostURL : String = "https://sandbox.plaid.com"
 //    lazy var itemData : ItemData? = nil
     func generateItemURL() -> String {
         let config = [
@@ -30,7 +30,7 @@ struct PlaidAPIManager{
 
         var components = URLComponents()
         components.scheme = "https"
-        components.host = hostURL
+        components.host = PlaidAPIManager.hostURL
         components.path = "/item/public_token/exchange"
         components.queryItems = config.map { URLQueryItem(name: $0, value: $1) }
         return components.string!
@@ -47,7 +47,7 @@ struct PlaidAPIManager{
 
         var components = URLComponents()
         components.scheme = "https"
-        components.host = hostURL
+        components.host = PlaidAPIManager.hostURL
         components.path = "/transactions/get"
         components.queryItems = config.map { URLQueryItem(name: $0, value: $1) }
         return components.string!
@@ -60,7 +60,7 @@ struct PlaidAPIManager{
 //        if let url = URL(string: itemUrl){
         
         var itemData : ItemData?
-        if let url = URL(string: hostURL + "/item/public_token/exchange"){
+        if let url = URL(string: PlaidAPIManager.hostURL + "/item/public_token/exchange"){
             print(url)
             let session = URLSession(configuration: .default)
             var request : URLRequest = URLRequest(url: url)
@@ -127,9 +127,7 @@ struct PlaidAPIManager{
     -> [Transaction]?{
         print("get transaction " + accessToken + " " + itemId)
         var transactions : [Transaction]?
-//        let transactionUrl = generateTransactionURL(accessToken)
-        if let url = URL(string: hostURL + "/transactions/get"){
-//         if let url = URL(string: transactionUrl){
+        if let url = URL(string: PlaidAPIManager.hostURL + "/transactions/get"){
             
             print(url)
             
@@ -148,10 +146,8 @@ struct PlaidAPIManager{
                 "start_date": startDate,
                 "end_date": endDate
             ]
-//            request.httpBody = parameters.percentEncoded()
             do{
                 request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-//                webView.load(request)
                 let task = session.dataTask(with : request){
                     (data, response, error) in
                     if(error != nil){
@@ -165,11 +161,7 @@ struct PlaidAPIManager{
                         } catch {
                             print(error.localizedDescription)
                         }
-                        
-//                        if self.parseJsonUser(safeData, accessToken, itemId) != nil {
-//    //                        self.delegate?.didFinishRequest(weather: weatherModel)
-//                            res = true
-//                        }
+
                         if let parsedTransactions = self.parseTransactions(safeData, itemId: itemId) {
                             transactions = parsedTransactions
                         }
@@ -228,11 +220,90 @@ struct PlaidAPIManager{
         }
         catch{
             print("error from parsing transactions json : ", error)
-//            delegate?.didFailToGetWeather(error)
             return nil
         }
     }
 
+    static func getBalance(access_token : String){
+        if let url = URL(string: PlaidAPIManager.hostURL + "/accounts/balance/get"){
+            let session = URLSession(configuration: .default)
+            var request : URLRequest = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+                
+            let parameters: [String: Any] = [
+                "client_id": PLAID_CLIENT_ID,
+                "secret": PLAID_SANDBOX_SECRET,
+                "access_token":  access_token
+            ]
+            do{
+                request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+                let task = session.dataTask(with: request) {
+                    (data, response, error) in
+                    if(error != nil){
+                        print(error!)
+                        return
+                    }
+                    if let safeData = data {
+                        PlaidAPIManager.parseBalance(data: safeData)
+                    }
+                }
+                task.resume()
+                
+            } catch {
+                print("error get balance from Plaid ", error.localizedDescription)
+    //                return nil
+            }
+        }
+        
+        
+    }
+    static func parseBalance(data: Data){
+        do{
+            let decoder = JSONDecoder()
+            let decodedData = try decoder.decode(AccountsData.self, from: data)
+            balance = decodedData.accounts[0].balances.current
+             print("balance is ",balance)
+        }
+        catch{
+             print("error parsing balance from Plaid ", error.localizedDescription)
+        }
+        
+    }
+    static func refreshTransactions(access_token : String){
+        if let url = URL(string: PlaidAPIManager.hostURL + "/transactions/refresh"){
+            let session = URLSession(configuration: .default)
+            var request : URLRequest = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+                
+            let parameters: [String: Any] = [
+                "client_id": PLAID_CLIENT_ID,
+                "secret": PLAID_SANDBOX_SECRET,
+                "access_token":  access_token
+            ]
+            do{
+                request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+                let task = session.dataTask(with: request) {
+                    (data, response, error) in
+                    if(error != nil){
+                        print(error!)
+                        return
+                    }
+                    
+                }
+                task.resume()
+                
+            } catch {
+                print("error get balance from Plaid ", error.localizedDescription)
+    //                return nil
+            }
+        }
+        
+        
+    }
     
     
     

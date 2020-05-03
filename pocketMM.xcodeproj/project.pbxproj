@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4AC457E6245E70C200B33EDC /* goalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC457E4245E70C200B33EDC /* goalTableViewCell.swift */; };
+		4AC457E7245E70C200B33EDC /* goalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC457E5245E70C200B33EDC /* goalTableViewCell.xib */; };
+		4AC457EA245E7EF700B33EDC /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC457E8245E7EF700B33EDC /* GoalCell.swift */; };
+		4AC457EB245E7EF700B33EDC /* GoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC457E9245E7EF700B33EDC /* GoalCell.xib */; };
 		571147585B32FE91B5078E25 /* Pods_pocketMM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0A46DACC518B5F85761BFE /* Pods_pocketMM.framework */; };
 		BE687A0CEDBFEEE714E8B9FE /* Pods_pocketMMTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5793DAC26627CB4C75B6EF4 /* Pods_pocketMMTests.framework */; };
 		D3F0B52BF8D5CDE27A5639FA /* Pods_pocketMM_pocketMMUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294A4BCAE669758AD0F51994 /* Pods_pocketMM_pocketMMUITests.framework */; };
@@ -34,8 +38,6 @@
 		E0E0D4D72456E20800852284 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4D62456E20800852284 /* Constants.swift */; };
 		E0E0D4DA2457083D00852284 /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4D82457083D00852284 /* SummaryCell.swift */; };
 		E0E0D4DB2457083D00852284 /* SummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0E0D4D92457083D00852284 /* SummaryCell.xib */; };
-		E0E0D4DE2457085200852284 /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4DC2457085200852284 /* GoalCell.swift */; };
-		E0E0D4DF2457085200852284 /* GoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0E0D4DD2457085200852284 /* GoalCell.xib */; };
 		E0E0D4E32459BDBD00852284 /* RetrieveDataFromFireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4E22459BDBC00852284 /* RetrieveDataFromFireBase.swift */; };
 		E0E0D4E5245C063E00852284 /* SetBillReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4E4245C063E00852284 /* SetBillReminderController.swift */; };
 		E0E0D4E7245C068300852284 /* SetLimitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4E6245C068300852284 /* SetLimitController.swift */; };
@@ -64,6 +66,10 @@
 		294A4BCAE669758AD0F51994 /* Pods_pocketMM_pocketMMUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pocketMM_pocketMMUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B62643BA75F9619EAFAF404 /* Pods-pocketMM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMM.release.xcconfig"; path = "Target Support Files/Pods-pocketMM/Pods-pocketMM.release.xcconfig"; sourceTree = "<group>"; };
 		3CB1C3EDD3E45532BFAA731A /* Pods-pocketMM-pocketMMUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMM-pocketMMUITests.release.xcconfig"; path = "Target Support Files/Pods-pocketMM-pocketMMUITests/Pods-pocketMM-pocketMMUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4AC457E4245E70C200B33EDC /* goalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goalTableViewCell.swift; sourceTree = "<group>"; };
+		4AC457E5245E70C200B33EDC /* goalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = goalTableViewCell.xib; sourceTree = "<group>"; };
+		4AC457E8245E7EF700B33EDC /* GoalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
+		4AC457E9245E7EF700B33EDC /* GoalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoalCell.xib; sourceTree = "<group>"; };
 		8C0A46DACC518B5F85761BFE /* Pods_pocketMM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pocketMM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CBFB78F76700D4DDFEAD25B /* Pods-pocketMM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMM.debug.xcconfig"; path = "Target Support Files/Pods-pocketMM/Pods-pocketMM.debug.xcconfig"; sourceTree = "<group>"; };
 		A32105EE0DA9DD46B64FEC63 /* Pods-pocketMMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMMTests.release.xcconfig"; path = "Target Support Files/Pods-pocketMMTests/Pods-pocketMMTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,8 +105,6 @@
 		E0E0D4D62456E20800852284 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E0E0D4D82457083D00852284 /* SummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCell.swift; sourceTree = "<group>"; };
 		E0E0D4D92457083D00852284 /* SummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SummaryCell.xib; sourceTree = "<group>"; };
-		E0E0D4DC2457085200852284 /* GoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
-		E0E0D4DD2457085200852284 /* GoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoalCell.xib; sourceTree = "<group>"; };
 		E0E0D4E22459BDBC00852284 /* RetrieveDataFromFireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveDataFromFireBase.swift; sourceTree = "<group>"; };
 		E0E0D4E4245C063E00852284 /* SetBillReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBillReminderController.swift; sourceTree = "<group>"; };
 		E0E0D4E6245C068300852284 /* SetLimitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLimitController.swift; sourceTree = "<group>"; };
@@ -187,8 +191,10 @@
 				E782947824579BAB00C7B63E /* NSUIColorHex.swift */,
 				E0E0D4D82457083D00852284 /* SummaryCell.swift */,
 				E0E0D4D92457083D00852284 /* SummaryCell.xib */,
-				E0E0D4DC2457085200852284 /* GoalCell.swift */,
-				E0E0D4DD2457085200852284 /* GoalCell.xib */,
+				4AC457E4245E70C200B33EDC /* goalTableViewCell.swift */,
+				4AC457E5245E70C200B33EDC /* goalTableViewCell.xib */,
+				4AC457E8245E7EF700B33EDC /* GoalCell.swift */,
+				4AC457E9245E7EF700B33EDC /* GoalCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -375,9 +381,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AC457EB245E7EF700B33EDC /* GoalCell.xib in Resources */,
 				E0D5482D243D8AF7009A9E27 /* LaunchScreen.storyboard in Resources */,
+				4AC457E7245E70C200B33EDC /* goalTableViewCell.xib in Resources */,
 				E0E0D4D32456B7D000852284 /* GoogleService-Info.plist in Resources */,
-				E0E0D4DF2457085200852284 /* GoalCell.xib in Resources */,
 				E0D5482A243D8AF7009A9E27 /* Assets.xcassets in Resources */,
 				E0D54825243D8AF6009A9E27 /* Main.storyboard in Resources */,
 				E0E0D4DB2457083D00852284 /* SummaryCell.xib in Resources */,
@@ -531,18 +538,19 @@
 				E0E0D4E7245C068300852284 /* SetLimitController.swift in Sources */,
 				E092DE92244A91F2005960FB /* User.swift in Sources */,
 				E0E0D4D52456C1F300852284 /* StartPageController.swift in Sources */,
+				4AC457EA245E7EF700B33EDC /* GoalCell.swift in Sources */,
 				E06E731224557CA400797988 /* AddGoalController.swift in Sources */,
 				E0E0D4D72456E20800852284 /* Constants.swift in Sources */,
 				E0E0D4E32459BDBD00852284 /* RetrieveDataFromFireBase.swift in Sources */,
 				E06E730E245571BC00797988 /* MainPageController.swift in Sources */,
 				E092DE95244A921C005960FB /* TransactionData.swift in Sources */,
 				E0D54822243D8AF6009A9E27 /* CreateUserController.swift in Sources */,
-				E0E0D4DE2457085200852284 /* GoalCell.swift in Sources */,
 				E06E731424557CF500797988 /* SummaryController.swift in Sources */,
 				E0E0D4DA2457083D00852284 /* SummaryCell.swift in Sources */,
 				E092DE97244A9242005960FB /* PlaidAPIManager.swift in Sources */,
 				E0D54828243D8AF6009A9E27 /* pocketMM.xcdatamodeld in Sources */,
 				E0E0D4E5245C063E00852284 /* SetBillReminderController.swift in Sources */,
+				4AC457E6245E70C200B33EDC /* goalTableViewCell.swift in Sources */,
 				E782947924579BAB00C7B63E /* NSUIColorHex.swift in Sources */,
 				E06E731624557DB400797988 /* AlertPageController.swift in Sources */,
 				E0D54820243D8AF6009A9E27 /* AppDelegate.swift in Sources */,

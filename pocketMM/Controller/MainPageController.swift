@@ -10,21 +10,49 @@ import UIKit
 import Firebase
 
 class MainPageController: UIViewController {
-
+    
+    
+    @IBOutlet weak var textview: UITextView!
+    
+   
+    @IBOutlet weak var topview: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.topview.layer.cornerRadius = 40;
+        //self.view.bringSubviewToFront(textview);
+        //view.sendSubviewToBack(imageView);
         title = "💰Home"
        print("in main page controller")
         navigationItem.hidesBackButton = true
-//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Main",style: .plain, target: nil, action: nil)
-        getTransactionFromRange(startDate: "2020-01-01", endDate: "2020-01-26")
+        let today = Date()
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        let end = dateFormatterGet.string(from: today)
+        print(end)
+        if let startDate = Calendar.current.date(bySetting: .month, value: 1 , of: today){
+            let start = dateFormatterGet.string(from: startDate)
+            print("date", start, end)
+            let plaidAPIManager : PlaidAPIManager = PlaidAPIManager()
+            if let currentUser = user {
+                PlaidAPIManager.refreshTransactions(access_token: currentUser.access_token)
+                plaidAPIManager.getTransaction(accessToken: currentUser.access_token, itemId: currentUser.item_id, startDate: start, endDate: end)
+                getTransactionFromRange(startDate: start, endDate: end)
+                
+            }
+           
+            
+        }
+        
         print("loading transactions")
         print("retrieved transactions")
-//        print(allTransactions.count)
+        print(allTransactions)
     }
 
     
 
+    
     
     @IBAction func logOutPressed(_ sender: Any) {
         let firebaseAuth = Auth.auth()
