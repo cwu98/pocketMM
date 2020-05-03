@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		4AC457E6245E70C200B33EDC /* goalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC457E4245E70C200B33EDC /* goalTableViewCell.swift */; };
 		4AC457E7245E70C200B33EDC /* goalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC457E5245E70C200B33EDC /* goalTableViewCell.xib */; };
-		4AC457EA245E7EF700B33EDC /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC457E8245E7EF700B33EDC /* GoalCell.swift */; };
-		4AC457EB245E7EF700B33EDC /* GoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC457E9245E7EF700B33EDC /* GoalCell.xib */; };
 		571147585B32FE91B5078E25 /* Pods_pocketMM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0A46DACC518B5F85761BFE /* Pods_pocketMM.framework */; };
 		BE687A0CEDBFEEE714E8B9FE /* Pods_pocketMMTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5793DAC26627CB4C75B6EF4 /* Pods_pocketMMTests.framework */; };
 		D3F0B52BF8D5CDE27A5639FA /* Pods_pocketMM_pocketMMUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294A4BCAE669758AD0F51994 /* Pods_pocketMM_pocketMMUITests.framework */; };
@@ -68,8 +66,6 @@
 		3CB1C3EDD3E45532BFAA731A /* Pods-pocketMM-pocketMMUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMM-pocketMMUITests.release.xcconfig"; path = "Target Support Files/Pods-pocketMM-pocketMMUITests/Pods-pocketMM-pocketMMUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4AC457E4245E70C200B33EDC /* goalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goalTableViewCell.swift; sourceTree = "<group>"; };
 		4AC457E5245E70C200B33EDC /* goalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = goalTableViewCell.xib; sourceTree = "<group>"; };
-		4AC457E8245E7EF700B33EDC /* GoalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
-		4AC457E9245E7EF700B33EDC /* GoalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoalCell.xib; sourceTree = "<group>"; };
 		8C0A46DACC518B5F85761BFE /* Pods_pocketMM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pocketMM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CBFB78F76700D4DDFEAD25B /* Pods-pocketMM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMM.debug.xcconfig"; path = "Target Support Files/Pods-pocketMM/Pods-pocketMM.debug.xcconfig"; sourceTree = "<group>"; };
 		A32105EE0DA9DD46B64FEC63 /* Pods-pocketMMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMMTests.release.xcconfig"; path = "Target Support Files/Pods-pocketMMTests/Pods-pocketMMTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -193,8 +189,6 @@
 				E0E0D4D92457083D00852284 /* SummaryCell.xib */,
 				4AC457E4245E70C200B33EDC /* goalTableViewCell.swift */,
 				4AC457E5245E70C200B33EDC /* goalTableViewCell.xib */,
-				4AC457E8245E7EF700B33EDC /* GoalCell.swift */,
-				4AC457E9245E7EF700B33EDC /* GoalCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -381,7 +375,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AC457EB245E7EF700B33EDC /* GoalCell.xib in Resources */,
 				E0D5482D243D8AF7009A9E27 /* LaunchScreen.storyboard in Resources */,
 				4AC457E7245E70C200B33EDC /* goalTableViewCell.xib in Resources */,
 				E0E0D4D32456B7D000852284 /* GoogleService-Info.plist in Resources */,
@@ -538,7 +531,6 @@
 				E0E0D4E7245C068300852284 /* SetLimitController.swift in Sources */,
 				E092DE92244A91F2005960FB /* User.swift in Sources */,
 				E0E0D4D52456C1F300852284 /* StartPageController.swift in Sources */,
-				4AC457EA245E7EF700B33EDC /* GoalCell.swift in Sources */,
 				E06E731224557CA400797988 /* AddGoalController.swift in Sources */,
 				E0E0D4D72456E20800852284 /* Constants.swift in Sources */,
 				E0E0D4E32459BDBD00852284 /* RetrieveDataFromFireBase.swift in Sources */,

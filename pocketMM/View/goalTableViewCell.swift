@@ -12,7 +12,8 @@ class goalTableViewCell: UITableViewCell {
 
  
     
-
+  
+    
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var goalImage: UIImageView!
     @IBOutlet weak var progress: UILabel!
@@ -23,9 +24,9 @@ class goalTableViewCell: UITableViewCell {
         super.awakeFromNib()
         print("awake from nib goaltableViewCell")
         // Initialization code
-//        self.name.sizeToFit()
-//        self.progress.sizeToFit()
-//        self.save.sizeToFit()
+        self.name.sizeToFit()
+        self.progress.sizeToFit()
+        self.save.sizeToFit()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
