@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "setting.png",
+      "filename" : "budget-vector-free-icon-set-40.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "setting@2x.png",
+      "filename" : "budget-vector-free-icon-set-40@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "setting@3x.png",
+      "filename" : "budget-vector-free-icon-set-40@3x.png",
       "scale" : "3x"
     }
   ],
