@@ -52,7 +52,7 @@ struct Transaction : Decodable {
 struct Goals: Decodable{
     let goals : [Goal]
 }
-//add current amount, price, saving,saving frequency,and a progress bar 
+//add [progress:current saved amount / goal item price, price], [save: # of money/frequency],[ a progress bar]
 struct Goal :Decodable {
     let name : String
     let amount: Double

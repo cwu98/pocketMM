@@ -74,9 +74,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqE-Yp-nTx">
-                                        <rect key="frame" x="97" y="0.0" width="51" height="25"/>
+                                        <rect key="frame" x="97" y="0.0" width="85" height="25"/>
                                         <attributedString key="attributedText">
-                                            <fragment content="1000">
+                                            <fragment content="1000/2000">
                                                 <attributes>
                                                     <color key="NSColor" red="0.33333333333333331" green="0.27843137254901962" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <font key="NSFont" size="17" name="ChalkboardSE-Regular"/>
