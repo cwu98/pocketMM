@@ -170,6 +170,7 @@ func getUser(){
             }
         }
     }
+    //get access to item_id via user
     func addTransaction(amount: Double, category: [String] , item_id : String
         , transaction_id : String, date: String){
         if let email = Auth.auth().currentUser?.email{
