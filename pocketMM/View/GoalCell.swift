@@ -10,10 +10,6 @@ import UIKit
 
 class GoalCell: UITableViewCell {
 
-    
-    @IBOutlet weak var goalImageView: UIImageView!
-    @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

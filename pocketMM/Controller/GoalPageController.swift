@@ -44,9 +44,9 @@ extension GoalPageController : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CONST.cellReusableIdentifier, for: indexPath) as! GoalCell
-        cell.nameLabel.text = goals[indexPath.row].name
-        cell.amountLabel.text = "\(goals[indexPath.row].amount)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: CONST.cellReusableIdentifier, for: indexPath) as! goalTableViewCell
+        cell.name.text = goals[indexPath.row].name
+        cell.progress.text = "\(goals[indexPath.row].amount)"
 //        cell.imageView.image =
        
         let url = URL(string: goals[indexPath.row].image)
@@ -59,7 +59,7 @@ extension GoalPageController : UITableViewDataSource{
             }
            
             DispatchQueue.main.async() {
-                cell.goalImageView.image = UIImage(data: data!)
+                cell.goalImage.image = UIImage(data: data!)
            }
         }
         task.resume()
