@@ -210,10 +210,12 @@ struct PlaidAPIManager{
                     CONST.FSTORE.transaction_amount : transaction.amount,
                     CONST.FSTORE.transaction_category : transaction.category
                     ]
-
-                db.collection(CONST.FSTORE.usersCollection).document("user_good@nyu.com").updateData([
-                    CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
-                ])
+                if let email = Auth.auth().currentUser?.email{
+                    db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
+                        CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
+                    ])
+                }
+                
 
             }
             return transactions

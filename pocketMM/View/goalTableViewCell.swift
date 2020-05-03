@@ -24,9 +24,9 @@ class goalTableViewCell: UITableViewCell {
         super.awakeFromNib()
         print("awake from nib goaltableViewCell")
         // Initialization code
-        self.name.sizeToFit()
-        self.progress.sizeToFit()
-        self.save.sizeToFit()
+//        self.name.sizeToFit()
+//        self.progress.sizeToFit()
+//        self.save.sizeToFit()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,10 +34,10 @@ class goalTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    private func commonInit(){
-        self.name.sizeToFit()
-        self.progress.sizeToFit()
-        self.save.sizeToFit()
-        
-    }
+//    private func commonInit(){
+//        self.name.sizeToFit()
+//        self.progress.sizeToFit()
+//        self.save.sizeToFit()
+//
+//    }
 }
