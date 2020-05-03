@@ -8,14 +8,159 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
-class AlertPageController: UIViewController {
+
+class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet var table: UITableView!
+    var reminders = [reminder]()
     var user : User?
+    var notificationGranted = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-         title = "💰Alert"
+         title = "💰Reminders and Alerts"
+        UNUserNotificationCenter.current().requestAuthorization(
+        options: [.alert,.sound]) {(granted, error) in
+                self.notificationGranted = true
+                if let error = error {
+                    print("granted, but error in notif permissions:\(error.localizedDescription)")
+                }
+        }
+    
+        
+        table.delegate = self
+        table.dataSource = self
+ 
+        /*
+        //load reminders from firebase
+        if let savedReminders = loadReminders(){
+            reminders += savedReminders
+        }
+        table.reloadData()
+ 
+         */
     }
-
+    
+    
+    /*
+    //load reminders from firebase
+    func loadReminders() -> [reminder]? {
+        
+    }
+    */
+    
+    override func viewDidAppear(_ animated: Bool){
+        super.viewDidAppear(true)
+        //table.reloadData()
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reminders.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "cell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let reminder = reminders[indexPath.row]
+        cell.textLabel?.text = reminder.title
+        let date = reminder.date
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, YYYY"
+        cell.detailTextLabel?.text = "Due: " + formatter.string(from: date)
+        
+        //make due date red if overdue
+        if NSDate().earlierDate(reminder.date) == reminder.date {
+            cell.detailTextLabel?.textColor = UIColor.red
+        }
+        else if NSDate() as Date == reminder.date {
+            cell.detailTextLabel?.textColor = UIColor.red
+        }
+        else{
+            cell.detailTextLabel?.textColor = UIColor.blue
+          return cell
+          
+      }
+        return cell
+    }
+    
+    @IBAction func didTapAdd(){
+        //show
+        guard let addVC = storyboard?.instantiateViewController(withIdentifier: "add") as? AddReminderViewController else {
+            return
+        }
+        
+        addVC.title = "New Reminder"
+        addVC.navigationItem.largeTitleDisplayMode = .never
+        addVC.completion = {title, date, frequency, alert in
+            DispatchQueue.main.async {
+                self.navigationController?.popToViewController(self, animated: true)
+                let newReminder = reminder(title: title, date: date, freq: frequency, alert: alert, identifier: "id_\(title)")
+                print("new reminder created")
+                self.reminders.append(newReminder)
+                self.table.reloadData()
+                
+                let content = UNMutableNotificationContent()
+                content.title = title
+                content.body = "pocketMM reminder"
+                content.sound = .default
+                
+                //TODO ALERT PART
+                
+                let calendar = Calendar.current
+                let targetDate = date
+                
+                var dateComponents = DateComponents()
+                
+                if frequency == "every month" {
+                    dateComponents.day = calendar.component(.day, from: targetDate)
+                }
+                else if frequency == "every year" {
+                    dateComponents.month = calendar.component(.month, from: targetDate)
+                }
+                else if frequency == "every week" {
+                    dateComponents.weekday = calendar.component(.weekday, from: targetDate)
+                }
+                
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true )
+                let request = UNNotificationRequest(identifier: "id_\(title)", content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print("error")
+                    }
+                }
+                print("notification added: \(request.identifier)")
+                    
+                }
+            }
+        
+        navigationController?.pushViewController(addVC, animated: true)
+    }
+    
+    //save reminders to firebase
+    func saveReminders() {
+      
+    }
+    
+    //allow delete
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            let toRemove = reminders.remove(at: indexPath.row)
+            
+            //TODO cancel local notification
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [toRemove.identifier])
+            saveReminders()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+        
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
         let firebaseAuth = Auth.auth()
         do {
@@ -25,4 +170,24 @@ class AlertPageController: UIViewController {
           print ("Error signing out: %@", signOutError)
         }
     }
+
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+
+  
 }
+    
+    
+struct reminder{
+    let title: String
+    let date: Date
+    let freq: String
+    let alert: String
+    let identifier: String
+    
+    
+}
+
