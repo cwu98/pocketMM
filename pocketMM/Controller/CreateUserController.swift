@@ -67,7 +67,7 @@ class CreateUserController: UIViewController {
                                 print("Document user successfully written!")
                             }
                         }
-                        
+                     getUser()
                     self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
                     
 //                        if self.itemData != nil {
