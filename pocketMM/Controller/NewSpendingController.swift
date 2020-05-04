@@ -2,7 +2,7 @@
 //  NewSpendingController.swift
 //  pocketMM
 //
-//  Created by 胡诗梵 on 5/3/20.
+//  Created by shifan on 5/3/20.
 //  Copyright © 2020 NYU. All rights reserved.
 //
 
@@ -16,10 +16,14 @@ class NewSpendingController: UIViewController {
     @IBOutlet weak var amountTextField: UITextView!
     var category : String?
     @IBOutlet weak var datetextview: UITextView!
+    
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet var activeButton: [UIButton]!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.datetextview.layer.cornerRadius = 25 
+        self.datetextview.layer.cornerRadius = 25
+        self.saveButton.layer.cornerRadius = 15
        let dateFormatterGet = DateFormatter()
        dateFormatterGet.dateFormat = "yyyy/MM/dd"
        let date = dateFormatterGet.string(from: Date())
@@ -37,6 +41,11 @@ class NewSpendingController: UIViewController {
     }
     */
 
+    @IBAction func ActiveButton(_ sender: UIButton) {
+    activeButton.forEach({ $0.backgroundColor = nil})
+        sender.backgroundColor =  #colorLiteral(red: 0.9839375615, green: 0.8418782353, blue: 0.3591020703, alpha: 1)
+
+    }
     @IBAction func categorySelected(_ sender: UIButton) {
         if let cat = sender.titleLabel?.text {
            category = cat
@@ -52,17 +61,21 @@ class NewSpendingController: UIViewController {
             , transaction_id : NSUUID().uuidString, date: date)
             
             
-            let alert = UIAlertController(title: "Add New Spending", message: "Successfully added new spending", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Add New Spending", message: "Successfully added a new spending", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
+            
         }
         else{
             let alert = UIAlertController(title: "Add New Spending", message: "Failed to add spending", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
+            
         }
+        self.nameTextField.text = nil
+        self.amountTextField.text = nil
         
     }
 }
