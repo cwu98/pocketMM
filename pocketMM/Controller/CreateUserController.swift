@@ -56,7 +56,7 @@ class CreateUserController: UIViewController {
                             CONST.FSTORE.item_id : item_id,
                             CONST.FSTORE.transactions : [],
                             CONST.FSTORE.goals : [],
-                            CONST.FSTORE.bills : [],
+                            CONST.FSTORE.reminders : [],
                             CONST.FSTORE.limit : CONST.Category.limits
                             
                         ]

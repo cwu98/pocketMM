@@ -15,7 +15,7 @@ struct CONST{
     static let cellReusableIdentifier = "ReusableCell"
     static let GoalCell = "GoalCell"
     static let settingsCellIdentifer = "SettingsCell"
-    static let billSeque = "billSegue"
+    static let reminderSeque = "reminderSegue"
     static let limitSeque = "limitSegue"
     
     static let balance = "balance"
@@ -33,10 +33,10 @@ struct CONST{
         
         static let limit = "limit"
         
-        static let bills = "bills"
-        static let bill_name = "name"
-        static let bill_due_date = "due_date"
-        static let bill_frequency = "frequency"
+        static let reminders = "reminders"
+        static let reminder_title = "title"
+        static let reminder_due_date = "due_date"
+        static let reminder_frequency = "frequency"
         
         static let transactions = "transactions"
         static let item_id = "item_id"
