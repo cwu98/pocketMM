@@ -98,5 +98,17 @@ struct Limit : Decodable {
     let rent : Double
     let goals : Double
     let miscellaneous : Double
+    init(entertainment: Double, groceries: Double, shopping: Double,
+               dining: Double, utilities: Double, rent: Double, goals: Double
+        , miscellaneous: Double){
+        self.entertainment = entertainment
+        self.groceries = groceries
+        self.shopping = shopping
+        self.dining = dining
+        self.utilities = utilities
+        self.rent = rent
+        self.goals = goals
+        self.miscellaneous = miscellaneous
+    }
 }
 
