@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class SettingsController: UIViewController {
-    var cells : [String] = ["Bills", "Limits"]
+    var cells : [String] = ["Limits"]
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +40,9 @@ extension SettingsController : UITableViewDataSource{
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(indexPath.row == 0){
-            performSegue(withIdentifier: CONST.billSeque, sender: self)
-        }
-        else{
             performSegue(withIdentifier: CONST.limitSeque, sender: self)
         }
+       
     }
     
 }

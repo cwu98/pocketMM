@@ -15,11 +15,11 @@ struct User : Decodable{
     let item_id : String
     let transactions: [Transaction]
     let goals : [Goal]
-    let bills : [Bill]
+    let reminders : [reminder]
     let limit : Limit
 //    init(email: String, accessToken: String,
 //         itemId : String, transactions: [Transaction],
-//         goals: [Goal], bills : [Bill]){
+//         goals: [Goal], reminders : [reminder]){
 //        self.email = email
 //        self.accessToken = accessToken
 //        self.itemId = itemId
@@ -77,20 +77,19 @@ struct Goal :Decodable {
     }
 }
 
-struct Bills: Decodable{
-    let bills : [Bill]
-}
-struct Bill : Decodable {
-    let name : String
-    let due_date : String
-    let frequency : String
-    init(name: String, due_date : String, frequency: String){
-        self.name = name
-        self.due_date = due_date
-        self.frequency = frequency
-    }
+struct Reminders : Decodable{
+    let reminders : [reminder]
 }
 
+struct reminder : Decodable{
+    let title: String
+    let date: Date
+    let freq: String
+    let alert: String
+    let identifier: String
+    
+    
+}
 struct Limit : Decodable {
     let entertainment : Double
     let groceries : Double

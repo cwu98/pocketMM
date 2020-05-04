@@ -30,8 +30,8 @@ class SummaryController: UIViewController, UITextFieldDelegate {
     var month: Int = 0
     var year: Int = 0
     let arrayOfMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-    //array of transaction data of type TransactionData
-    var transactionData = [TransactionData]()
+    //array of transaction data of type Transaction
+    var transactionData = [Transaction]()
     
     //array to hold total spending per category... this is the data for pie chart
     var totalSpendingByCategory = [Double]()
@@ -40,7 +40,10 @@ class SummaryController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        if let currentUser = user{
+            transactionData = currentUser.transactions
+            
+        }
         //
         let datePicker = MonthYearPickerView()
         monthLabel.inputView = datePicker
@@ -64,10 +67,10 @@ class SummaryController: UIViewController, UITextFieldDelegate {
 
         var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category} )
 
-//        for (categoryID, transaction) in groupByCategory{
-//            var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
-//            totalSpendingByCategory.insert(total, at: categoryID)
-//        }
+      for (categoryID, transaction) in groupByCategory{
+            var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
+            //totalSpendingByCategory.insert(total, at: categoryID)
+        }
 
         
 
