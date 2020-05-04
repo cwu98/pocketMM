@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A7541A4245F90C500A1FB31 /* NewSpendingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7541A3245F90C500A1FB31 /* NewSpendingController.swift */; };
 		4AC457E6245E70C200B33EDC /* goalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC457E4245E70C200B33EDC /* goalTableViewCell.swift */; };
 		4AC457E7245E70C200B33EDC /* goalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC457E5245E70C200B33EDC /* goalTableViewCell.xib */; };
 		571147585B32FE91B5078E25 /* Pods_pocketMM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0A46DACC518B5F85761BFE /* Pods_pocketMM.framework */; };
@@ -64,6 +65,7 @@
 		294A4BCAE669758AD0F51994 /* Pods_pocketMM_pocketMMUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pocketMM_pocketMMUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B62643BA75F9619EAFAF404 /* Pods-pocketMM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMM.release.xcconfig"; path = "Target Support Files/Pods-pocketMM/Pods-pocketMM.release.xcconfig"; sourceTree = "<group>"; };
 		3CB1C3EDD3E45532BFAA731A /* Pods-pocketMM-pocketMMUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pocketMM-pocketMMUITests.release.xcconfig"; path = "Target Support Files/Pods-pocketMM-pocketMMUITests/Pods-pocketMM-pocketMMUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4A7541A3245F90C500A1FB31 /* NewSpendingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSpendingController.swift; sourceTree = "<group>"; };
 		4AC457E4245E70C200B33EDC /* goalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goalTableViewCell.swift; sourceTree = "<group>"; };
 		4AC457E5245E70C200B33EDC /* goalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = goalTableViewCell.xib; sourceTree = "<group>"; };
 		8C0A46DACC518B5F85761BFE /* Pods_pocketMM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pocketMM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,7 @@
 				E06E731124557CA400797988 /* AddGoalController.swift */,
 				E0E0D4E4245C063E00852284 /* SetBillReminderController.swift */,
 				E0E0D4E6245C068300852284 /* SetLimitController.swift */,
+				4A7541A3245F90C500A1FB31 /* NewSpendingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				E06E731824557DDA00797988 /* SettingsController.swift in Sources */,
 				E0E0D4E7245C068300852284 /* SetLimitController.swift in Sources */,
 				E092DE92244A91F2005960FB /* User.swift in Sources */,
+				4A7541A4245F90C500A1FB31 /* NewSpendingController.swift in Sources */,
 				E0E0D4D52456C1F300852284 /* StartPageController.swift in Sources */,
 				E06E731224557CA400797988 /* AddGoalController.swift in Sources */,
 				E0E0D4D72456E20800852284 /* Constants.swift in Sources */,
