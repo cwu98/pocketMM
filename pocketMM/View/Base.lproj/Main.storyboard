@@ -224,10 +224,26 @@
                                                 <rect key="frame" x="8" y="0.0" width="398" height="338"/>
                                                 <color key="backgroundColor" red="0.80315134099999996" green="0.96235281230000003" blue="0.60634377240000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="62" id="ycO-Nc-3no">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" rowHeight="62" id="ycO-Nc-3no">
                                                         <rect key="frame" x="0.0" y="28" width="398" height="62"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ycO-Nc-3no" id="Jiz-VP-D7Q" userLabel="Alert">
+                                                            <rect key="frame" x="0.0" y="0.0" width="398" height="62"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="62" id="hcv-7o-HIi">
+                                                        <rect key="frame" x="0.0" y="90" width="398" height="62"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hcv-7o-HIi" id="Al6-Vn-ucT" userLabel="Alert">
+                                                            <rect key="frame" x="0.0" y="0.0" width="398" height="62"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="62" id="4c7-em-Ecm">
+                                                        <rect key="frame" x="0.0" y="152" width="398" height="62"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4c7-em-Ecm" id="ajL-BH-gY9" userLabel="Alert">
                                                             <rect key="frame" x="0.0" y="0.0" width="398" height="62"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
@@ -252,7 +268,6 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wS-yr-dBK">
                                                         <rect key="frame" x="0.0" y="0.0" width="192" height="137"/>
->>>>>>> refs/remotes/origin/master
                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                         <state key="normal" image="reminder"/>
                                                         <connections>
@@ -262,7 +277,6 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0S-SD-xpD">
 
                                                         <rect key="frame" x="194" y="0.0" width="192" height="137"/>
->>>>>>> refs/remotes/origin/master
                                                         <size key="titleShadowOffset" width="14" height="0.0"/>
                                                         <state key="normal" image="goalsbutton"/>
                                                         <connections>
@@ -349,6 +363,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="datetextview" destination="5ya-Rj-l2T" id="FY9-IZ-Xpz"/>
+                        <outlet property="tableView" destination="fix-oM-djy" id="Wqt-Ce-Zim"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0yf-Ev-ace" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -696,17 +711,16 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="yearLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IS5-KC-kjp">
-                                <rect key="frame" x="164" y="117.5" width="86" height="24"/>
+                                <rect key="frame" x="164" y="188" width="86" height="24"/>
+
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progressViewStyle="bar" progress="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="xvS-8j-dhv">
-                                <rect key="frame" x="123" y="282.5" width="150" height="2.5"/>
-                                <color key="progressTintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </progressView>
                             <textField opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="monthLabel" placeholder="Select date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sf6-1B-Wri">
-                                <rect key="frame" x="135" y="84" width="144" height="34"/>
+                               
+                              <rect key="frame" x="20" y="133" width="374" height="35"/>
+
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -714,13 +728,14 @@
                         <color key="backgroundColor" name="backgroundGreen"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="IS5-KC-kjp" firstAttribute="centerX" secondItem="IXU-3c-33W" secondAttribute="centerX" id="0r5-BI-N5Z"/>
-                            <constraint firstItem="xvS-8j-dhv" firstAttribute="centerX" secondItem="IXU-3c-33W" secondAttribute="centerX" id="ABO-qr-hle"/>
-                            <constraint firstItem="sf6-1B-Wri" firstAttribute="top" secondItem="IXU-3c-33W" secondAttribute="top" constant="40" id="EXs-9K-YgV"/>
-                            <constraint firstItem="IS5-KC-kjp" firstAttribute="top" secondItem="sf6-1B-Wri" secondAttribute="bottom" constant="-0.5" id="MNt-bS-rzI"/>
-                            <constraint firstItem="IXU-3c-33W" firstAttribute="trailing" secondItem="HI5-WY-KIP" secondAttribute="trailing" constant="10" id="Rj0-xF-Tz5"/>
-                            <constraint firstItem="sf6-1B-Wri" firstAttribute="centerX" secondItem="IXU-3c-33W" secondAttribute="centerX" id="gwT-x8-1Mg"/>
-                            <constraint firstItem="HI5-WY-KIP" firstAttribute="leading" secondItem="IXU-3c-33W" secondAttribute="leading" constant="10" id="i8i-FG-Ywf"/>
+                            <constraint firstItem="HI5-WY-KIP" firstAttribute="centerX" secondItem="IXU-3c-33W" secondAttribute="centerX" id="8Qp-FI-ci4"/>
+                            <constraint firstItem="IS5-KC-kjp" firstAttribute="top" secondItem="IXU-3c-33W" secondAttribute="top" constant="100" id="UGe-fG-7Ec"/>
+                            <constraint firstItem="IS5-KC-kjp" firstAttribute="top" secondItem="sf6-1B-Wri" secondAttribute="bottom" constant="20" id="d0Z-cx-9bX"/>
+                            <constraint firstItem="sf6-1B-Wri" firstAttribute="top" secondItem="IXU-3c-33W" secondAttribute="top" constant="45" id="gWz-pq-w4g"/>
+                            <constraint firstItem="IS5-KC-kjp" firstAttribute="centerX" secondItem="IXU-3c-33W" secondAttribute="centerX" id="mw6-f9-8FG"/>
+                            <constraint firstItem="IXU-3c-33W" firstAttribute="trailing" secondItem="sf6-1B-Wri" secondAttribute="trailing" constant="20" id="ozh-Wh-0hT"/>
+                            <constraint firstItem="HI5-WY-KIP" firstAttribute="centerY" secondItem="IXU-3c-33W" secondAttribute="centerY" id="w6O-Tm-V6m"/>
+                            <constraint firstItem="sf6-1B-Wri" firstAttribute="leading" secondItem="IXU-3c-33W" secondAttribute="leading" constant="20" id="wfT-Aq-xbd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IXU-3c-33W"/>
                     </view>
@@ -1252,7 +1267,6 @@
             </objects>
 
             <point key="canvasLocation" x="-7990" y="-1285"/>
->>>>>>> refs/remotes/origin/master
         </scene>
         <!--Add Reminder View Controller-->
         <scene sceneID="a60-3j-TEf">
@@ -1370,7 +1384,6 @@
             </objects>
 
             <point key="canvasLocation" x="-6519" y="-1285"/>
->>>>>>> refs/remotes/origin/master
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -1395,7 +1408,6 @@
         <image name="newSpending" width="186" height="133"/>
 
         <image name="plus" catalog="system" width="128" height="113"/>
->>>>>>> refs/remotes/origin/master
         <image name="setting" width="184" height="132"/>
         <image name="title" width="305" height="67"/>
         <image name="titleWithoutunder" width="266" height="40"/>
@@ -1406,5 +1418,4 @@
         </namedColor>
     </resources>
 
->>>>>>> refs/remotes/origin/master
 </document>

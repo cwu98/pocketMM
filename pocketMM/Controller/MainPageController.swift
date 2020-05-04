@@ -9,18 +9,43 @@
 import UIKit
 import Firebase
 
-class MainPageController: UIViewController {
+class MainPageController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
+  
     
     
+    var accountNames: [String] = []
+    var balances: [Double] = []
     @IBOutlet weak var textview: UITextView!
     
-   
-   
-    
     @IBOutlet weak var datetextview: UITextView!
+    @IBOutlet weak var tableView: UITableView!
     
+    func tableView(tableView: UITableViewDelegate, numberOfRowsInSection section: Int) -> Int {
+        return accountNames.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return accountNames.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+  
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        var formatted = String(format: "$%.02f", balances[indexPath.row])
+        cell.textLabel?.text = accountNames[indexPath.row] + ":      " + formatted
+
+        return cell
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        accountNames = ["Plaid Checking", "Plaid Credit Card", "Plaid Money Market"]
+        balances = [3010.10, 501.00, 1100.00]
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         self.datetextview.layer.cornerRadius = 25
         //self.view.bringSubviewToFront(textview);

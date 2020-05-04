@@ -49,7 +49,8 @@ class SummaryController: UIViewController, UITextFieldDelegate {
             let string = String  (format: "%03d/%d",month, year)
             print(string)
         }
-        
+        var tempArr: Array<Double> = Array(repeating: 0, count: 8)
+        totalSpendingByCategory = tempArr
         //get current month and year
         let date = Date()
         let calendar = Calendar.current
@@ -59,10 +60,11 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         /*
         monthLabel.leftViewMode = UITextField.ViewMode.always
         monthLabel.leftViewMode = .always
-        monthLabel.text = arrayOfMonths[month]
         monthLabel.leftView = UIImageView(image: UIImage(named: "downArrow.png"))
-        yearLabel.text = "\(year)"
  */
+        monthLabel.text = arrayOfMonths[month]
+        yearLabel.text = "\(year)"
+ createDatePicker()
         
         //group based on category into dict [category_id : [...list of TransactionData objects with this category_id ] ]
 
