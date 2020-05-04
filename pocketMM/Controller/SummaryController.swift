@@ -16,15 +16,18 @@ struct tablecelldata {
     let index : String!     //number + .
     let percent : String!   //number + %
     let name : String!
-    let amount : String!    //$ + number 
+    let amount : String!    //$ + number
 }
 
 class SummaryController: UIViewController, UITextFieldDelegate {
+  
     
     @IBOutlet weak var pieChart:PieChartView!
     @IBOutlet weak var monthLabel: UITextField!
     @IBOutlet weak var yearLabel: UILabel!
     
+    var datePicker = MonthYearPickerView()
+
     var selectedMonth: String?
     var user : User?
     var month: Int = 0
@@ -44,12 +47,14 @@ class SummaryController: UIViewController, UITextFieldDelegate {
             transactionData = currentUser.transactions
             
         }
+        else {
+            print("error getting transaction data in summaryController")
+        }
         //
-        let datePicker = MonthYearPickerView()
-        monthLabel.inputView = datePicker
+        monthLabel.delegate = self
         datePicker.onDateSelected = { (month: Int, year: Int) in
             let string = String  (format: "%03d/%d",month, year)
-            NSLog(string)
+            print(string)
         }
         
         //get current month and year
@@ -57,19 +62,22 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         let calendar = Calendar.current
         month = calendar.component(.month, from: date)
         year = calendar.component(.year, from: date)
+        
+        /*
         monthLabel.leftViewMode = UITextField.ViewMode.always
         monthLabel.leftViewMode = .always
         monthLabel.text = arrayOfMonths[month]
         monthLabel.leftView = UIImageView(image: UIImage(named: "downArrow.png"))
         yearLabel.text = "\(year)"
+ */
         
         //group based on category into dict [category_id : [...list of TransactionData objects with this category_id ] ]
 
-        var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category} )
+        var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category_id} )
 
       for (categoryID, transaction) in groupByCategory{
             var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
-            //totalSpendingByCategory.insert(total, at: categoryID)
+        totalSpendingByCategory.insert(total, at: categoryID!)
         }
 
         
@@ -79,6 +87,36 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         
         
     }
+    func createDatePicker() {
+        //toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        //bar button
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        toolbar.setItems([doneBtn], animated: true)
+        
+        //assign toolbar
+        monthLabel.inputAccessoryView = toolbar
+        
+        //assign date picker to text field
+        monthLabel.inputView = datePicker
+
+        
+        
+        self.view.endEditing(true)
+        
+    }
+  
+    
+    @objc func donePressed() {
+        //format
+       
+        monthLabel.text = arrayOfMonths[datePicker.month-1]
+        yearLabel.text = "\(datePicker.year)"
+        
+    }
+    
     
     func updateChardData(){
         

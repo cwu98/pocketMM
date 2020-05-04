@@ -36,19 +36,49 @@ struct Transactions : Decodable{
     let transactions : [Transaction]
 }
 struct Transaction : Decodable {
-    let transaction_id : String
-    let amount : Double
-    let date : String
-    let category : [String]
-    let item_id : String
-    init(amount: Double, category: [String], item_id: String, transaction_id: String,
-         date: String){
-        self.amount = amount
-        self.category = category
-        self.transaction_id = transaction_id
-        self.date = date
-        self.item_id = item_id
+let transaction_id : String
+let amount : Double
+let date : String
+let category : [String]
+let category_id : Int?
+let item_id : String
+init(amount: Double, category: [String], item_id: String, transaction_id: String,
+     date: String){
+    let category_id : Int
+ 
+    if category.contains("Arts and Entertainment") || category.contains("Adult Entertainment") || category.contains("Entertainment"){
+            category_id = 0
+        }
+    else if category.contains("Supermarkets and Groceries") || category.contains("Delis"){
+            category_id = 1
     }
+    else if category.contains("Shops") || category.contains("Clothing and Accessories"){
+            category_id = 2
+    }
+    else if category.contains("Restaurants") || category.contains("Food and Drink") {
+            category_id = 3
+    }
+        else if category.contains("Utilities"){
+            category_id = 4
+    }
+        else if category.contains("Rent"){
+            category_id = 5
+    }
+        else if category.contains("goals"){
+            category_id = 6
+    }
+        else {
+            category_id = 7
+    }
+    
+    self.amount = amount
+    self.category = category
+    self.category_id = category_id
+    print("category_id: \(category_id)")
+    self.transaction_id = transaction_id
+    self.date = date
+    self.item_id = item_id
+}
 }
 
 struct AccountsData : Decodable {
