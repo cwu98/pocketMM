@@ -11,8 +11,8 @@ import Firebase
 
 
 var allTransactions : [Transaction] = []
-var allBills : [Bill] = []
-var limit: [String : Double] = Dictionary()
+var allReminders : [reminder] = []
+var limit: Limit?
 var balance : Double = -1.0
 var user : User?
 
@@ -85,7 +85,7 @@ func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]{
     return allTransactions
 }
 
-func getBills(){
+func getReminderss(){
     if let email = Auth.auth().currentUser?.email{
         db.collection(CONST.FSTORE.usersCollection).document(email).getDocument{
            (querySnapshot, error) in
@@ -98,15 +98,15 @@ func getBills(){
                 do{
                     let data = try JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
 
-                    let decodedData = try decoder.decode(Bills.self, from: data)
+                    let decodedData = try decoder.decode(Reminders.self, from: data)
                     
-                    for bill in decodedData.bills {
-                        allBills.append(bill)
+                    for reminder in decodedData.reminders {
+                        allReminders.append(reminder)
                     }
-                    print("all bills ", allBills)
+                    print("all reminders ", allReminders)
                 }
                 catch{
-                    print("error from parsing bills json : ", error)
+                    print("error from parsing reminders json : ", error)
                   
                 }
                 
@@ -130,11 +130,11 @@ func getLimit(){
                     let data = try JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
 
                     let decodedData = try decoder.decode(Limit.self, from: data)
-                
+                    limit = decodedData
                     print("limits ", decodedData)
                 }
                 catch{
-                    print("error from parsing bills json : ", error)
+                    print("error from parsing limits json : ", error)
                   
                 }
                 
@@ -159,7 +159,7 @@ func getUser(){
                     user = try decoder.decode(User.self, from: data)
                     
                     PlaidAPIManager.getBalance(access_token: user!.access_token)
-//                    print(user!.transactions, balance, user!.limit, user!.bills, user!.goals)
+//                    print(user!.transactions, balance, user!.limit, user!.reminders, user!.goals)
                    
                 }
                 catch{

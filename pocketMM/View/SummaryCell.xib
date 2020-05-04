@@ -61,6 +61,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="42" id="MqG-uI-SyX"/>
                             <constraint firstAttribute="width" constant="42" id="WTn-Xp-hQz"/>
+                            <constraint firstAttribute="width" secondItem="iru-mm-Hl8" secondAttribute="height" multiplier="1:1" id="iZm-IL-NYn"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y6b-s3-Ckh" userLabel="amount">
