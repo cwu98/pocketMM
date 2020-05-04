@@ -22,7 +22,7 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
     
     public var completion: ((String, Date, String, String) -> Void)?
     
-    let freqArr = ["every month", "every week", "every year"]
+    let freqArr = ["every month", "every week", "every year", "never"]
     let alertArr = ["1 day", "2 days", "3 days", "4 days", "5 days", "6 days", "1 week", "2 weeks"]
     
     override func viewDidLoad() {
@@ -154,12 +154,6 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
         
         dueDateField.text = formatter.string(from: datePicker.date)
     }
-    
-    
-    //set frequency
-    
-    
-    //remind me XXX days before
     
 
 }

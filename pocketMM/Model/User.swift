@@ -83,12 +83,18 @@ struct Reminders : Decodable{
 
 struct reminder : Decodable{
     let title: String
-    let date: Date
-    let freq: String
-    let alert: String
+    let date: String
+    let frequency: String
     let identifier: String
    
+    init(title: String, date: String, frequency: String, identifier: String){
+        self.title = title
+        self.date = date
+        self.frequency = frequency
+        self.identifier = identifier
+    }
 }
+
 struct Limit : Decodable {
     let entertainment : Double
     let groceries : Double
