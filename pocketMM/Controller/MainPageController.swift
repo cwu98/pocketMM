@@ -28,6 +28,8 @@ class MainPageController: UIViewController {
         title = "💰Home"
        print("in main page controller")
         navigationItem.hidesBackButton = true
+        
+//        loadTransactions()
         let today = Date()
         var startComponent = Calendar.current.dateComponents([.year, .month, .day], from: today)
         startComponent.month = 1
@@ -36,8 +38,8 @@ class MainPageController: UIViewController {
         dateFormatterGet.dateFormat = "yyyy-MM-dd"
         let end = dateFormatterGet.string(from: today)
         print(end)
-        
-//        if let startDate = Calendar.current.date(bySetting: .month, value: 1 , of: today){
+        datetextview.text = end
+    //        if let startDate = Calendar.current.date(bySetting: .month, value: 1 , of: today){
          if let startDate = Calendar.current.date(from: startComponent){
            
             let start = dateFormatterGet.string(from: startDate)
@@ -52,10 +54,7 @@ class MainPageController: UIViewController {
            
             
         }
-        
         print("loading transactions")
-        print("retrieved transactions")
-        print(allTransactions)
     }
 
     
