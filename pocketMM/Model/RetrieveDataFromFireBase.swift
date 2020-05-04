@@ -170,32 +170,33 @@ func getUser(){
             }
         }
     }
-    //get access to item_id via user
-    func addTransaction(amount: Double, category: [String] , item_id : String
-        , transaction_id : String, date: String){
-        if let email = Auth.auth().currentUser?.email{
-            let transaction = Transaction(
-                                amount: amount,
-                                category: category,
-                                item_id : item_id,
-                                transaction_id: transaction_id,
-                                date: date)
-            
-            let docData : [String: Any] = [
-                CONST.FSTORE.transaction_id : transaction.transaction_id,
-                CONST.FSTORE.item_id : transaction.item_id,
-                CONST.FSTORE.transaction_date : transaction.date,
-                CONST.FSTORE.transaction_amount : transaction.amount,
-                CONST.FSTORE.transaction_category : transaction.category
-                ]
+    
+}
+//get access to item_id via user
+func addTransaction(amount: Double, category: [String] , item_id : String
+    , transaction_id : String, date: String){
+    if let email = Auth.auth().currentUser?.email{
+        let transaction = Transaction(
+                            amount: amount,
+                            category: category,
+                            item_id : item_id,
+                            transaction_id: transaction_id,
+                            date: date)
+        
+        let docData : [String: Any] = [
+            CONST.FSTORE.transaction_id : transaction.transaction_id,
+            CONST.FSTORE.item_id : transaction.item_id,
+            CONST.FSTORE.transaction_date : transaction.date,
+            CONST.FSTORE.transaction_amount : transaction.amount,
+            CONST.FSTORE.transaction_category : transaction.category
+            ]
 
-            db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
-                CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
-            ])
-        }
-        else{
-            print("failed to add Transaction")
-        }
+        db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
+            CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
+        ])
+    }
+    else{
+        print("failed to add Transaction")
     }
 }
 

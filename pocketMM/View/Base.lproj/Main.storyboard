@@ -210,7 +210,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPN-DH-ODv" userLabel="Top View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="158"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="77.5"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="04/26/2020" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5ya-Rj-l2T">
                                                 <rect key="frame" x="20" y="12" width="374" height="58"/>
@@ -230,7 +230,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9m-bI-kHf" userLabel="Middle View">
-                                        <rect key="frame" x="0.0" y="159" width="414" height="789.5"/>
+                                        <rect key="frame" x="0.0" y="78.5" width="414" height="387"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fix-oM-djy">
                                                 <rect key="frame" x="8" y="0.0" width="398" height="338"/>
@@ -247,7 +247,7 @@
                                                 </prototypes>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuN-6h-kF1">
-                                                <rect key="frame" x="136" y="346" width="143" height="49"/>
+                                                <rect key="frame" x="135.5" y="346" width="143" height="49"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                                 <state key="normal" title="Reminders"/>
                                                 <connections>
@@ -267,13 +267,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTN-el-nat" userLabel="Near Bottom View">
-                                        <rect key="frame" x="0.0" y="949.5" width="414" height="313"/>
+                                        <rect key="frame" x="0.0" y="466.5" width="414" height="151.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iIE-1z-26p">
-                                                <rect key="frame" x="14" y="7.5" width="386" height="137"/>
+                                                <rect key="frame" x="-178" y="-61" width="770" height="274"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wS-yr-dBK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="192" height="137"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="274"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                         <state key="normal" image="summary"/>
                                                         <connections>
@@ -281,7 +281,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0S-SD-xpD">
-                                                        <rect key="frame" x="194" y="0.0" width="192" height="137"/>
+                                                        <rect key="frame" x="386" y="0.0" width="384" height="274"/>
                                                         <size key="titleShadowOffset" width="14" height="0.0"/>
                                                         <state key="normal" image="goalsbutton"/>
                                                         <connections>
@@ -301,14 +301,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HwJ-5K-sYa" userLabel="Bottom View">
-                                        <rect key="frame" x="0.0" y="1263.5" width="414" height="316"/>
+                                        <rect key="frame" x="0.0" y="619" width="414" height="155"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="XGZ-LM-0vY">
-
-                                                <rect key="frame" x="19.5" y="11" width="375" height="133"/>
+                                                <rect key="frame" x="-166.5" y="-55.5" width="747" height="266"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUW-Hp-h1Y">
-                                                        <rect key="frame" x="0.0" y="0.0" width="186" height="133"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="372" height="266"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                         <state key="normal" image="setting"/>
                                                         <connections>
@@ -316,7 +315,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6x-rT-byb">
-                                                        <rect key="frame" x="189" y="0.0" width="186" height="133"/>
+                                                        <rect key="frame" x="375" y="0.0" width="372" height="266"/>
                                                         <state key="normal" image="newSpending"/>
                                                         <connections>
                                                             <segue destination="DYS-Ii-tMe" kind="show" id="nUH-Bl-i60"/>
@@ -491,6 +490,9 @@
                                                         <inset key="titleEdgeInsets" minX="-83" minY="0.0" maxX="0.0" maxY="-80"/>
                                                         <inset key="imageEdgeInsets" minX="14" minY="0.0" maxX="0.0" maxY="17"/>
                                                         <state key="normal" title="grocery" image="C_grocery"/>
+                                                        <connections>
+                                                            <action selector="categorySelected:" destination="DYS-Ii-tMe" eventType="touchUpInside" id="ySY-dN-EuW"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="had-uS-5ee">
                                                         <rect key="frame" x="103.5" y="0.0" width="103.5" height="135.5"/>
@@ -498,13 +500,19 @@
                                                         <inset key="titleEdgeInsets" minX="-79" minY="0.0" maxX="0.0" maxY="-95"/>
                                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="1"/>
                                                         <state key="normal" title="goals" image="C_goal"/>
+                                                        <connections>
+                                                            <action selector="categorySelected:" destination="DYS-Ii-tMe" eventType="touchUpInside" id="IYi-P0-SLB"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLh-rO-Xa0">
                                                         <rect key="frame" x="207" y="0.0" width="103.5" height="135.5"/>
                                                         <inset key="contentEdgeInsets" minX="-1" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <inset key="titleEdgeInsets" minX="-83" minY="0.0" maxX="0.0" maxY="-77"/>
                                                         <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="17"/>
-                                                        <state key="normal" title="entmt" image="C_Entertainment"/>
+                                                        <state key="normal" title="entertainment" image="C_Entertainment"/>
+                                                        <connections>
+                                                            <action selector="categorySelected:" destination="DYS-Ii-tMe" eventType="touchUpInside" id="x9x-ta-8RT"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDa-qx-FYA">
                                                         <rect key="frame" x="310.5" y="0.0" width="103.5" height="135.5"/>
@@ -512,6 +520,9 @@
                                                         <inset key="titleEdgeInsets" minX="-80" minY="0.0" maxX="0.0" maxY="-104"/>
                                                         <inset key="imageEdgeInsets" minX="33" minY="0.0" maxX="0.0" maxY="-1"/>
                                                         <state key="normal" title="dining" image="C_dining"/>
+                                                        <connections>
+                                                            <action selector="categorySelected:" destination="DYS-Ii-tMe" eventType="touchUpInside" id="rW8-8Q-MPL"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -524,6 +535,9 @@
                                                         <inset key="titleEdgeInsets" minX="-46" minY="0.0" maxX="0.0" maxY="-80"/>
                                                         <inset key="imageEdgeInsets" minX="27" minY="0.0" maxX="0.0" maxY="17"/>
                                                         <state key="normal" title="utilities" image="C_utility"/>
+                                                        <connections>
+                                                            <action selector="categorySelected:" destination="DYS-Ii-tMe" eventType="touchUpInside" id="hYa-Wh-Ukk"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IjZ-6o-eEw">
                                                         <rect key="frame" x="103.5" y="0.0" width="103.5" height="135.5"/>
@@ -531,6 +545,9 @@
                                                         <inset key="titleEdgeInsets" minX="-72" minY="0.0" maxX="0.0" maxY="-91"/>
                                                         <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="shopping" image="C_shopping"/>
+                                                        <connections>
+                                                            <action selector="categorySelected:" destination="DYS-Ii-tMe" eventType="touchUpInside" id="sTC-B9-ann"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldL-u2-4Jx">
                                                         <rect key="frame" x="207" y="0.0" width="103.5" height="135.5"/>
@@ -538,13 +555,19 @@
                                                         <inset key="titleEdgeInsets" minX="-80" minY="0.0" maxX="0.0" maxY="-80"/>
                                                         <inset key="imageEdgeInsets" minX="17" minY="0.0" maxX="0.0" maxY="17"/>
                                                         <state key="normal" title="rent" image="C_rent"/>
+                                                        <connections>
+                                                            <action selector="categorySelected:" destination="DYS-Ii-tMe" eventType="touchUpInside" id="tWW-4r-dta"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwA-WZ-Gan">
                                                         <rect key="frame" x="310.5" y="0.0" width="103.5" height="135.5"/>
                                                         <inset key="contentEdgeInsets" minX="-19" minY="5" maxX="-14" maxY="19"/>
                                                         <inset key="titleEdgeInsets" minX="-67" minY="0.0" maxX="0.0" maxY="-91"/>
                                                         <inset key="imageEdgeInsets" minX="36" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        <state key="normal" title="Misc" image="C_misc"/>
+                                                        <state key="normal" title="miscellaneous" image="C_misc"/>
+                                                        <connections>
+                                                            <action selector="categorySelected:" destination="DYS-Ii-tMe" eventType="touchUpInside" id="oSV-Da-pBh"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -568,6 +591,9 @@
                                                 <state key="normal" title="Save">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="saveButtonClicked:" destination="DYS-Ii-tMe" eventType="touchUpInside" id="XuM-Nw-fU4"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -607,7 +633,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="T2L-nO-1fj"/>
                     <connections>
+                        <outlet property="amountTextField" destination="FlQ-ab-c5r" id="qkh-ts-ha8"/>
                         <outlet property="datetextview" destination="nMw-8Y-kpo" id="sEb-LU-29m"/>
+                        <outlet property="nameTextField" destination="2x4-iT-gDM" id="qXB-jg-nDr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E2M-vZ-DkT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
