@@ -29,11 +29,17 @@ class MainPageController: UIViewController {
        print("in main page controller")
         navigationItem.hidesBackButton = true
         let today = Date()
+        var startComponent = Calendar.current.dateComponents([.year, .month, .day], from: today)
+        startComponent.month = 1
+        startComponent.day = 1
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd"
         let end = dateFormatterGet.string(from: today)
         print(end)
-        if let startDate = Calendar.current.date(bySetting: .month, value: 1 , of: today){
+        
+//        if let startDate = Calendar.current.date(bySetting: .month, value: 1 , of: today){
+         if let startDate = Calendar.current.date(from: startComponent){
+           
             let start = dateFormatterGet.string(from: startDate)
             print("date", start, end)
             let plaidAPIManager : PlaidAPIManager = PlaidAPIManager()

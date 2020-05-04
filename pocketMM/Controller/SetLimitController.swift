@@ -27,11 +27,16 @@ class SetLimitController: UIViewController {
             db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
                 "\(CONST.FSTORE.limit).\(category)" : Double(limitPerMonth)
             ])
-            errorTextView.isHidden = false
+            let alert = UIAlertController(title: "Set Limit", message: "Successfully to set limit of \(limitTextField.text!) for category \(categoryTextField.text!)", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                           alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
         }
         else{
-            errorTextView.isHidden = true
-            errorTextView.text = "Failed to set bill"
+            let alert = UIAlertController(title: "Set Limit", message: "Failed to set limit for category \(categoryTextField.text!)", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                           alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }

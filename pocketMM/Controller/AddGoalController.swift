@@ -42,12 +42,24 @@ class AddGoalController: UIViewController {
                 db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
                     CONST.FSTORE.goals : FieldValue.arrayUnion([docData])
                     ])
-                    uploadTextView.isHidden = false
-                    uploadTextView.text = "Successfully uploaded goal"
-                }
+//                    uploadTextView.isHidden = false
+//                    uploadTextView.text = "Successfully uploaded goal"
+                let alert = UIAlertController(title: "Uploaded", message: "Successfully uploaded goal", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okAction)
+                present(alert, animated: true, completion: nil)
+                
             }
+        else{
+            let alert = UIAlertController(title: "Uploading", message: "Something's gone wrong. Please try again!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            
+        }
             
         
+    }
     }
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
         let firebaseAuth = Auth.auth()
@@ -58,16 +70,16 @@ class AddGoalController: UIViewController {
           print ("Error signing out: %@", signOutError)
         }
     }
-    @IBAction func handlePanUpload(_ sender: UIPanGestureRecognizer) {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        picker.sourceType = .photoLibrary;
-        uploadTextView.isHidden = false
-        uploadTextView.text = "tapped"
-        print("handling here\n ")
-        present(picker, animated: true, completion: nil)
-    }
+//    @IBAction func handlePanUpload(_ sender: UIPanGestureRecognizer) {
+//        let picker = UIImagePickerController()
+//        picker.delegate = self
+//        picker.allowsEditing = true
+//        picker.sourceType = .photoLibrary;
+////        uploadTextView.isHidden = false
+////        uploadTextView.text = "tapped"
+//        print("handling here\n ")
+//        present(picker, animated: true, completion: nil)
+//    }
 }
 
 extension AddGoalController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{

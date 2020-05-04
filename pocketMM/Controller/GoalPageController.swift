@@ -67,7 +67,6 @@ extension GoalPageController : UITableViewDataSource{
                 }
                
                 DispatchQueue.main.async() {
-                    print("setting image")
                     cell.goalImage.image = UIImage(data: data!)
                }
             }

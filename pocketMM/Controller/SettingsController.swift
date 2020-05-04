@@ -15,7 +15,10 @@ class SettingsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "💰Settings"
+        tableView.delegate = self
         tableView.dataSource = self
+        tableView.delaysContentTouches = false
+        tableView.isUserInteractionEnabled = true
     }
 
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
@@ -28,8 +31,9 @@ class SettingsController: UIViewController {
         }
     }
 }
-extension SettingsController : UITableViewDataSource{
+extension SettingsController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("number of cells seting page", cells.count)
         return cells.count
     }
     
@@ -38,8 +42,10 @@ extension SettingsController : UITableViewDataSource{
         cell.textLabel?.text = cells[indexPath.row]
         return cell
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("select row", indexPath.row)
         if(indexPath.row == 0){
+            print("setting detected row")
             performSegue(withIdentifier: CONST.limitSeque, sender: self)
         }
        
