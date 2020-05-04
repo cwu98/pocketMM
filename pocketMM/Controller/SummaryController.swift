@@ -29,7 +29,6 @@ class SummaryController: UIViewController, UITextFieldDelegate {
     var datePicker = MonthYearPickerView()
 
     var selectedMonth: String?
-    var user : User?
     var month: Int = 0
     var year: Int = 0
     let arrayOfMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -42,14 +41,8 @@ class SummaryController: UIViewController, UITextFieldDelegate {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let currentUser = user{
-            transactionData = currentUser.transactions
-            
-        }
-        else {
-            print("error getting transaction data in summaryController")
-        }
+        print("In summary controller")
+        transactionData = user!.transactions
         //
         monthLabel.delegate = self
         datePicker.onDateSelected = { (month: Int, year: Int) in
@@ -77,10 +70,16 @@ class SummaryController: UIViewController, UITextFieldDelegate {
 
       for (categoryID, transaction) in groupByCategory{
             var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
+
+        print("category id: ", categoryID)
+        var index : Int
+        index = categoryID ?? 7
+        totalSpendingByCategory.insert(total, at: index)
+
         totalSpendingByCategory.insert(total, at: categoryID)
         }
-
-        
+print("trying to print total spending by category")
+        print(totalSpendingByCategory)
 
 
         updateChardData()
@@ -115,10 +114,42 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         monthLabel.text = arrayOfMonths[datePicker.month-1]
         yearLabel.text = "\(datePicker.year)"
         
+        updateChardData()
     }
     
-    
+    func displayForSelectedMonth(){
+        var dateComponents = DateComponents()
+        dateComponents.month = month
+        dateComponents.year = year
+        let userCalendar = Calendar.current
+        var startDate = userCalendar.date(from: dateComponents)
+        var comps2 = DateComponents()
+        comps2.month = 1
+        comps2.day = -1
+        var endDate = userCalendar.date(byAdding: comps2, to: startDate!)
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        let end = dateFormatterGet.string(from: endDate!)
+            
+               
+        let start = dateFormatterGet.string(from: startDate!)
+                print("date range: ", start, " ", end)
+        
+        transactionData = getTransactionFromRange(startDate: start, endDate: end)
+          var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category_id} )
+
+        for (categoryID, transaction) in groupByCategory{
+              var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
+        var index : Int
+        index = categoryID ?? 7
+        totalSpendingByCategory.insert(total, at: index)
+
+          }
+
+
+    }
     func updateChardData(){
+        displayForSelectedMonth()
         
         var entries: [PieChartDataEntry] = []
         for i in 0..<totalSpendingByCategory.count {
