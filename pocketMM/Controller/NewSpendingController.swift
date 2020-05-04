@@ -20,7 +20,10 @@ class NewSpendingController: UIViewController {
         super.viewDidLoad()
 
         self.datetextview.layer.cornerRadius = 25 
-       
+       let dateFormatterGet = DateFormatter()
+       dateFormatterGet.dateFormat = "yyyy/MM/dd"
+       let date = dateFormatterGet.string(from: Date())
+        datetextview.text = date
     }
     
 

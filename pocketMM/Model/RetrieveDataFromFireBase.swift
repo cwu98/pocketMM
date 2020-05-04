@@ -48,6 +48,7 @@ func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]{
 //                        }
                         
                         let decodedData = try decoder.decode(Transactions.self, from: jsonData)
+                        print("retrieved transactions")
                         print("transactions ", decodedData)
                         for transaction in decodedData.transactions {
                             print(allTransactions.count)
