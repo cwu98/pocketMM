@@ -18,7 +18,9 @@ class NewSpendingController: UIViewController {
     @IBOutlet weak var datetextview: UITextView!
     
     @IBOutlet weak var saveButton: UIButton!
+    
     @IBOutlet var activeButton: [UIButton]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,12 +48,14 @@ class NewSpendingController: UIViewController {
         sender.backgroundColor =  #colorLiteral(red: 0.9839375615, green: 0.8418782353, blue: 0.3591020703, alpha: 1)
 
     }
+    
     @IBAction func categorySelected(_ sender: UIButton) {
         if let cat = sender.titleLabel?.text {
            category = cat
         }
         
     }
+    
     @IBAction func saveButtonClicked(_ sender: UIButton) {
         if let _ = nameTextField.text, let amount = Double(amountTextField.text), let cat = category,let currentUser = user {
             let dateFormatterGet = DateFormatter()
