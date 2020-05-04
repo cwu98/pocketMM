@@ -50,6 +50,8 @@ class NewSpendingController: UIViewController {
             let date = dateFormatterGet.string(from: Date())
             addTransaction(amount: amount, category: [cat] , item_id : currentUser.item_id
             , transaction_id : NSUUID().uuidString, date: date)
+            
+            
             let alert = UIAlertController(title: "Add New Spending", message: "Successfully added new spending", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
