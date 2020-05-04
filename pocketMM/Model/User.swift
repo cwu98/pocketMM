@@ -49,6 +49,7 @@ let item_id : String
     
 init(amount: Double, category: [String], item_id: String, transaction_id: String,
      date: String){
+    print("making transaction object")
     let category_id : Int
  
     if category.contains("Arts and Entertainment") || category.contains("Adult Entertainment") || category.contains("Entertainment"){

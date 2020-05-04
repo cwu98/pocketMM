@@ -29,7 +29,6 @@ class SummaryController: UIViewController, UITextFieldDelegate {
     var datePicker = MonthYearPickerView()
 
     var selectedMonth: String?
-    var user : User?
     var month: Int = 0
     var year: Int = 0
     let arrayOfMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -42,15 +41,17 @@ class SummaryController: UIViewController, UITextFieldDelegate {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("In summary VC")
+        print("transactionData")
         if let currentUser = user{
             transactionData = currentUser.transactions
-            
+            print(transactionData)
         }
         else {
-            print("error getting transaction data in summaryController")
+            transactionData = user!.transactions
+            print(transactionData)
         }
-        //
+        
         monthLabel.delegate = self
         datePicker.onDateSelected = { (month: Int, year: Int) in
             let string = String  (format: "%03d/%d",month, year)
@@ -87,6 +88,7 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         
         
     }
+    
     func createDatePicker() {
         //toolbar
         let toolbar = UIToolbar()
@@ -115,10 +117,45 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         monthLabel.text = arrayOfMonths[datePicker.month-1]
         yearLabel.text = "\(datePicker.year)"
         
+        month = datePicker.month
+        year = datePicker.year
+        
+        updateChardData()
+        
     }
     
+    func getDataFromMonthSelection() {
+        var dateComponents = DateComponents()
+        
+        dateComponents.month = month
+        dateComponents.year = year
+        dateComponents.day = 1
+        let userCal = Calendar.current
+        let startDate = userCal.date(from: dateComponents)!
+        var comps2 = DateComponents()
+        comps2.month = 1
+        comps2.day = -1
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        let endDate = Calendar.current.date(byAdding: comps2, to: startDate)
+        let end = dateFormatterGet.string(from: endDate!)
+            
+                let start = dateFormatterGet.string(from: startDate)
+                print("date ", start," --> ", end)
+                
+                    transactionData = getTransactionFromRange(startDate: start, endDate: end)
+                    
+                
+    }
     
     func updateChardData(){
+        getDataFromMonthSelection()
+        var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category_id} )
+
+             for (categoryID, transaction) in groupByCategory{
+                   var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
+               totalSpendingByCategory.insert(total, at: categoryID!)
+               }
         
         var entries: [PieChartDataEntry] = []
         for i in 0..<totalSpendingByCategory.count {
@@ -128,10 +165,7 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         let chartDataSet = PieChartDataSet(entries: entries, label:"Categories")
         
         let chartData = PieChartData(dataSet: chartDataSet)
-        //assign colors??
-        //let colors = [UIColor , UIColor, ...]
-        //chartDataSet.colors = colors as! [NSUIColor]
-       
+     
         
         let color1 = NSUIColor(hex: 0xC39BD3) //purple
         let color2 = NSUIColor(hex: 0xAED6F1) //blue
