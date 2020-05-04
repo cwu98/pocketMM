@@ -73,7 +73,7 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         print("category id: ", categoryID)
         var index : Int
         index = categoryID ?? 7
-        totalSpendingByCategory.insert(total, at: Int(categoryID as! Int64))
+        totalSpendingByCategory.insert(total, at: index)
         }
 print("trying to print total spending by category")
         print(totalSpendingByCategory)
@@ -137,7 +137,10 @@ print("trying to print total spending by category")
 
         for (categoryID, transaction) in groupByCategory{
               var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
-          totalSpendingByCategory.insert(total, at: categoryID!)
+        var index : Int
+        index = categoryID ?? 7
+        totalSpendingByCategory.insert(total, at: index)
+
           }
 
 
