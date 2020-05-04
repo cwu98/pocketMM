@@ -207,12 +207,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="GEy-YM-2e1">
-<<<<<<< HEAD
-                                <rect key="frame" x="0.0" y="88" width="414" height="1579.5"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPN-DH-ODv" userLabel="Top View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="158"/>
-=======
+
                                 <rect key="frame" x="0.0" y="88" width="414" height="822"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPN-DH-ODv" userLabel="Top View">
@@ -233,9 +228,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9m-bI-kHf" userLabel="Middle View">
-<<<<<<< HEAD
-                                        <rect key="frame" x="0.0" y="159" width="414" height="789.5"/>
-=======
+
                                         <rect key="frame" x="0.0" y="83" width="414" height="411.5"/>
 >>>>>>> refs/remotes/origin/master
                                         <subviews>
@@ -272,15 +265,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTN-el-nat" userLabel="Near Bottom View">
-<<<<<<< HEAD
-                                        <rect key="frame" x="0.0" y="949.5" width="414" height="313"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iIE-1z-26p">
-                                                <rect key="frame" x="-178" y="5" width="770" height="303"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wS-yr-dBK" userLabel="summary">
-                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="303"/>
-=======
+
                                         <rect key="frame" x="0.0" y="495.5" width="414" height="161"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iIE-1z-26p">
@@ -295,10 +280,7 @@
                                                             <segue destination="UQA-a2-XXv" kind="show" identifier="summarySegue" id="1Ov-sb-ad8"/>
                                                         </connections>
                                                     </button>
-<<<<<<< HEAD
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0S-SD-xpD" userLabel="goals">
-                                                        <rect key="frame" x="386" y="0.0" width="384" height="303"/>
-=======
+
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0S-SD-xpD">
                                                         <rect key="frame" x="194" y="0.0" width="192" height="151"/>
 >>>>>>> refs/remotes/origin/master
@@ -322,15 +304,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HwJ-5K-sYa" userLabel="Bottom View">
-<<<<<<< HEAD
-                                        <rect key="frame" x="0.0" y="1263.5" width="414" height="316"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="XGZ-LM-0vY">
-                                                <rect key="frame" x="-189" y="7" width="792" height="289"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUW-Hp-h1Y" userLabel="setting">
-                                                        <rect key="frame" x="0.0" y="0.0" width="394.5" height="289"/>
-=======
+
                                         <rect key="frame" x="0.0" y="657.5" width="414" height="164.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="XGZ-LM-0vY">
@@ -346,10 +320,7 @@
                                                             <segue destination="Dq8-Yk-aQY" kind="show" id="uGp-4X-j2s"/>
                                                         </connections>
                                                     </button>
-<<<<<<< HEAD
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6x-rT-byb" userLabel="new spending">
-                                                        <rect key="frame" x="397.5" y="0.0" width="394.5" height="289"/>
-=======
+
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6x-rT-byb">
                                                         <rect key="frame" x="200.5" y="0.0" width="197.5" height="144.5"/>
 >>>>>>> refs/remotes/origin/master
