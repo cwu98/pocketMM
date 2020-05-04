@@ -1,176 +1,154 @@
 //
-//  SummaryController.swift
+//  User.swift
 //  pocketMM
 //
-//  Created by Ly Cao on 4/26/20.
+//  Created by Ly Cao on 4/18/20.
 //  Copyright © 2020 NYU. All rights reserved.
 //
 
-
-import UIKit
+import Foundation
 import Firebase
-import Charts
-//table cell of bottom table view
-struct tablecelldata {
-    let cell : Int!
-    let index : String!     //number + .
-    let percent : String!   //number + %
-    let name : String!
-    let amount : String!    //$ + number
+
+struct User : Decodable{
+    let email : String
+    let access_token : String
+    let item_id : String
+    let transactions: [Transaction]
+    let goals : [Goal]
+    let reminders : [reminder]
+    let limit : Limit
+//    init(email: String, accessToken: String,
+//         itemId : String, transactions: [Transaction],
+//         goals: [Goal], reminders : [reminder]){
+//        self.email = email
+//        self.accessToken = accessToken
+//        self.itemId = itemId
+//        self.transactions = transactions
+//        self.goals = goals
+//    }
+    
 }
-
-class SummaryController: UIViewController, UITextFieldDelegate {
-  
-    
-    @IBOutlet weak var pieChart:PieChartView!
-    @IBOutlet weak var monthLabel: UITextField!
-    @IBOutlet weak var yearLabel: UILabel!
-    
-    var datePicker = MonthYearPickerView()
-
-    var selectedMonth: String?
-    var user : User?
-    var month: Int = 0
-    var year: Int = 0
-    let arrayOfMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-    //array of transaction data of type Transaction
-    var transactionData = [Transaction]()
-    
-    //array to hold total spending per category... this is the data for pie chart
-    var totalSpendingByCategory = [Double]()
-    
-  
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if let currentUser = user{
-            transactionData = currentUser.transactions
-            
+struct Item {
+    let accessToken: String
+    let itemId : String
+}
+struct Transactions : Decodable{
+    let transactions : [Transaction]
+}
+struct Transaction : Decodable, Hashable {
+let transaction_id : String
+let amount : Double
+let date : String
+let category : [String]
+let category_id : Int?
+let item_id : String
+    func hash(into hasher: inout Hasher){
+        hasher.combine(category_id)
+    }
+    init(amount: Double, category: [String], item_id: String, transaction_id: String,
+     date: String){
+    let category_id : Int
+ 
+    if category.contains("Arts and Entertainment") || category.contains("Adult Entertainment") || category.contains("Entertainment"){
+            category_id = 0
         }
+    else if category.contains("Supermarkets and Groceries") || category.contains("Delis"){
+            category_id = 1
+    }
+    else if category.contains("Shops") || category.contains("Clothing and Accessories"){
+            category_id = 2
+    }
+    else if category.contains("Restaurants") || category.contains("Food and Drink") {
+            category_id = 3
+    }
+        else if category.contains("Utilities"){
+            category_id = 4
+    }
+        else if category.contains("Rent"){
+            category_id = 5
+    }
+        else if category.contains("goals"){
+            category_id = 6
+    }
         else {
-            print("error getting transaction data in summaryController")
-        }
-        //
-        monthLabel.delegate = self
-        datePicker.onDateSelected = { (month: Int, year: Int) in
-            let string = String  (format: "%03d/%d",month, year)
-            print(string)
-        }
-        
-        //get current month and year
-        let date = Date()
-        let calendar = Calendar.current
-        month = calendar.component(.month, from: date)
-        year = calendar.component(.year, from: date)
-        
-        /*
-        monthLabel.leftViewMode = UITextField.ViewMode.always
-        monthLabel.leftViewMode = .always
-        monthLabel.text = arrayOfMonths[month]
-        monthLabel.leftView = UIImageView(image: UIImage(named: "downArrow.png"))
-        yearLabel.text = "\(year)"
- */
-        
-        //group based on category into dict [category_id : [...list of TransactionData objects with this category_id ] ]
-
-        var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category_id} )
-
-      for (categoryID, transaction) in groupByCategory{
-            var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
-        totalSpendingByCategory.insert(total, at: categoryID!)
-        }
-
-        
-
-
-        updateChardData()
-        
-        
-    }
-    func createDatePicker() {
-        //toolbar
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        //bar button
-        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-        toolbar.setItems([doneBtn], animated: true)
-        
-        //assign toolbar
-        monthLabel.inputAccessoryView = toolbar
-        
-        //assign date picker to text field
-        monthLabel.inputView = datePicker
-
-        
-        
-        self.view.endEditing(true)
-        
-    }
-  
-    
-    @objc func donePressed() {
-        //format
-       
-        monthLabel.text = arrayOfMonths[datePicker.month-1]
-        yearLabel.text = "\(datePicker.year)"
-        
+            category_id = 7
     }
     
-    
-    func updateChardData(){
-        
-        var entries: [PieChartDataEntry] = []
-        for i in 0..<totalSpendingByCategory.count {
-            let dataEntry = PieChartDataEntry(value: totalSpendingByCategory[i], label: "Category \(i)" )
-            entries.append(dataEntry)
-        }
-        let chartDataSet = PieChartDataSet(entries: entries, label:"Categories")
-        
-        let chartData = PieChartData(dataSet: chartDataSet)
-        //assign colors??
-        //let colors = [UIColor , UIColor, ...]
-        //chartDataSet.colors = colors as! [NSUIColor]
-       
-        
-        let color1 = NSUIColor(hex: 0xC39BD3) //purple
-        let color2 = NSUIColor(hex: 0xAED6F1) //blue
-        let color3 = NSUIColor(hex: 0x76D7C4) //green
-        let color4 = NSUIColor(hex: 0xF4D03F) //yellow
-        let color5 = NSUIColor(hex: 0xF39C12) //orange
-        let color6 = NSUIColor(hex: 0xEC7063) //red
-        let color7 = NSUIColor(hex: 0xB2BABB) //gray
-        let color8 = NSUIColor(hex: 0xFADBD8)   //pink
-        
-        
-        chartDataSet.colors = [color1, color2, color3, color4, color5, color6, color7, color8]
-
-        chartDataSet.drawIconsEnabled = false
-        chartDataSet.sliceSpace = 2
-        pieChart.data = chartData
-        pieChart.chartDescription?.text = "January" //month to display
-        pieChart.drawHoleEnabled = true
-        pieChart.holeRadiusPercent = 30
-        pieChart.legend.enabled = true
-        pieChart.rotationEnabled = false
-        pieChart.entryLabelColor = .white
-        pieChart.entryLabelFont = .systemFont(ofSize: 14, weight:.light)
-        
-        let l = pieChart.legend
-        l.horizontalAlignment = .center
-        l.verticalAlignment = .bottom
-        l.xEntrySpace = 0
-        l.yEntrySpace = 8
-    }
-
-    @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
-        let firebaseAuth = Auth.auth()
-        do {
-          try firebaseAuth.signOut()
-            navigationController?.popToRootViewController(animated: true)
-        } catch let signOutError as NSError {
-          print ("Error signing out: %@", signOutError)
-        }
-    }
-    
+    self.amount = amount
+    self.category = category
+    self.category_id = category_id
+    print("category_id: \(category_id)")
+    self.transaction_id = transaction_id
+    self.date = date
+    self.item_id = item_id
 }
+}
+
+struct AccountsData : Decodable {
+    let accounts : [AccountData]
+}
+struct AccountData : Decodable{
+    let balances : BalanceData
+}
+struct BalanceData : Decodable{
+    let current : Double
+}
+
+
+struct Goals: Decodable{
+    let goals : [Goal]
+}
+//add [progress:current saved amount / goal item price, price], [save: # of money/frequency],[ a progress bar]
+struct Goal :Decodable {
+    let name : String
+    let amount: Double
+    let image: String
+    init(name: String, amount: Double, image: String){
+        self.name = name
+        self.amount = amount
+        self.image = image
+    }
+}
+
+struct Reminders : Decodable{
+    let reminders : [reminder]
+}
+
+struct reminder : Decodable{
+    let title: String
+    let date: String
+    let frequency: String
+   // let alert: String
+    let identifier: String
+    
+    init(title: String, date: String, frequency: String, identifier: String){
+        self.title = title
+        self.date = date
+        self.frequency = frequency
+        self.identifier = identifier
+    }
+   
+}
+struct Limit : Decodable {
+    let entertainment : Double
+    let groceries : Double
+    let shopping : Double
+    let dining : Double
+    let utilities : Double
+    let rent : Double
+    let goals : Double
+    let miscellaneous : Double
+    init(entertainment: Double, groceries: Double, shopping: Double,
+               dining: Double, utilities: Double, rent: Double, goals: Double
+        , miscellaneous: Double){
+        self.entertainment = entertainment
+        self.groceries = groceries
+        self.shopping = shopping
+        self.dining = dining
+        self.utilities = utilities
+        self.rent = rent
+        self.goals = goals
+        self.miscellaneous = miscellaneous
+    }
+}
+
