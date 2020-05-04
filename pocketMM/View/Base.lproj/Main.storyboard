@@ -75,8 +75,8 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Passward:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6x-bO-gIr" userLabel="ps">
-                                                <rect key="frame" x="102" y="26" width="97" height="25"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6x-bO-gIr" userLabel="ps">
+                                                <rect key="frame" x="101" y="26" width="98" height="25"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -640,7 +640,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E2M-vZ-DkT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8607.246376811594" y="-342.1875"/>
+            <point key="canvasLocation" x="-7925" y="-421"/>
         </scene>
         <!--Goal Page Controller-->
         <scene sceneID="N7P-1G-IMK">
@@ -741,7 +741,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7AW-FB-rFT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7924.6376811594209" y="1134.375"/>
+            <point key="canvasLocation" x="-7874" y="1156"/>
         </scene>
         <!--Settings Controller-->
         <scene sceneID="GMO-cl-xET">
@@ -763,6 +763,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="backgroundGreen"/>
                                         <connections>
                                             <segue destination="rBS-tW-NMW" kind="show" identifier="limitSegue" id="TQU-IM-BLt"/>
                                         </connections>
@@ -840,7 +841,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkB-EX-bOz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8588.4057971014499" y="2459.5982142857142"/>
+            <point key="canvasLocation" x="-8546" y="2194"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="zRb-eS-zfV">
@@ -1224,7 +1225,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKj-im-A3v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7925" y="-846"/>
+            <point key="canvasLocation" x="-7990" y="-1285"/>
         </scene>
         <!--Add Reminder View Controller-->
         <scene sceneID="a60-3j-TEf">
@@ -1318,7 +1319,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="piY-ol-vpi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9248" y="248"/>
+            <point key="canvasLocation" x="-6519" y="-1285"/>
         </scene>
     </scenes>
     <resources>
@@ -1345,7 +1346,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HKm-om-qae"/>
+        <segue reference="fQr-Ky-T4K"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="backgroundGreen"/>
 </document>
