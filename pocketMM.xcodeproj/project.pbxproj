@@ -39,7 +39,6 @@
 		E0E0D4E32459BDBD00852284 /* RetrieveDataFromFireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4E22459BDBC00852284 /* RetrieveDataFromFireBase.swift */; };
 		E0E0D4E5245C063E00852284 /* SetBillReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4E4245C063E00852284 /* SetBillReminderController.swift */; };
 		E0E0D4E7245C068300852284 /* SetLimitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D4E6245C068300852284 /* SetLimitController.swift */; };
-		E722EED824605C44006495B3 /* SummaryControllerCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E722EED724605C44006495B3 /* SummaryControllerCopy.swift */; };
 		E782947924579BAB00C7B63E /* NSUIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E782947824579BAB00C7B63E /* NSUIColorHex.swift */; };
 		E7DCB1DE245F8BB800EA08CC /* AddReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DCB1DC245F8BB700EA08CC /* AddReminderViewController.swift */; };
 		E7DCB1DF245F8BB800EA08CC /* AlertPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DCB1DD245F8BB800EA08CC /* AlertPageController.swift */; };
@@ -108,7 +107,6 @@
 		E0E0D4E4245C063E00852284 /* SetBillReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBillReminderController.swift; sourceTree = "<group>"; };
 		E0E0D4E6245C068300852284 /* SetLimitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLimitController.swift; sourceTree = "<group>"; };
 		E5793DAC26627CB4C75B6EF4 /* Pods_pocketMMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pocketMMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E722EED724605C44006495B3 /* SummaryControllerCopy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummaryControllerCopy.swift; path = ../../../../SummaryControllerCopy.swift; sourceTree = "<group>"; };
 		E782947824579BAB00C7B63E /* NSUIColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSUIColorHex.swift; sourceTree = "<group>"; };
 		E7DCB1DC245F8BB700EA08CC /* AddReminderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReminderViewController.swift; sourceTree = "<group>"; };
 		E7DCB1DD245F8BB800EA08CC /* AlertPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPageController.swift; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 				E06E730B24556FF600797988 /* LoginController.swift */,
 				E06E730D245571BC00797988 /* MainPageController.swift */,
 				E06E731324557CF500797988 /* SummaryController.swift */,
-				E722EED724605C44006495B3 /* SummaryControllerCopy.swift */,
 				E06E731724557DDA00797988 /* SettingsController.swift */,
 				E06E730F245576E900797988 /* GoalPageController.swift */,
 				E06E731124557CA400797988 /* AddGoalController.swift */,
@@ -538,7 +535,6 @@
 				E06E7310245576E900797988 /* GoalPageController.swift in Sources */,
 				E06E731824557DDA00797988 /* SettingsController.swift in Sources */,
 				E0E0D4E7245C068300852284 /* SetLimitController.swift in Sources */,
-				E722EED824605C44006495B3 /* SummaryControllerCopy.swift in Sources */,
 				E092DE92244A91F2005960FB /* User.swift in Sources */,
 				4A7541A4245F90C500A1FB31 /* NewSpendingController.swift in Sources */,
 				E0E0D4D52456C1F300852284 /* StartPageController.swift in Sources */,

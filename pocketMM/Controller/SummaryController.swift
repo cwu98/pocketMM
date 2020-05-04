@@ -205,3 +205,4 @@ print("trying to print total spending by category")
     }
     
 }
+
