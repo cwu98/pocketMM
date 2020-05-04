@@ -103,12 +103,12 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
             saveButton.isEnabled = true
         }
     }
-    /*
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-    */
+    
     @IBAction func didTapSaveButton(){
         if let titleText = titleField.text,
             let freqText = frequencyField.text,

@@ -134,6 +134,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
                         print("error")
                     }
                 }
+                self.saveReminders(title: title, dueDate: date, frequency: frequency)
                 print("notification added: \(request.identifier)")
                     
                 }
@@ -143,12 +144,26 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     //save reminders to firebase
-    func saveReminders() {
+    func saveReminders(title: String, dueDate: Date, frequency: String) {
+        let title = title
+        let due_date = dueDate
+        let frequency = frequency
+        let email = Auth.auth().currentUser?.email
+        let docData : [String: Any] = [
+                  CONST.FSTORE.reminder_title : title,
+                  CONST.FSTORE.reminder_due_date : due_date,
+                  CONST.FSTORE.reminder_frequency : frequency
+        ]
+
+        db.collection(CONST.FSTORE.usersCollection).document(email!).updateData([
+                  CONST.FSTORE.reminders : FieldValue.arrayUnion([docData])
+              ])
+          
       
     }
     
     //allow delete
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             let toRemove = reminders.remove(at: indexPath.row)
@@ -156,7 +171,6 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
             //TODO cancel local notification
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [toRemove.identifier])
-            saveReminders()
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -181,13 +195,5 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
 }
     
     
-struct reminder{
-    let title: String
-    let date: Date
-    let freq: String
-    let alert: String
-    let identifier: String
-    
-    
-}
+
 
