@@ -61,17 +61,21 @@ class NewSpendingController: UIViewController {
             , transaction_id : NSUUID().uuidString, date: date)
             
             
-            let alert = UIAlertController(title: "Add New Spending", message: "Successfully added new spending", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Add New Spending", message: "Successfully added a new spending", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
+            
         }
         else{
             let alert = UIAlertController(title: "Add New Spending", message: "Failed to add spending", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
+            
         }
+        self.nameTextField.text = nil
+        self.amountTextField.text = nil
         
     }
 }
