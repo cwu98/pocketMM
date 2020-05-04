@@ -40,21 +40,13 @@ let transaction_id : String
 let amount : Double
 let date : String
 let category : [String]
-let category_id : Int
+let category_id : Int?
 let item_id : String
-<<<<<<< HEAD
     
-    func hash(into hasher: inout Hasher){
-        hasher.combine(category_id)
-    }
-    
-init(amount: Double, category: [String], item_id: String, transaction_id: String,
-=======
-    func hash(into hasher: inout Hasher){
-        hasher.combine(category_id)
-    }
+     func hash(into hasher: inout Hasher){
+         hasher.combine(category_id)
+     }
     init(amount: Double, category: [String], item_id: String, transaction_id: String,
->>>>>>> 33382169f4057e801c15da61a715ec08be4b38d7
      date: String){
     print("making transaction object")
     let category_id : Int
