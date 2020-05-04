@@ -16,9 +16,11 @@ class AddGoalController: UIViewController {
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var uploadImageView: UIImageView!
+    @IBOutlet weak var finishCreatingButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "💰Add Goals"
+        self.finishCreatingButton.layer.cornerRadius = 15
         uploadImageView.isUserInteractionEnabled = true
         uploadImageView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleUpload)))
     }
