@@ -40,13 +40,15 @@ let transaction_id : String
 let amount : Double
 let date : String
 let category : [String]
-let category_id : Int
+let category_id : Int?
 let item_id : String
-    func hash(into hasher: inout Hasher){
-        hasher.combine(category_id)
-    }
+    
+     func hash(into hasher: inout Hasher){
+         hasher.combine(category_id)
+     }
     init(amount: Double, category: [String], item_id: String, transaction_id: String,
      date: String){
+    print("making transaction object")
     let category_id : Int
  
     if category.contains("Arts and Entertainment") || category.contains("Adult Entertainment") || category.contains("Entertainment"){

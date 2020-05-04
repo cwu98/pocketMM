@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="W60-9j-dG0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="W60-9j-dG0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -75,8 +75,8 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Passward:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6x-bO-gIr" userLabel="ps">
-                                                <rect key="frame" x="102" y="26" width="97" height="25"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6x-bO-gIr" userLabel="ps">
+                                                <rect key="frame" x="101" y="26" width="98" height="25"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -247,10 +247,12 @@
                                         <rect key="frame" x="0.0" y="466.5" width="414" height="151.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iIE-1z-26p">
-                                                <rect key="frame" x="14" y="8" width="386" height="136"/>
+
+                                                <rect key="frame" x="14" y="7.5" width="386" height="137"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wS-yr-dBK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="192" height="136"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="192" height="137"/>
+>>>>>>> refs/remotes/origin/master
                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                         <state key="normal" image="reminder"/>
                                                         <connections>
@@ -258,7 +260,9 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0S-SD-xpD">
-                                                        <rect key="frame" x="194" y="0.0" width="192" height="136"/>
+
+                                                        <rect key="frame" x="194" y="0.0" width="192" height="137"/>
+>>>>>>> refs/remotes/origin/master
                                                         <size key="titleShadowOffset" width="14" height="0.0"/>
                                                         <state key="normal" image="goalsbutton"/>
                                                         <connections>
@@ -634,7 +638,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E2M-vZ-DkT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8607.246376811594" y="-342.1875"/>
+            <point key="canvasLocation" x="-7925" y="-421"/>
         </scene>
         <!--Goal Page Controller-->
         <scene sceneID="N7P-1G-IMK">
@@ -735,7 +739,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7AW-FB-rFT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7924.6376811594209" y="1134.375"/>
+            <point key="canvasLocation" x="-7874" y="1156"/>
         </scene>
         <!--Settings Controller-->
         <scene sceneID="GMO-cl-xET">
@@ -757,6 +761,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="backgroundGreen"/>
                                         <connections>
                                             <segue destination="rBS-tW-NMW" kind="show" identifier="limitSegue" id="TQU-IM-BLt"/>
                                         </connections>
@@ -850,7 +855,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkB-EX-bOz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8588.4057971014499" y="2459.5982142857142"/>
+            <point key="canvasLocation" x="-8546" y="2194"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="zRb-eS-zfV">
@@ -1245,7 +1250,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKj-im-A3v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7926.0869565217399" y="-846.42857142857144"/>
+
+            <point key="canvasLocation" x="-7990" y="-1285"/>
+>>>>>>> refs/remotes/origin/master
         </scene>
         <!--Add Reminder View Controller-->
         <scene sceneID="a60-3j-TEf">
@@ -1361,9 +1368,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="piY-ol-vpi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9249.2753623188419" y="247.76785714285714"/>
+
+            <point key="canvasLocation" x="-6519" y="-1285"/>
+>>>>>>> refs/remotes/origin/master
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fQr-Ky-T4K"/>
+    </inferredMetricsTieBreakers>
+    <color key="tintColor" name="backgroundGreen"/>
     <resources>
         <image name="C_Entertainment" width="85" height="85"/>
         <image name="C_dining" width="93" height="93"/>
@@ -1380,8 +1393,9 @@
         <image name="loginButton" width="204.5" height="89"/>
         <image name="mice" width="151" height="44"/>
         <image name="newSpending" width="186" height="133"/>
-        <image name="plus" catalog="system" width="64" height="56"/>
-        <image name="reminder" width="191" height="136"/>
+
+        <image name="plus" catalog="system" width="128" height="113"/>
+>>>>>>> refs/remotes/origin/master
         <image name="setting" width="184" height="132"/>
         <image name="title" width="305" height="67"/>
         <image name="titleWithoutunder" width="266" height="40"/>
@@ -1391,8 +1405,6 @@
             <color red="0.80299997329711914" green="0.96200001239776611" blue="0.60600000619888306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="fQr-Ky-T4K"/>
-    </inferredMetricsTieBreakers>
-    <color key="tintColor" name="backgroundGreen"/>
+
+>>>>>>> refs/remotes/origin/master
 </document>
