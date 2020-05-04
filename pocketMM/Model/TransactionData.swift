@@ -16,7 +16,7 @@ struct TransactionData : Decodable {
     let name : String
     let amount : Double
     let category : [String]
-    let category_id : String
+    let category_id : Int?
     let date : String
 }
 

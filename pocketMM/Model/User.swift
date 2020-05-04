@@ -35,14 +35,17 @@ struct Item {
 struct Transactions : Decodable{
     let transactions : [Transaction]
 }
-struct Transaction : Decodable {
+struct Transaction : Decodable, Hashable {
 let transaction_id : String
 let amount : Double
 let date : String
 let category : [String]
 let category_id : Int
 let item_id : String
-init(amount: Double, category: [String], item_id: String, transaction_id: String,
+    func hash(into hasher: inout Hasher){
+        hasher.combine(category_id)
+    }
+    init(amount: Double, category: [String], item_id: String, transaction_id: String,
      date: String){
     let category_id : Int
  
