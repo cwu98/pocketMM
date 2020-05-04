@@ -83,7 +83,7 @@ struct Reminders : Decodable{
 
 struct reminder : Decodable{
     let title: String
-    let date: Date
+    let date: String
     let freq: String
     let alert: String
     let identifier: String
