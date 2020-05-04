@@ -49,7 +49,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
   
-        func loadReminders() -> [reminder]? {
+        func loadReminders(){
             if let email = Auth.auth().currentUser?.email{
                                 db.collection(CONST.FSTORE.usersCollection).document(email).getDocument{
                    (querySnapshot, error) in
@@ -76,7 +76,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
 
                      }
                 }
-                return allReminders
+                
             }
         }
         
