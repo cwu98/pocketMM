@@ -10,32 +10,114 @@
 import UIKit
 import Firebase
 import Charts
+//table cell of bottom table view
+struct tablecelldata {
+    let cell : Int!
+    let index : String!     //number + .
+    let percent : String!   //number + %
+    let name : String!
+    let amount : String!    //$ + number
+}
 
-class SummaryController: UIViewController {
-    @IBOutlet weak var pieChart:PieChartView!
-    var user : User?
+class SummaryController: UIViewController, UITextFieldDelegate {
+  
     
-    //array of transaction data of type TransactionData
-    var transactionData = [TransactionData]()
+    @IBOutlet weak var pieChart:PieChartView!
+    @IBOutlet weak var monthLabel: UITextField!
+    @IBOutlet weak var yearLabel: UILabel!
+    
+    var datePicker = MonthYearPickerView()
+
+    var selectedMonth: String?
+    var user : User?
+    var month: Int = 0
+    var year: Int = 0
+    let arrayOfMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+    //array of transaction data of type Transaction
+    var transactionData = [Transaction]()
     
     //array to hold total spending per category... this is the data for pie chart
     var totalSpendingByCategory = [Double]()
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //group based on category into dict [category_id : [...list of TransactionData objects with this category_id ] ]
-        var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category} )
-
-        for (categoryID, transaction) in groupByCategory{
-            var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
-            totalSpendingByCategory.insert(total, categoryID)
+        if let currentUser = user{
+            transactionData = currentUser.transactions
+            
         }
+        else {
+            print("error getting transaction data in summaryController")
+        }
+        //
+        monthLabel.delegate = self
+        datePicker.onDateSelected = { (month: Int, year: Int) in
+            let string = String  (format: "%03d/%d",month, year)
+            print(string)
+        }
+        
+        //get current month and year
+        let date = Date()
+        let calendar = Calendar.current
+        month = calendar.component(.month, from: date)
+        year = calendar.component(.year, from: date)
+        
+        /*
+        monthLabel.leftViewMode = UITextField.ViewMode.always
+        monthLabel.leftViewMode = .always
+        monthLabel.text = arrayOfMonths[month]
+        monthLabel.leftView = UIImageView(image: UIImage(named: "downArrow.png"))
+        yearLabel.text = "\(year)"
+ */
+        
+        //group based on category into dict [category_id : [...list of TransactionData objects with this category_id ] ]
+
+        var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category_id} )
+
+      for (categoryID, transaction) in groupByCategory{
+            var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
+        totalSpendingByCategory.insert(total, at: categoryID!)
+        }
+
+        
+
 
         updateChardData()
         
         
     }
+    func createDatePicker() {
+        //toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        //bar button
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        toolbar.setItems([doneBtn], animated: true)
+        
+        //assign toolbar
+        monthLabel.inputAccessoryView = toolbar
+        
+        //assign date picker to text field
+        monthLabel.inputView = datePicker
+
+        
+        
+        self.view.endEditing(true)
+        
+    }
+  
+    
+    @objc func donePressed() {
+        //format
+       
+        monthLabel.text = arrayOfMonths[datePicker.month-1]
+        yearLabel.text = "\(datePicker.year)"
+        
+    }
+    
+    
     func updateChardData(){
         
         var entries: [PieChartDataEntry] = []
