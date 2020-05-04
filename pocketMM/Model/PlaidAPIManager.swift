@@ -263,7 +263,7 @@ struct PlaidAPIManager{
         
     }
     static func parseBalance(data: Data){
-        do{
+       do{
             let decoder = JSONDecoder()
             let decodedData = try decoder.decode(AccountsData.self, from: data)
             balance = decodedData.accounts[0].balances.current
@@ -272,6 +272,8 @@ struct PlaidAPIManager{
         catch{
              print("error parsing balance from Plaid ", error.localizedDescription)
         }
+      
+        
         
     }
     static func refreshTransactions(access_token : String){
