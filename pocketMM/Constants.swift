@@ -45,6 +45,7 @@ struct CONST{
         static let transaction_amount = "amount"
         static let transaction_date = "date"
         static let transaction_category = "category"
+        static let transaction_category_id = "category_id"
 
         
     }

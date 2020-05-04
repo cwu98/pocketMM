@@ -77,7 +77,7 @@ class SummaryController: UIViewController, UITextFieldDelegate {
 
       for (categoryID, transaction) in groupByCategory{
             var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
-        totalSpendingByCategory.insert(total, at: categoryID!)
+        totalSpendingByCategory.insert(total, at: categoryID)
         }
 
         

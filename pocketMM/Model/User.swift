@@ -40,23 +40,24 @@ let transaction_id : String
 let amount : Double
 let date : String
 let category : [String]
-let category_id : Int?
+let category_id : Int
 let item_id : String
 init(amount: Double, category: [String], item_id: String, transaction_id: String,
      date: String){
     let category_id : Int
  
     if category.contains("Arts and Entertainment") || category.contains("Adult Entertainment") || category.contains("Entertainment"){
-            category_id = 0
+        category_id = 0
+        
         }
     else if category.contains("Supermarkets and Groceries") || category.contains("Delis"){
-            category_id = 1
+        category_id = 1
     }
     else if category.contains("Shops") || category.contains("Clothing and Accessories"){
-            category_id = 2
+        category_id = 2
     }
     else if category.contains("Restaurants") || category.contains("Food and Drink") {
-            category_id = 3
+        category_id = 3
     }
         else if category.contains("Utilities"){
             category_id = 4
@@ -79,6 +80,40 @@ init(amount: Double, category: [String], item_id: String, transaction_id: String
     self.date = date
     self.item_id = item_id
 }
+    func initCategory_id(category : [String]) -> Int{
+        if category.contains("Arts and Entertainment") || category.contains("Adult Entertainment") || category.contains("Entertainment"){
+//            category_id = 0
+            return 0
+            }
+        else if category.contains("Supermarkets and Groceries") || category.contains("Delis"){
+//            category_id = 1
+            return 1
+        }
+        else if category.contains("Shops") || category.contains("Clothing and Accessories"){
+//            category_id = 2
+            return 2
+        }
+        else if category.contains("Restaurants") || category.contains("Food and Drink") {
+//            category_id = 3
+            return 3
+        }
+            else if category.contains("Utilities"){
+//                category_id = 4
+            return 4
+        }
+            else if category.contains("Rent"){
+//                category_id = 5
+            return 5
+        }
+            else if category.contains("goals"){
+//                category_id = 6
+            return 6
+        }
+            else {
+//                category_id = 7
+            return 7
+        }
+    }
 }
 
 struct AccountsData : Decodable {

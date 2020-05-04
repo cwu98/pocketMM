@@ -208,7 +208,8 @@ struct PlaidAPIManager{
                     CONST.FSTORE.item_id : transaction.item_id,
                     CONST.FSTORE.transaction_date : transaction.date,
                     CONST.FSTORE.transaction_amount : transaction.amount,
-                    CONST.FSTORE.transaction_category : transaction.category
+                    CONST.FSTORE.transaction_category : transaction.category,
+                    CONST.FSTORE.transaction_category_id : transaction.category_id
                     ]
                 if let email = Auth.auth().currentUser?.email{
                     db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
