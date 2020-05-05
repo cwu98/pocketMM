@@ -43,13 +43,12 @@ class NewSpendingController: UIViewController {
     }
     */
 
-    @IBAction func ActiveButton(_ sender: UIButton) {
-    activeButton.forEach({ $0.backgroundColor = nil})
-        sender.backgroundColor =  #colorLiteral(red: 0.9839375615, green: 0.8418782353, blue: 0.3591020703, alpha: 1)
 
-    }
     
     @IBAction func categorySelected(_ sender: UIButton) {
+        activeButton.forEach({ $0.backgroundColor = nil})
+        sender.backgroundColor =  #colorLiteral(red: 0.9839375615, green: 0.8418782353, blue: 0.3591020703, alpha: 1)
+        
         if let cat = sender.titleLabel?.text {
            category = cat
         }
