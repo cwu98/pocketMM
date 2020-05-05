@@ -20,6 +20,7 @@ class goalTableViewCell: UITableViewCell {
     @IBOutlet weak var save: UILabel!
     @IBOutlet weak var progressBar: UIView!
     
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         print("awake from nib goaltableViewCell")

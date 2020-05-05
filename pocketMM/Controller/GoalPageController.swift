@@ -19,6 +19,7 @@ class GoalPageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "💰Goals"
+        self.tableView.layer.cornerRadius = 15
         
         tableView.register(UINib(nibName: CONST.goalTableViewCell, bundle: nil), forCellReuseIdentifier: CONST.cellReusableIdentifier)
 //        loadGoals()
@@ -73,6 +74,7 @@ extension GoalPageController : UITableViewDataSource{
             task.resume()
         }
          
+        
         
         return cell
     }

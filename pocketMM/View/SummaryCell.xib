@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -79,7 +78,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" name="backgroundGreen"/>
+                <color key="backgroundColor" red="0.96464413400000004" green="0.97281914950000004" blue="0.9529392123" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
                     <constraint firstItem="pa8-gu-Pv5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DRd-XP-O6G"/>
                     <constraint firstItem="mpP-Ga-TEC" firstAttribute="leading" secondItem="QS4-hU-HCG" secondAttribute="trailing" constant="23" id="LLE-WQ-Unz"/>
@@ -103,8 +102,5 @@
     </objects>
     <resources>
         <image name="upload" width="415" height="421.5"/>
-        <namedColor name="backgroundGreen">
-            <color red="0.80299997329711914" green="0.96200001239776611" blue="0.60600000619888306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
     </resources>
 </document>
