@@ -87,6 +87,7 @@ func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]{
 }
 
 func getReminders(){
+    print("in getReminders function")
     if let email = Auth.auth().currentUser?.email{
         db.collection(CONST.FSTORE.usersCollection).document(email).getDocument{
            (querySnapshot, error) in

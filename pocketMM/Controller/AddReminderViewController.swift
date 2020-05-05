@@ -113,7 +113,7 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
         if let titleText = titleField.text,
             let freqText = frequencyField.text,
             let alertMeText = alertMeField.text {
-            
+            print("date picker date \(datePicker.date)")
             completion?(titleText, datePicker.date, freqText, alertMeText)
         }
         print("save button tapped")

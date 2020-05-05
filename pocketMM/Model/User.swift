@@ -147,8 +147,9 @@ struct Goal :Decodable {
     }
 }
 
-struct Reminders : Decodable{
+struct Reminders: Decodable{
     let reminders : [reminder]
+    
 }
 
 struct reminder : Decodable{
@@ -158,13 +159,14 @@ struct reminder : Decodable{
    // let alert: String
     let identifier: String
     
+    
     init(title: String, date: String, frequency: String, identifier: String){
         self.title = title
         self.date = date
         self.frequency = frequency
         self.identifier = identifier
     }
-   
+
 }
 struct Limit : Decodable {
     let entertainment : Double

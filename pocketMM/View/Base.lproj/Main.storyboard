@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="W60-9j-dG0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="W60-9j-dG0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -190,7 +190,7 @@
         <scene sceneID="tCd-Rm-oqE">
             <objects>
                 <viewController id="arW-aE-Y7o" customClass="MainPageController" customModule="pocketMM" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="88T-50-dOR">
+                    <view key="view" contentMode="scaleToFill" id="88T-50-dOR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -250,9 +250,18 @@
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pso-H7-OqF">
+                                                <rect key="frame" x="124" y="282" width="168" height="61"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="41"/>
+                                                <state key="normal" title="Summary"/>
+                                                <connections>
+                                                    <segue destination="UQA-a2-XXv" kind="show" id="mat-tI-HlH"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" name="backgroundGreen"/>
                                         <constraints>
+                                            <constraint firstItem="Pso-H7-OqF" firstAttribute="centerX" secondItem="fix-oM-djy" secondAttribute="centerX" id="D5E-Ub-uZx"/>
                                             <constraint firstItem="fix-oM-djy" firstAttribute="centerX" secondItem="r9m-bI-kHf" secondAttribute="centerX" id="Kca-71-rfc"/>
                                             <constraint firstItem="fix-oM-djy" firstAttribute="centerY" secondItem="r9m-bI-kHf" secondAttribute="centerY" id="LiU-iQ-aWq"/>
                                             <constraint firstItem="fix-oM-djy" firstAttribute="leading" secondItem="r9m-bI-kHf" secondAttribute="leading" constant="8" id="QpI-66-QPA"/>
@@ -271,7 +280,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                         <state key="normal" image="reminder"/>
                                                         <connections>
-                                                            <segue destination="Z1O-Ge-GcM" kind="show" id="boz-hK-O8k"/>
+                                                            <segue destination="Z1O-Ge-GcM" kind="show" identifier="reminderSegue" id="boz-hK-O8k"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0S-SD-xpD">
@@ -349,8 +358,11 @@
                         <constraints>
                             <constraint firstItem="7Tj-G5-oj3" firstAttribute="trailing" secondItem="GEy-YM-2e1" secondAttribute="trailing" id="DEz-Wl-i2e"/>
                             <constraint firstItem="7Tj-G5-oj3" firstAttribute="bottom" secondItem="GEy-YM-2e1" secondAttribute="bottom" id="JJF-VZ-qeP"/>
+                            <constraint firstItem="7Tj-G5-oj3" firstAttribute="bottom" secondItem="Pso-H7-OqF" secondAttribute="bottom" constant="352.5" id="UJu-FQ-bTz"/>
+                            <constraint firstItem="Pso-H7-OqF" firstAttribute="leading" secondItem="7Tj-G5-oj3" secondAttribute="leading" constant="124" id="hfC-vR-WMJ"/>
                             <constraint firstItem="GEy-YM-2e1" firstAttribute="leading" secondItem="7Tj-G5-oj3" secondAttribute="leading" id="mcs-6W-bpC"/>
                             <constraint firstItem="GEy-YM-2e1" firstAttribute="top" secondItem="7Tj-G5-oj3" secondAttribute="top" id="soH-8S-mYX"/>
+                            <constraint firstItem="Pso-H7-OqF" firstAttribute="top" secondItem="7Tj-G5-oj3" secondAttribute="top" constant="360.5" id="yMO-UF-0Oh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Tj-G5-oj3"/>
                     </view>
@@ -711,13 +723,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="yearLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IS5-KC-kjp">
-                                <rect key="frame" x="164" y="144" width="86" height="24"/>
+                                <rect key="frame" x="164" y="188" width="86" height="24"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="monthLabel" placeholder="Select date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sf6-1B-Wri">
-                                <rect key="frame" x="20" y="89" width="374" height="35"/>
+                                <rect key="frame" x="20" y="133" width="374" height="35"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -927,7 +939,7 @@
                                                     <fragment content="pass_good">
                                                         <attributes>
                                                             <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <font key="NSFont" metaFont="label" size="14"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -1257,7 +1269,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="table" destination="NDB-do-nsn" id="Gst-HP-l6c"/>
-                        <segue destination="MLx-jm-Qmp" kind="show" id="4F0-RP-62c"/>
+                        <segue destination="MLx-jm-Qmp" kind="show" identifier="" id="4F0-RP-62c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKj-im-A3v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1381,6 +1393,10 @@
             <point key="canvasLocation" x="-6519" y="-1285"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fQr-Ky-T4K"/>
+    </inferredMetricsTieBreakers>
+    <color key="tintColor" name="backgroundGreen"/>
     <resources>
         <image name="C_Entertainment" width="85" height="85"/>
         <image name="C_dining" width="93" height="93"/>
@@ -1397,7 +1413,7 @@
         <image name="loginButton" width="204.5" height="89"/>
         <image name="mice" width="151" height="44"/>
         <image name="newSpending" width="186" height="133"/>
-        <image name="plus" catalog="system" width="64" height="56"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="reminder" width="191" height="136"/>
         <image name="setting" width="184" height="132"/>
         <image name="title" width="305" height="67"/>
@@ -1408,8 +1424,4 @@
             <color red="0.80299997329711914" green="0.96200001239776611" blue="0.60600000619888306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="fQr-Ky-T4K"/>
-    </inferredMetricsTieBreakers>
-    <color key="tintColor" name="backgroundGreen"/>
 </document>

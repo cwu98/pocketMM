@@ -43,6 +43,7 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         print("In summary controller")
         transactionData = user!.transactions
+        print(user?.email)
         //
         monthLabel.delegate = self
         datePicker.onDateSelected = { (month: Int, year: Int) in
