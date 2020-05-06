@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="ipad10_2" orientation="portrait" layout="fullscreen" appearance="light"/>
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+>>>>>>> refs/remotes/origin/master
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+<<<<<<< HEAD
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Qfe-Ir-fre">
                                 <rect key="frame" x="198" y="0.0" width="414" height="27"/>
                             </imageView>
@@ -27,10 +34,28 @@
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Lo1-hA-a59">
                                 <rect key="frame" x="198" y="1053" width="414" height="27"/>
+=======
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchinglogo" translatesAutoresizingMaskIntoConstraints="NO" id="bJr-ie-BuX">
+                                <rect key="frame" x="-49" y="394" width="512" height="496"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="IpH-EC-MIW">
+                                <rect key="frame" x="54.5" y="301" width="305" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Lo1-hA-a59">
+                                <rect key="frame" x="-6" y="863" width="414" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Qfe-Ir-fre">
+                                <rect key="frame" x="0.0" y="44" width="414" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+>>>>>>> refs/remotes/origin/master
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.87058823529999996" green="0.86274509799999999" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+<<<<<<< HEAD
                         <constraints>
                             <constraint firstItem="bJr-ie-BuX" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-49" id="5fZ-QK-ZIv"/>
                             <constraint firstItem="bJr-ie-BuX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="49" id="9oH-Es-3Rl"/>
@@ -46,6 +71,8 @@
                             <constraint firstItem="bJr-ie-BuX" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="28" id="vfR-zs-Bof"/>
                             <constraint firstItem="Lo1-hA-a59" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="zC6-I2-vzF"/>
                         </constraints>
+=======
+>>>>>>> refs/remotes/origin/master
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -58,5 +85,8 @@
         <image name="cat_frame" width="414" height="27"/>
         <image name="launchinglogo" width="414" height="492"/>
         <image name="title" width="305" height="67"/>
+        <namedColor name="backgroundColor">
+            <color red="1" green="0.97647058823529409" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
