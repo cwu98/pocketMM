@@ -80,7 +80,8 @@ extension GoalPageController : UITableViewDataSource{
             task.resume()
         }
          
-        
+        cell.contentView.backgroundColor = #colorLiteral(red: 0.8920666575, green: 0.9419104457, blue: 0.98284477, alpha: 0.8003264127)
+        cell.contentView.layer.cornerRadius = 10
         
         return cell
     }

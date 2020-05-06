@@ -24,10 +24,7 @@ class goalTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         print("awake from nib goaltableViewCell")
-        // Initialization code
-//        self.name.sizeToFit()
-//        self.progress.sizeToFit()
-//        self.save.sizeToFit()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

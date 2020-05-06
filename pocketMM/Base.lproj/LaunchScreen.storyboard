@@ -17,25 +17,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchinglogo" translatesAutoresizingMaskIntoConstraints="NO" id="bJr-ie-BuX">
-                                <rect key="frame" x="-49" y="394" width="512" height="496"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="launchinglogo" translatesAutoresizingMaskIntoConstraints="NO" id="bJr-ie-BuX">
+                                <rect key="frame" x="0.0" y="394" width="414" height="492"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="IpH-EC-MIW">
-                                <rect key="frame" x="54.5" y="301" width="305" height="67"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="IpH-EC-MIW">
+                                <rect key="frame" x="55" y="301" width="304" height="67"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Lo1-hA-a59">
-                                <rect key="frame" x="-6" y="863" width="414" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Lo1-hA-a59">
+                                <rect key="frame" x="0.0" y="836" width="414" height="54"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Qfe-Ir-fre">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Qfe-Ir-fre">
                                 <rect key="frame" x="0.0" y="44" width="414" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" name="backgroundColor"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bJr-ie-BuX" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="5fm-pK-hpv"/>
+                            <constraint firstItem="Lo1-hA-a59" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="HiW-Sb-cd9"/>
+                            <constraint firstItem="IpH-EC-MIW" firstAttribute="top" secondItem="Qfe-Ir-fre" secondAttribute="bottom" constant="230" id="IZb-7f-T8r"/>
+                            <constraint firstItem="IpH-EC-MIW" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="JFc-t1-FZP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qfe-Ir-fre" secondAttribute="trailing" id="OZ1-Rx-HhY"/>
+                            <constraint firstItem="bJr-ie-BuX" firstAttribute="top" secondItem="IpH-EC-MIW" secondAttribute="bottom" constant="26" id="Qla-tQ-Cy9"/>
+                            <constraint firstItem="Qfe-Ir-fre" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="QqZ-zj-cjO"/>
+                            <constraint firstItem="Lo1-hA-a59" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="28" id="Tae-pZ-VbO"/>
+                            <constraint firstItem="bJr-ie-BuX" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="XtH-vi-RuI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IpH-EC-MIW" secondAttribute="trailing" constant="55" id="Ydg-W9-h6i"/>
+                            <constraint firstItem="bJr-ie-BuX" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="24" id="ete-OI-cf6"/>
+                            <constraint firstItem="IpH-EC-MIW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="lFy-4c-eM4"/>
+                            <constraint firstItem="Qfe-Ir-fre" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pF9-cG-qci"/>
+                            <constraint firstAttribute="trailing" secondItem="bJr-ie-BuX" secondAttribute="trailing" id="qCQ-TA-xhW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Lo1-hA-a59" secondAttribute="trailing" id="wZe-PO-TaV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
