@@ -16,6 +16,7 @@ class GoalPageController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var goals : [Goal] = []
+    var refresher : UIRefreshControl!
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "💰Goals"
@@ -31,6 +32,11 @@ class GoalPageController: UIViewController {
         else{
             loadGoals()
         }
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresher.addTarget(self,  action: #selector(GoalPageController.populate), for: .valueChanged)
+        
+        tableView.addSubview(refresher)
     }
    
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
@@ -82,6 +88,9 @@ extension GoalPageController : UITableViewDataSource{
     
 }
 extension GoalPageController{
+    @objc func populate(){
+        loadGoals()
+    }
     func loadGoals(){
         if let email = Auth.auth().currentUser?.email{
             db.collection(CONST.FSTORE.usersCollection).document(email).getDocument{
@@ -96,11 +105,14 @@ extension GoalPageController{
                         let jsonData = try JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.prettyPrinted)
 
                         let decodedData = try decoder.decode(Goals.self, from: jsonData)
-                        print("goals are", decodedData)
-                        for goal in decodedData.goals {
-                            self.goals.append(Goal(name: goal.name, amount: goal.amount, image: goal.image))
-                        }
+//                        print("goals are", decodedData)
+//                        for goal in decodedData.goals {
+//                            self.goals.append(Goal(name: goal.name, amount: goal.amount, image: goal.image))
+//                        }
+                        self.goals = decodedData.goals
                         self.tableView.dataSource = self
+                        self.refresher.endRefreshing()
+                        self.tableView.reloadData()
                     }
                     catch{
                         print("error from parsing goals json : ", error)

@@ -21,7 +21,6 @@ class NewSpendingController: UIViewController {
     
     @IBOutlet var activeButton: [UIButton]!
     
-    
     var firebaseManager = FirebaseManager()
     
     override func viewDidLoad() {
@@ -66,6 +65,7 @@ class NewSpendingController: UIViewController {
             firebaseManager.addTransaction(amount: amount, category: [cat] , item_id : currentUser.item_id
             , transaction_id : NSUUID().uuidString, date: date)
             
+            firebaseManager.getUser()
             
             let alert = UIAlertController(title: "Add New Spending", message: "Successfully added a new spending", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -84,4 +84,16 @@ class NewSpendingController: UIViewController {
         self.amountTextField.text = nil
         
     }
+}
+
+extension NewSpendingController : FirebaseUserDelegate{
+    func didFinishGettingUser(user: User) {
+        print("updated user after saving new spending")
+    }
+    
+    func didFailToGetUser() {
+        //
+    }
+    
+    
 }
