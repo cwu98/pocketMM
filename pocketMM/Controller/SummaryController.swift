@@ -34,17 +34,18 @@ class SummaryController: UIViewController, UITextFieldDelegate {
     var month: Int = 0
     var year: Int = 0
     let arrayOfMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+    let categories = ["Entertainment", "Groceries", "Shopping", "Dining", "Utilities", "Rent", "Goals", "Miscellaneous"]
+    
     //array of transaction data of type Transaction
     var transactionData = [Transaction]()
-    
+    var groupByCategory = [[Transaction]]()
     //array to hold total spending per category... this is the data for pie chart
     var totalSpendingByCategory = [Double]()
     
-  
     override func viewDidLoad() {
         super.viewDidLoad()
         print("In summary controller")
-        
+        groupByCategory = [ [], [], [], [], [], [], [], []]
 //        plaidAPIManger.transactionDelegate = self
         firebaseManager.transactionsDelegate = self
         
@@ -57,40 +58,41 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         //
         monthLabel.delegate = self
         datePicker.onDateSelected = { (month: Int, year: Int) in
-            let string = String  (format: "%03d/%d",month, year)
+            let string = String  (format: "%02d/%d",month, year)
             print(string)
         }
-        var tempArr: Array<Double> = Array(repeating: 0, count: 8)
-        totalSpendingByCategory = tempArr
+        
+        
         //get current month and year
         let date = Date()
         let calendar = Calendar.current
         month = calendar.component(.month, from: date)
         year = calendar.component(.year, from: date)
         
-        /*
-        monthLabel.leftViewMode = UITextField.ViewMode.always
-        monthLabel.leftViewMode = .always
-        monthLabel.leftView = UIImageView(image: UIImage(named: "downArrow.png"))
- */
+      
         monthLabel.text = arrayOfMonths[month]
         yearLabel.text = "\(year)"
  createDatePicker()
-        
+        transactionData = user?.transactions as! [Transaction]
+print(transactionData)
         //group based on category into dict [category_id : [...list of TransactionData objects with this category_id ] ]
 
-        var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category_id} )
-
-      for (categoryID, transaction) in groupByCategory{
-            var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
-        print("category id: ", categoryID)
-        var index : Int
-        index = categoryID ?? 7
-        totalSpendingByCategory.insert(total, at: index)
+        for item in transactionData {
+          
+            groupByCategory[item.category_id].append(item)
+            
         }
+       
 print("trying to print total spending by category")
-        print(totalSpendingByCategory)
 
+        for list in groupByCategory {
+            totalSpendingByCategory.append(list.reduce(0) { $0 + $1.amount})
+        }
+        totalSpendingByCategory[0] = 120.50
+        totalSpendingByCategory[5] = 1550.00
+        
+        print("count: ",totalSpendingByCategory.count)
+        print(totalSpendingByCategory)
 
         updateChardData()
         
@@ -145,26 +147,15 @@ print("trying to print total spending by category")
         let start = dateFormatterGet.string(from: startDate!)
                 print("date range: ", start, " ", end)
         
-//        transactionData = getTransactionFromRange(startDate: start, endDate: end)
-        //refer to didFinishGettingTransactions below
-          var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category_id} )
-
-        for (categoryID, transaction) in groupByCategory{
-              var total = transaction.reduce(0) {  $0 + $1.amount} //sum all amount from transactions in each category
-        var index : Int
-        index = categoryID ?? 7
-        totalSpendingByCategory.insert(total, at: index)
-
-          }
 
 
     }
     func updateChardData(){
-        displayForSelectedMonth()
-        
+  //      displayForSelectedMonth()
+        pieChart.backgroundColor = .white
         var entries: [PieChartDataEntry] = []
         for i in 0..<totalSpendingByCategory.count {
-            let dataEntry = PieChartDataEntry(value: totalSpendingByCategory[i], label: "Category \(i)" )
+            let dataEntry = PieChartDataEntry(value: totalSpendingByCategory[i], label: categories[i] )
             entries.append(dataEntry)
         }
         let chartDataSet = PieChartDataSet(entries: entries, label:"Categories")
@@ -187,16 +178,17 @@ print("trying to print total spending by category")
         
         chartDataSet.colors = [color1, color2, color3, color4, color5, color6, color7, color8]
 
+        
         chartDataSet.drawIconsEnabled = false
-        chartDataSet.sliceSpace = 2
+        chartDataSet.sliceSpace = 1
         pieChart.data = chartData
-        pieChart.chartDescription?.text = "January" //month to display
+        pieChart.chartDescription?.text = arrayOfMonths[month-1] //month to display
         pieChart.drawHoleEnabled = true
-        pieChart.holeRadiusPercent = 30
+        pieChart.holeRadiusPercent = 0.3
+        pieChart.transparentCircleRadiusPercent = 0.33
         pieChart.legend.enabled = true
         pieChart.rotationEnabled = false
-        pieChart.entryLabelColor = .white
-        pieChart.entryLabelFont = .systemFont(ofSize: 14, weight:.light)
+        pieChart.drawEntryLabelsEnabled = false
         
         let l = pieChart.legend
         l.horizontalAlignment = .center
