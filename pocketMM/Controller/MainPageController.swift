@@ -26,6 +26,7 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableViewDelegate, numberOfRowsInSection section: Int) -> Int {
 //        return accountNames.count
 //        return 1
+        print("number of cells in Main Page Controller", balanceAccounts.count)
         return balanceAccounts.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,7 +42,7 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         let formatted = String(format: "$%.02f", balanceAccounts[indexPath.row].balances.current)
-        cell.textLabel!.text  = balanceAccounts[indexPath.row].official_name + ":      " + "\(formatted)"
+        cell.textLabel!.text  = balanceAccounts[indexPath.row].name + ":      " + "\(formatted)"
         return cell
     }
     override func viewDidLoad() {
@@ -49,17 +50,23 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
         accountNames = ["Plaid Checking", "Plaid Credit Card", "Plaid Money Market"]
         balances = [3010.10, 501.00, 1100.00]
         
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatterGet.string(from: Date())
+        datetextview.text = date
+        
         plaidAPIManager.refreshTransactionDelegate = self
         plaidAPIManager.balanceDelegate = self
         
         if let currentUser = user {
             plaidAPIManager.refreshTransactions(access_token: currentUser.access_token)
-            plaidAPIManager.getBalance(access_token: currentUser.access_token)
+//            plaidAPIManager.getBalance(access_token: currentUser.access_token)
         }
         plaidAPIManager.transactionDelegate = self
         
         tableView.delegate = self
-        
+        tableView.dataSource = self
         
         self.datetextview.layer.cornerRadius = 25
         //self.view.bringSubviewToFront(textview);
@@ -90,26 +97,26 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
 extension MainPageController : PlaidRefreshTransactionDelegate{
     func didFinishRedreshingTransactions(transactions: [Transaction]) {
         let today = Date()
-            var startComponent = Calendar.current.dateComponents([.year, .month, .day], from: today)
-            startComponent.month = 1
-            startComponent.day = 1
-            let dateFormatterGet = DateFormatter()
-            dateFormatterGet.dateFormat = "yyyy-MM-dd"
-            let end = dateFormatterGet.string(from: today)
-            print(end)
-            datetextview.text = end
-             if let startDate = Calendar.current.date(from: startComponent){
-               
-                let start = dateFormatterGet.string(from: startDate)
-                print("date", start, end)
-                let plaidAPIManager : PlaidAPIManager = PlaidAPIManager()
-                if let currentUser = user {
-                    plaidAPIManager.getTransaction(accessToken: currentUser.access_token, itemId: currentUser.item_id, startDate: start, endDate: end)
+        var startComponent = Calendar.current.dateComponents([.year, .month, .day], from: today)
+        startComponent.month = 1
+        startComponent.day = 1
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        let end = dateFormatterGet.string(from: today)
+        print(end)
+        datetextview.text = end
+         if let startDate = Calendar.current.date(from: startComponent){
+           
+            let start = dateFormatterGet.string(from: startDate)
+            print("date", start, end)
+            let plaidAPIManager : PlaidAPIManager = PlaidAPIManager()
+            if let currentUser = user {
+                plaidAPIManager.getTransaction(accessToken: currentUser.access_token, itemId: currentUser.item_id, startDate: start, endDate: end)
 //                    getTransactionFromRange(startDate: start, endDate: end)
-                }
-               
-                
             }
+           
+            
+        }
     }
     
     
@@ -128,10 +135,19 @@ extension MainPageController : PlaidTransactionDelegate{
     
 }
 extension MainPageController : PlaidBalanceDelegate{
+    func didFailToGetBalance() {
+        print("failed to get balance from Main Page Controller")
+    }
+    
     func didFinishGettingBalance(accounts: AccountsData) {
         //user get here
-        tableView.dataSource = self
         balanceAccounts = accounts.accounts
+        print("got balance from Main Page Controller", balanceAccounts.count)
+        DispatchQueue.main.async {
+            self.tableView.dataSource = self
+        }
+        
+        
         //number of accounts =
     }
     

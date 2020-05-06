@@ -27,7 +27,7 @@ protocol PlaidRefreshTransactionDelegate{
 }
 protocol PlaidBalanceDelegate{
     func didFinishGettingBalance(accounts : AccountsData)
-//    func couldnGetTransaction()
+    func didFailToGetBalance()
 }
 
 struct PlaidAPIManager{
@@ -180,7 +180,11 @@ struct PlaidAPIManager{
                 task.resume()
             } catch {
                 print("error get transaction ", error.localizedDescription)
+                self.transactionDelegate?.didFailToGetTransactions()
             }
+        }
+        else{
+            self.transactionDelegate?.didFailToGetTransactions()
         }
        
     }
@@ -259,6 +263,12 @@ struct PlaidAPIManager{
                         return
                     }
                     if let safeData = data {
+                        do{
+                            let jsonObject = try JSONSerialization.jsonObject(with: safeData)
+                            print("got balance data from Plaid")
+                        } catch {
+                            print(error.localizedDescription)
+                        }
                         if let parsedAccountData = PlaidAPIManager.parseBalance(data: safeData){
                             self.balanceDelegate?.didFinishGettingBalance(accounts : parsedAccountData)
                         }
@@ -269,13 +279,17 @@ struct PlaidAPIManager{
             } catch {
                 print("error get balance from Plaid ", error.localizedDescription)
     //                return nil
+                 self.balanceDelegate?.didFailToGetBalance()
             }
         }
-        
+        else{
+             self.balanceDelegate?.didFailToGetBalance()
+        }
         
     }
     static func parseBalance(data: Data) -> AccountsData?{
        do{
+            print("parsing balance")
             let decoder = JSONDecoder()
             let decodedData = try decoder.decode(AccountsData.self, from: data)
             balance = decodedData.accounts[0].balances.current

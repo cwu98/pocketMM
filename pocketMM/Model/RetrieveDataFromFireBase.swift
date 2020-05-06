@@ -18,10 +18,12 @@ var user : User?
 
 protocol FirebaseTransactionDelegate{
     func didFinishGettingTransactions(transactions : [Transaction])
+    func didFailToGetTransactions()
 }
 
 protocol FirebaseUserDelegate{
     func didFinishGettingUser(user : User)
+    func didFailToGetUser()
 }
 
 
@@ -29,7 +31,7 @@ struct FirebaseManager {
     var transactionsDelegate: FirebaseTransactionDelegate?
     var userDelegate: FirebaseUserDelegate?
     
-    func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]{
+    func getTransactionFromRange(startDate: String, endDate: String) {
          
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd"
@@ -86,6 +88,7 @@ struct FirebaseManager {
                         }
                         catch{
                             print("error from parsing transactions json : ", error)
+                            self.transactionsDelegate?.didFailToGetTransactions()
                           
                         }
                         
@@ -95,10 +98,11 @@ struct FirebaseManager {
             
         } else {
            print("There was an error decoding the string")
-            return allTransactions
+            self.transactionsDelegate?.didFailToGetTransactions()
+//            return allTransactions
         }
         print(allTransactions.count)
-        return allTransactions
+//        return allTransactions
     }
 
     func getReminders(){
@@ -174,15 +178,19 @@ struct FirebaseManager {
                         self.userDelegate?.didFinishGettingUser(user : user!)
 //                        PlaidAPIManager.getBalance(access_token: user!.access_token)
     //                    print(user!.transactions, balance, user!.limit, user!.reminders, user!.goals)
+                        print("got user")
                         self.userDelegate?.didFinishGettingUser(user: user!)
                     }
                     catch{
                         print("error from parsing user json : ", error)
-                      
+                        self.userDelegate?.didFailToGetUser()
                     }
                     
                 }
             }
+        }
+        else{
+            self.userDelegate?.didFailToGetUser()
         }
         
     }

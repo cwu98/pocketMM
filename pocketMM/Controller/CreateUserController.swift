@@ -176,6 +176,10 @@ extension CreateUserController : PlaidTransactionDelegate{
     
 }
 extension CreateUserController : FirebaseUserDelegate{
+    func didFailToGetUser() {
+        //
+    }
+    
     func didFinishGettingUser(user: User) {
         //
     }

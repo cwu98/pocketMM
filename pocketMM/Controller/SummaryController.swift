@@ -217,6 +217,10 @@ print("trying to print total spending by category")
     
 }
 extension SummaryController : FirebaseTransactionDelegate{
+    func didFailToGetTransactions() {
+        //
+    }
+    
     func didFinishGettingTransactions(transactions: [Transaction]) {
         //do your thing here
     }
@@ -224,6 +228,10 @@ extension SummaryController : FirebaseTransactionDelegate{
     
 }
 extension SummaryController : FirebaseUserDelegate{
+    func didFailToGetUser() {
+        //
+    }
+    
     func didFinishGettingUser(user: User) {
         //user get here
     }

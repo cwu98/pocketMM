@@ -40,7 +40,7 @@ let transaction_id : String
 let amount : Double
 let date : String
 let category : [String]
-let category_id : Int?
+let category_id : Int
 let item_id : String
     
      func hash(into hasher: inout Hasher){
@@ -93,8 +93,7 @@ struct AccountsData : Decodable {
 }
 struct AccountData : Decodable{
     let balances : BalanceData
-    let official_name : String
-    let subtype : String
+    let name : String
 }
 struct BalanceData : Decodable{
     let current : Double
