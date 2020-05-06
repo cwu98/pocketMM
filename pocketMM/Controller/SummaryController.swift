@@ -21,6 +21,8 @@ struct tablecelldata {
 
 class SummaryController: UIViewController, UITextFieldDelegate {
   
+    var plaidAPIManger = PlaidAPIManager()
+    var firebaseManager = FirebaseManager()
     
     @IBOutlet weak var pieChart:PieChartView!
     @IBOutlet weak var monthLabel: UITextField!
@@ -42,7 +44,16 @@ class SummaryController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("In summary controller")
-        transactionData = user!.transactions
+        
+//        plaidAPIManger.transactionDelegate = self
+        firebaseManager.transactionsDelegate = self
+        
+        if(user == nil){
+            firebaseManager.userDelegate = self
+            firebaseManager.getUser()
+        }
+        
+//        transactionData = user!.transactions
         //
         monthLabel.delegate = self
         datePicker.onDateSelected = { (month: Int, year: Int) in
@@ -134,7 +145,8 @@ print("trying to print total spending by category")
         let start = dateFormatterGet.string(from: startDate!)
                 print("date range: ", start, " ", end)
         
-        transactionData = getTransactionFromRange(startDate: start, endDate: end)
+//        transactionData = getTransactionFromRange(startDate: start, endDate: end)
+        //refer to didFinishGettingTransactions below
           var groupByCategory = Dictionary(grouping: transactionData, by: {$0.category_id} )
 
         for (categoryID, transaction) in groupByCategory{
@@ -204,4 +216,27 @@ print("trying to print total spending by category")
     }
     
 }
+extension SummaryController : FirebaseTransactionDelegate{
+    func didFailToGetTransactions() {
+        //
+    }
+    
+    func didFinishGettingTransactions(transactions: [Transaction]) {
+        //do your thing here
+    }
+    
+    
+}
+extension SummaryController : FirebaseUserDelegate{
+    func didFailToGetUser() {
+        //
+    }
+    
+    func didFinishGettingUser(user: User) {
+        //user get here
+    }
+    
+    
+}
+
 

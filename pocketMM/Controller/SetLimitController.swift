@@ -14,10 +14,12 @@ class SetLimitController: UIViewController {
     
     @IBOutlet weak var errorTextView: UITextView!
     @IBOutlet weak var limitTextField: UITextField!
+    var firebaseManager = FirebaseManager()
     override func viewDidLoad() {
         super.viewDidLoad()
        title  = "Set Limit"
         errorTextView.isHidden = true
+        firebaseManager.userDelegate = self
     }
 
     @IBAction func setLimitPressed(_ sender: Any) {
@@ -27,6 +29,7 @@ class SetLimitController: UIViewController {
             db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
                 "\(CONST.FSTORE.limit).\(category)" : Double(limitPerMonth)
             ])
+            firebaseManager.getUser()
             let alert = UIAlertController(title: "Set Limit", message: "Successfully to set limit of \(limitTextField.text!) for category \(categoryTextField.text!)", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                            alert.addAction(okAction)
@@ -39,4 +42,16 @@ class SetLimitController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+}
+
+extension SetLimitController : FirebaseUserDelegate{
+    func didFinishGettingUser(user: User) {
+        print("updated user after saving new limit")
+    }
+    
+    func didFailToGetUser() {
+        //
+    }
+    
+    
 }

@@ -21,6 +21,8 @@ class NewSpendingController: UIViewController {
     
     @IBOutlet var activeButton: [UIButton]!
     
+    var firebaseManager = FirebaseManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,8 +32,15 @@ class NewSpendingController: UIViewController {
        dateFormatterGet.dateFormat = "yyyy/MM/dd"
        let date = dateFormatterGet.string(from: Date())
         datetextview.text = date
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
 
     /*
     // MARK: - Navigation
@@ -44,6 +53,7 @@ class NewSpendingController: UIViewController {
     */
 
 
+   
     
     @IBAction func categorySelected(_ sender: UIButton) {
         activeButton.forEach({ $0.backgroundColor = nil})
@@ -60,9 +70,10 @@ class NewSpendingController: UIViewController {
             let dateFormatterGet = DateFormatter()
             dateFormatterGet.dateFormat = "yyyy-MM-dd"
             let date = dateFormatterGet.string(from: Date())
-            addTransaction(amount: amount, category: [cat] , item_id : currentUser.item_id
+            firebaseManager.addTransaction(amount: amount, category: [cat] , item_id : currentUser.item_id
             , transaction_id : NSUUID().uuidString, date: date)
             
+            firebaseManager.getUser()
             
             let alert = UIAlertController(title: "Add New Spending", message: "Successfully added a new spending", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -81,4 +92,16 @@ class NewSpendingController: UIViewController {
         self.amountTextField.text = nil
         
     }
+}
+
+extension NewSpendingController : FirebaseUserDelegate{
+    func didFinishGettingUser(user: User) {
+        print("updated user after saving new spending")
+    }
+    
+    func didFailToGetUser() {
+        //
+    }
+    
+    
 }

@@ -40,7 +40,7 @@ let transaction_id : String
 let amount : Double
 let date : String
 let category : [String]
-let category_id : Int?
+let category_id : Int
 let item_id : String
     
      func hash(into hasher: inout Hasher){
@@ -48,77 +48,44 @@ let item_id : String
      }
     init(amount: Double, category: [String], item_id: String, transaction_id: String,
      date: String){
-    print("making transaction object")
-    let category_id : Int
- 
-    if category.contains("Arts and Entertainment") || category.contains("Adult Entertainment") || category.contains("Entertainment"){
-        category_id = 0
-        
-        }
-    else if category.contains("Supermarkets and Groceries") || category.contains("Delis"){
-        category_id = 1
-    }
-    else if category.contains("Shops") || category.contains("Clothing and Accessories"){
-        category_id = 2
-    }
-    else if category.contains("Restaurants") || category.contains("Food and Drink") {
-        category_id = 3
-    }
-        else if category.contains("Utilities"){
-            category_id = 4
-    }
-        else if category.contains("Rent"){
-            category_id = 5
-    }
-        else if category.contains("goals"){
-            category_id = 6
-    }
-        else {
-            category_id = 7
-    }
-    
-    self.amount = amount
-    self.category = category
-    self.category_id = category_id
-    print("category_id: \(category_id)")
-    self.transaction_id = transaction_id
-    self.date = date
-    self.item_id = item_id
-}
-    func initCategory_id(category : [String]) -> Int{
+        print("making transaction object")
+        let category_id : Int
+     
         if category.contains("Arts and Entertainment") || category.contains("Adult Entertainment") || category.contains("Entertainment"){
-//            category_id = 0
-            return 0
+            category_id = 0
+            
             }
         else if category.contains("Supermarkets and Groceries") || category.contains("Delis"){
-//            category_id = 1
-            return 1
+            category_id = 1
         }
         else if category.contains("Shops") || category.contains("Clothing and Accessories"){
-//            category_id = 2
-            return 2
+            category_id = 2
         }
         else if category.contains("Restaurants") || category.contains("Food and Drink") {
-//            category_id = 3
-            return 3
+            category_id = 3
         }
             else if category.contains("Utilities"){
-//                category_id = 4
-            return 4
+                category_id = 4
         }
             else if category.contains("Rent"){
-//                category_id = 5
-            return 5
+                category_id = 5
         }
             else if category.contains("goals"){
-//                category_id = 6
-            return 6
+                category_id = 6
         }
             else {
-//                category_id = 7
-            return 7
+                category_id = 7
         }
+        
+        self.amount = amount
+        self.category = category
+        self.category_id = category_id
+        print("category_id: \(category_id)")
+        self.transaction_id = transaction_id
+        self.date = date
+        self.item_id = item_id
     }
+    
 }
 
 struct AccountsData : Decodable {
@@ -126,6 +93,7 @@ struct AccountsData : Decodable {
 }
 struct AccountData : Decodable{
     let balances : BalanceData
+    let name : String
 }
 struct BalanceData : Decodable{
     let current : Double
@@ -153,14 +121,14 @@ struct Reminders : Decodable{
 
 struct reminder : Decodable{
     let title: String
-    let date: String
+    let due_date: String
     let frequency: String
    // let alert: String
     let identifier: String
     
-    init(title: String, date: String, frequency: String, identifier: String){
+    init(title: String, due_date: String, frequency: String, identifier: String){
         self.title = title
-        self.date = date
+        self.due_date = due_date
         self.frequency = frequency
         self.identifier = identifier
     }

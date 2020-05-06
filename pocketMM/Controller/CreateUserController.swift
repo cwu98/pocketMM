@@ -26,10 +26,12 @@ class CreateUserController: UIViewController {
     
     @IBOutlet weak var newAccount: UIButton!
     @IBOutlet weak var loginBA: UIButton!
-    
-    var itemData : ItemData?
+   
     var plaidAPIManager : PlaidAPIManager = PlaidAPIManager()
+    var firebaseManager  = FirebaseManager()
     var timer : Timer = Timer()
+    var createAccountPressed = false
+    var finishedGettingTransaction = false
     override func viewDidLoad() {
         super.viewDidLoad()
         errorTextView.isHidden = true
@@ -39,14 +41,22 @@ class CreateUserController: UIViewController {
         
         self.newAccount.layer.cornerRadius = 15
         self.loginBA.layer.cornerRadius = 15
+        
+        plaidAPIManager.itemDelegate = self
+        plaidAPIManager.transactionDelegate = self
+        firebaseManager.userDelegate = self
+        
+        emailTextField.becomeFirstResponder()
+        passwordTextField.becomeFirstResponder()
+        emailTextField.isEnabled = true
+        passwordTextField.isEnabled = true
     }
 
     @IBAction func createAccountPressed(_ sender: UIButton) {
+        self.createAccountPressed = true
         if let email = emailTextField.text, let password = passwordTextField.text{
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error{
-//                    self.errorTextView.text = e.localizedDescription
-//                    self.errorTextView.isHidden = false
                  let alert = UIAlertController(title: "Create Account", message: e.localizedDescription, preferredStyle: .alert)
                  let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                  alert.addAction(okAction)
@@ -70,19 +80,13 @@ class CreateUserController: UIViewController {
                             } else {
                                 print("Document user successfully written!")
                             }
+                    }
+                    print("createAccountPressed", self.finishedGettingTransaction)
+                    if(self.finishedGettingTransaction){
+                        DispatchQueue.main.async {
+                           self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
                         }
-                     getUser()
-                    self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
-                    
-//                        if self.itemData != nil {
-//
-//                        }
-//                        else{
-//                            print("itemData is funcking nil")
-//                        }
-                        
-                    
-                   
+                    }
                     
                 }
             }
@@ -97,9 +101,6 @@ class CreateUserController: UIViewController {
         if (UI_USER_INTERFACE_IDIOM() == .pad) {
             linkViewController.modalPresentationStyle = .formSheet;
         }
-//        if ([UIDevice userInterfaceIdiom] == .pad){
-//            linkViewController.modalPresentationStyle = .formSheet;
-//        }
 
         present(linkViewController, animated: true)
     }
@@ -110,70 +111,13 @@ extension CreateUserController : PLKPlaidLinkViewDelegate, WKNavigationDelegate 
     
     
     func handleSuccessWithToken(_ publicToken: String, metadata: [String : Any]?) {
-        print("Success " + publicToken)
-        itemData = self.plaidAPIManager.getItem(publicToken: publicToken)
-        if let item = itemData {
-            
-        }
-        addTransactionsToFirebaseDb()
-        
-//        getItemAndTransaction(publicToken)
-        
-
+        plaidAPIManager.getItem(publicToken: publicToken)
     }
-    
-    func addTransactionsToFirebaseDb(){
-        if let transactions = plaidAPIManager.getTransaction(accessToken: access_token, itemId: item_id, startDate: "2020-01-01", endDate: "2020-04-26"){
-         for transaction in transactions{
-            print(transaction)
-//            let docData = [
-//                CONST.FSTORE.transaction_id : transaction.transaction_id,
-//                CONST.FSTORE.item_id : transaction.item_id,
-//                CONST.FSTORE.transaction_date : transaction.date,
-//                CONST.FSTORE.transaction_amount : String(format: "%f",transaction.amount),
-//                CONST.FSTORE.transaction_category : transaction.category!.description
-//            ]
-//            db.collection(CONST.FSTORE.transactionsCollection).addDocument(data: docData){
-//                (error) in
-//                if let e = error{
-//                    print("error uploading transactions to FireStore ", e)
-//                }
-//            }
-         }
-            
-        }
-        
-    }
-    
-//    func getItemAndTransaction(_ publicToken: String, startDate: String, endDate: String){
-//        var itemData : ItemData?
-//        let radQueue = OperationQueue()
-//        let operation1 = BlockOperation{
-//            itemData = self.plaidAPIManager.getItem(publicToken: publicToken)
-//        }
-//        print("here")
-//        let operation2 = BlockOperation{
-////            self.plaidAPIManager.getTransaction(accessToken: "access-sandbox-446a6983-ede6-4e5d-abc4-a36a8e042e8e", itemId: "LWEPa9pW38HgAdn8kPDBF8qDmQVgM1cPKLMKx")
-//            if let item = itemData{
-//                print("getting trans item " + item.access_token + " " + item.item_id)
-//                self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true){
-//                     timer in
-//                    if self.plaidAPIManager.getTransaction(accessToken: item.access_token, itemId: item.item_id, startDate: startDate,
-//                        endDate: endDate) ?? true {
-//                        self.timer.invalidate()
-//                     }
-//                 }
-////                self.plaidAPIManager.getTransaction(accessToken: "access-sandbox-446a6983-ede6-4e5d-abc4-a36a8e042e8e", itemId: "LWEPa9pW38HgAdn8kPDBF8qDmQVgM1cPKLMKx")
-////                self.plaidAPIManager.getTransaction(accessToken: item.access_token, itemId: item.item_id)
-//            }
-//
-//        }
-//
-//        operation2.addDependency(operation1)
-//        radQueue.addOperation(operation1)
-//        radQueue.addOperation(operation2)
-//    }
     func handleError(_ error: Error, metadata: [String : Any]?) {
+        let alert = UIAlertController(title: "Linking to Plaid Account", message: error.localizedDescription, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func handleExitWithMetadata(_ metadata: [String : Any]?) {
@@ -198,3 +142,64 @@ extension CreateUserController : PLKPlaidLinkViewDelegate, WKNavigationDelegate 
     }
     
 }
+extension CreateUserController : PlaidItemDelegate{
+    func didFinishGettingItem(item_id: String, access_token: String) {
+        print("didFinishGettingItem")
+        let today = Date()
+        //start of the year
+        var startComponent = Calendar.current.dateComponents([.year, .month, .day], from: today)
+        startComponent.month = 1
+        startComponent.day = 1
+        let dateFormatterGet = DateFormatter()
+       dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        //until today
+        let end = dateFormatterGet.string(from: today)
+   //        if let startDate = Calendar.current.date(bySetting: .month, value: 1 , of: today){
+        if let startDate = Calendar.current.date(from: startComponent){
+          
+           let start = dateFormatterGet.string(from: startDate)
+            plaidAPIManager.getTransaction(accessToken: access_token, itemId : item_id, startDate: start, endDate: end)
+        }
+    }
+    
+    
+}
+extension CreateUserController : PlaidTransactionDelegate{
+    func didFinishGettingTransactions(transactions: [Transaction]) {
+        finishedGettingTransaction = true
+        print("didFinishGettingTransactions", createAccountPressed)
+        if(createAccountPressed){
+            for transaction in transactions {
+                firebaseManager.addTransaction(amount: transaction.amount, category: transaction.category, item_id : transaction.item_id
+                    , transaction_id : transaction.transaction_id, date: transaction.date)
+            }
+            firebaseManager.getUser()
+        }
+        
+        DispatchQueue.main.async {
+           self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
+        }
+    }
+    func didFailToGetTransactions(){
+        print("didFailToGetTransactions", finishedGettingTransaction)
+         finishedGettingTransaction = true
+        if(createAccountPressed){
+            DispatchQueue.main.async {
+               self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
+            }
+            
+        }
+    }
+    
+}
+extension CreateUserController : FirebaseUserDelegate{
+    func didFailToGetUser() {
+        //
+    }
+    
+    func didFinishGettingUser(user: User) {
+        //
+    }
+    
+}
+

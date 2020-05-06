@@ -16,6 +16,8 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet var table: UITableView!
     var reminders = [reminder]()
     var notificationGranted = false
+    var firebaseManager = FirebaseManager()
+    var refresher : UIRefreshControl!
     
     
     override func viewDidLoad() {
@@ -35,14 +37,22 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
             else{
                     reminders = loadReminders()
                 }
-                
+              
+        firebaseManager.userDelegate = self
         table.delegate = self
         table.dataSource = self
         
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresher.addTarget(self,  action: #selector(AlertPageController.populate), for: .valueChanged)
         
+        table.addSubview(refresher)
         table.reloadData()
  
          
+    }
+    @objc func populate(){
+        loadReminders()
     }
         func loadReminders() -> [reminder]{
 
@@ -59,10 +69,12 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
                             let data = try JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
 
                              let decodedData = try decoder.decode(Reminders.self, from: data)
-
+                            self.reminders = decodedData.reminders
                              for reminder in decodedData.reminders {
                                 allReminders.append(reminder)
                             }
+                            self.refresher.endRefreshing()
+                            self.table.reloadData()
                             print("all reminders ", allReminders)
                         }
                         catch{
@@ -112,17 +124,17 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let reminder = reminders[indexPath.row]
         cell.textLabel?.text = reminder.title
-        print("\(reminder.title)", " ", "\(reminder.date)")
-        let date = self.convertToDate(date: reminder.date)
+        print("\(reminder.title)", " ", "\(reminder.due_date)")
+        let date = self.convertToDate(date: reminder.due_date)
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, YYYY"
         cell.detailTextLabel?.text = "Due: " + formatter.string(from: date!)
         
         //make due date red if overdue
-        if NSDate().earlierDate(self.convertToDate(date: reminder.date)!) == self.convertToDate(date: reminder.date) {
+        if NSDate().earlierDate(self.convertToDate(date: reminder.due_date)!) == self.convertToDate(date: reminder.due_date) {
             cell.detailTextLabel?.textColor = UIColor.red
         }
-        else if NSDate() as Date == self.convertToDate(date: reminder.date) {
+        else if NSDate() as Date == self.convertToDate(date: reminder.due_date) {
             cell.detailTextLabel?.textColor = UIColor.red
         }
         else{
@@ -144,7 +156,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
         addVC.completion = {title, date, frequency, alert in
             DispatchQueue.main.async {
                 self.navigationController?.popToViewController(self, animated: true)
-                let newReminder = reminder(title: title, date: "\(date)", frequency: frequency, identifier: "id_\(title)")
+                let newReminder = reminder(title: title, due_date: "\(date)", frequency: frequency, identifier: "id_\(title)")
                 print("new reminder created")
                 self.reminders.append(newReminder)
                 self.table.reloadData()
@@ -211,13 +223,19 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
                   CONST.FSTORE.reminder_title : title,
                   CONST.FSTORE.reminder_due_date : due_date,
                   CONST.FSTORE.reminder_frequency : frequency,
-            CONST.FSTORE.reminder_identifier : identifier
+                  CONST.FSTORE.reminder_identifier : identifier
         ]
 
         db.collection(CONST.FSTORE.usersCollection).document(email!).updateData([
                   CONST.FSTORE.reminders : FieldValue.arrayUnion([docData])
               ])
-          
+        let alert = UIAlertController(title: "Save Reminders", message: "Successfully saved reminder", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+        
+        
+        firebaseManager.getUser()
       
     }
     
@@ -264,6 +282,18 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
 
 
   
+}
+
+extension AlertPageController : FirebaseUserDelegate{
+    func didFinishGettingUser(user: User) {
+        print("updated user after saving new reminder")
+    }
+    
+    func didFailToGetUser() {
+        //
+    }
+    
+    
 }
     
     
