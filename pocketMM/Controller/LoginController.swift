@@ -59,8 +59,9 @@ class LoginController: UIViewController {
 }
 extension LoginController : FirebaseUserDelegate{
     func didFailToGetUser() {
+        print("did fail to get user in Log In Controller")
         DispatchQueue.main.async {
-             print("did fail to get user in Log In Controller")
+             
            self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
         }
     }
@@ -69,12 +70,14 @@ extension LoginController : FirebaseUserDelegate{
 //        DispatchQueue.main.async {
 //           self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
 //        }
+        print("did finish getting user in Log In Controller")
         self.plaidAPIManager.getBalance(access_token: user.access_token)
     }
     
 }
 extension LoginController: PlaidBalanceDelegate{
     func didFailToGetBalance() {
+        print("did fail to get balance in Log In Controller")
         DispatchQueue.main.async {
              print("did fail balance in Log In Controller")
            self.performSegue(withIdentifier: CONST.loginSegue, sender: self)

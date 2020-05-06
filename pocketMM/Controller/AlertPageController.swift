@@ -17,6 +17,8 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
     var reminders = [reminder]()
     var notificationGranted = false
     var firebaseManager = FirebaseManager()
+    var refresher : UIRefreshControl!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +42,17 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
         table.delegate = self
         table.dataSource = self
         
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresher.addTarget(self,  action: #selector(AlertPageController.populate), for: .valueChanged)
         
+        table.addSubview(refresher)
         table.reloadData()
  
          
+    }
+    @objc func populate(){
+        loadReminders()
     }
         func loadReminders() -> [reminder]{
 
@@ -60,10 +69,12 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
                             let data = try JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
 
                              let decodedData = try decoder.decode(Reminders.self, from: data)
-
+                            self.reminders = decodedData.reminders
                              for reminder in decodedData.reminders {
                                 allReminders.append(reminder)
                             }
+                            self.refresher.endRefreshing()
+                            self.table.reloadData()
                             print("all reminders ", allReminders)
                         }
                         catch{
@@ -218,6 +229,12 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
         db.collection(CONST.FSTORE.usersCollection).document(email!).updateData([
                   CONST.FSTORE.reminders : FieldValue.arrayUnion([docData])
               ])
+        let alert = UIAlertController(title: "Save Reminders", message: "Successfully saved reminder", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+        
+        
         firebaseManager.getUser()
       
     }

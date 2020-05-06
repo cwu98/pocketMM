@@ -45,9 +45,15 @@ class CreateUserController: UIViewController {
         plaidAPIManager.itemDelegate = self
         plaidAPIManager.transactionDelegate = self
         firebaseManager.userDelegate = self
+        
+        emailTextField.becomeFirstResponder()
+        passwordTextField.becomeFirstResponder()
+        emailTextField.isEnabled = true
+        passwordTextField.isEnabled = true
     }
 
     @IBAction func createAccountPressed(_ sender: UIButton) {
+        self.createAccountPressed = true
         if let email = emailTextField.text, let password = passwordTextField.text{
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error{
@@ -74,11 +80,14 @@ class CreateUserController: UIViewController {
                             } else {
                                 print("Document user successfully written!")
                             }
-                        }
-                    self.createAccountPressed = true
-                    if(self.finishedGettingTransaction){
-                        self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
                     }
+                    print("createAccountPressed", self.finishedGettingTransaction)
+                    if(self.finishedGettingTransaction){
+                        DispatchQueue.main.async {
+                           self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
+                        }
+                    }
+                    
                 }
             }
         }
@@ -135,6 +144,7 @@ extension CreateUserController : PLKPlaidLinkViewDelegate, WKNavigationDelegate 
 }
 extension CreateUserController : PlaidItemDelegate{
     func didFinishGettingItem(item_id: String, access_token: String) {
+        print("didFinishGettingItem")
         let today = Date()
         //start of the year
         var startComponent = Calendar.current.dateComponents([.year, .month, .day], from: today)
@@ -157,6 +167,7 @@ extension CreateUserController : PlaidItemDelegate{
 extension CreateUserController : PlaidTransactionDelegate{
     func didFinishGettingTransactions(transactions: [Transaction]) {
         finishedGettingTransaction = true
+        print("didFinishGettingTransactions", createAccountPressed)
         if(createAccountPressed){
             for transaction in transactions {
                 firebaseManager.addTransaction(amount: transaction.amount, category: transaction.category, item_id : transaction.item_id
@@ -165,12 +176,18 @@ extension CreateUserController : PlaidTransactionDelegate{
             firebaseManager.getUser()
         }
         
-        self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
+        DispatchQueue.main.async {
+           self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
+        }
     }
     func didFailToGetTransactions(){
+        print("didFailToGetTransactions", finishedGettingTransaction)
          finishedGettingTransaction = true
         if(createAccountPressed){
-            self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
+            DispatchQueue.main.async {
+               self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
+            }
+            
         }
     }
     

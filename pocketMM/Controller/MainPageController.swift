@@ -23,6 +23,8 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var datetextview: UITextView!
     @IBOutlet weak var tableView: UITableView!
     
+    var refresher : UIRefreshControl!
+    
     func tableView(tableView: UITableViewDelegate, numberOfRowsInSection section: Int) -> Int {
 //        return accountNames.count
 //        return 1
@@ -78,6 +80,13 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
         navigationItem.hidesBackButton = true
 
         print("loading transactions")
+        
+        
+        refresher = UIRefreshControl()
+       refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+       refresher.addTarget(self,  action: #selector(MainPageController.populate), for: .valueChanged)
+       
+       tableView.addSubview(refresher)
 
     }
 
@@ -95,9 +104,27 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 }
-
+extension MainPageController{
+    
+    @objc func populate(){
+        if let currentUser = user {
+            
+            
+            if(balanceAccounts.count == 0){
+                plaidAPIManager.getBalance(access_token: currentUser.access_token)
+            }
+            else{
+                self.refresher.endRefreshing()
+                self.tableView.reloadData()
+            }
+            plaidAPIManager.refreshTransactions(access_token: currentUser.access_token)
+        }
+    }
+    
+}
 extension MainPageController : PlaidRefreshTransactionDelegate{
-    func didFinishRedreshingTransactions(transactions: [Transaction]) {
+    func didFinishRefreshingTransactions(transactions: [Transaction]) {
+        
         let today = Date()
         var startComponent = Calendar.current.dateComponents([.year, .month, .day], from: today)
         startComponent.month = 1
@@ -129,6 +156,7 @@ extension MainPageController : PlaidTransactionDelegate{
             firebaseManager.addTransaction(amount: transaction.amount, category: transaction.category, item_id : transaction.item_id
                 , transaction_id : transaction.transaction_id, date: transaction.date)
         }
+        
     }
     
     func didFailToGetTransactions() {
@@ -138,15 +166,19 @@ extension MainPageController : PlaidTransactionDelegate{
 }
 extension MainPageController : PlaidBalanceDelegate{
     func didFailToGetBalance() {
+        self.refresher.endRefreshing()
+        self.tableView.reloadData()
         print("failed to get balance from Main Page Controller")
     }
     
     func didFinishGettingBalance(accounts: AccountsData) {
+        
         //user get here
         balanceAccounts = accounts.accounts
         print("got balance from Main Page Controller", balanceAccounts.count)
         DispatchQueue.main.async {
-            self.tableView.dataSource = self
+            self.refresher.endRefreshing()
+            self.tableView.reloadData()
         }
         
         
