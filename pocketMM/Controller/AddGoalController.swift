@@ -17,12 +17,15 @@ class AddGoalController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var uploadImageView: UIImageView!
     @IBOutlet weak var finishCreatingButton: UIButton!
+    var firebaseManager = FirebaseManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "💰Add Goals"
         self.finishCreatingButton.layer.cornerRadius = 15
         uploadImageView.isUserInteractionEnabled = true
         uploadImageView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleUpload)))
+        firebaseManager.userDelegate = self
     }
     
     @IBAction func createGoalClicked(_ sender: UIButton) {
@@ -44,6 +47,7 @@ class AddGoalController: UIViewController {
                 db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
                     CONST.FSTORE.goals : FieldValue.arrayUnion([docData])
                     ])
+                firebaseManager.getUser()
 //                    uploadTextView.isHidden = false
 //                    uploadTextView.text = "Successfully uploaded goal"
                 let alert = UIAlertController(title: "Uploaded", message: "Successfully uploaded goal", preferredStyle: .alert)
@@ -176,4 +180,16 @@ extension AddGoalController: UIImagePickerControllerDelegate, UINavigationContro
         }
 
     }
+}
+
+extension AddGoalController : FirebaseUserDelegate{
+    func didFinishGettingUser(user: User) {
+        print("updated user after saving new goal")
+    }
+    
+    func didFailToGetUser() {
+        //
+    }
+    
+    
 }

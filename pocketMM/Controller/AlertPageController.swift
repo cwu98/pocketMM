@@ -16,7 +16,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet var table: UITableView!
     var reminders = [reminder]()
     var notificationGranted = false
-    
+    var firebaseManager = FirebaseManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,8 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
             else{
                     reminders = loadReminders()
                 }
-                
+              
+        firebaseManager.userDelegate = self
         table.delegate = self
         table.dataSource = self
         
@@ -217,7 +218,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
         db.collection(CONST.FSTORE.usersCollection).document(email!).updateData([
                   CONST.FSTORE.reminders : FieldValue.arrayUnion([docData])
               ])
-          
+        firebaseManager.getUser()
       
     }
     
@@ -264,6 +265,18 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
 
 
   
+}
+
+extension AlertPageController : FirebaseUserDelegate{
+    func didFinishGettingUser(user: User) {
+        print("updated user after saving new reminder")
+    }
+    
+    func didFailToGetUser() {
+        //
+    }
+    
+    
 }
     
     
