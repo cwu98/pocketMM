@@ -112,17 +112,17 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let reminder = reminders[indexPath.row]
         cell.textLabel?.text = reminder.title
-        print("\(reminder.title)", " ", "\(reminder.date)")
-        let date = self.convertToDate(date: reminder.date)
+        print("\(reminder.title)", " ", "\(reminder.due_date)")
+        let date = self.convertToDate(date: reminder.due_date)
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, YYYY"
         cell.detailTextLabel?.text = "Due: " + formatter.string(from: date!)
         
         //make due date red if overdue
-        if NSDate().earlierDate(self.convertToDate(date: reminder.date)!) == self.convertToDate(date: reminder.date) {
+        if NSDate().earlierDate(self.convertToDate(date: reminder.due_date)!) == self.convertToDate(date: reminder.due_date) {
             cell.detailTextLabel?.textColor = UIColor.red
         }
-        else if NSDate() as Date == self.convertToDate(date: reminder.date) {
+        else if NSDate() as Date == self.convertToDate(date: reminder.due_date) {
             cell.detailTextLabel?.textColor = UIColor.red
         }
         else{
@@ -144,7 +144,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
         addVC.completion = {title, date, frequency, alert in
             DispatchQueue.main.async {
                 self.navigationController?.popToViewController(self, animated: true)
-                let newReminder = reminder(title: title, date: "\(date)", frequency: frequency, identifier: "id_\(title)")
+                let newReminder = reminder(title: title, due_date: "\(date)", frequency: frequency, identifier: "id_\(title)")
                 print("new reminder created")
                 self.reminders.append(newReminder)
                 self.table.reloadData()
@@ -211,7 +211,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
                   CONST.FSTORE.reminder_title : title,
                   CONST.FSTORE.reminder_due_date : due_date,
                   CONST.FSTORE.reminder_frequency : frequency,
-            CONST.FSTORE.reminder_identifier : identifier
+                  CONST.FSTORE.reminder_identifier : identifier
         ]
 
         db.collection(CONST.FSTORE.usersCollection).document(email!).updateData([
