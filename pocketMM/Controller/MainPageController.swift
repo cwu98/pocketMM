@@ -11,9 +11,6 @@ import Firebase
 
 class MainPageController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-  
-    
-    
     var accountNames: [String] = []
     var balances: [Double] = []
     var balanceAccounts : [AccountData] = []
@@ -43,11 +40,6 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-//        let formatted = String(format: "$%.02f", balances[indexPath.row])
-//        cell.textLabel?.text = accountNames[indexPath.row] + ":      " + formatted
-//        if let email = Auth.auth().currentUser?.email {
-//            cell.textLabel!.text  = email + ":      " + "\(balance)"
-//        }
         let formatted = String(format: "$%.02f", balanceAccounts[indexPath.row].balances.current)
         cell.textLabel!.text  = balanceAccounts[indexPath.row].official_name + ":      " + "\(formatted)"
         return cell
@@ -76,8 +68,8 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
        print("in main page controller")
         navigationItem.hidesBackButton = true
 
-        
         print("loading transactions")
+
     }
 
     

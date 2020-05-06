@@ -115,9 +115,9 @@ struct FirebaseManager {
                         let data = try JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
 
                         let decodedData = try decoder.decode(Reminders.self, from: data)
-                        
+                        print("reminders ", decodedData)
                         for reminder in decodedData.reminders {
-                            allReminders.append(reminder)
+                            
                         }
                         print("all reminders ", allReminders)
                     }
