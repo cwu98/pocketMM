@@ -166,6 +166,7 @@ struct reminder : Decodable{
     }
    
 }
+
 struct Limit : Decodable {
     let entertainment : Double
     let groceries : Double

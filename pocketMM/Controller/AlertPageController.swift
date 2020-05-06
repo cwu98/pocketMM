@@ -15,7 +15,6 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet var table: UITableView!
     var reminders = [reminder]()
-    var user : User?
     var notificationGranted = false
     
     
@@ -29,28 +28,23 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
                     print("granted, but error in notif permissions:\(error.localizedDescription)")
                 }
         }
-    
-        
+     
+        if let currentUser = user{
+                reminders = currentUser.reminders
+            }
+            else{
+                    reminders = loadReminders()
+                }
+                
         table.delegate = self
         table.dataSource = self
- 
         
-        //load reminders from firebase
-        if let currentUser = user{
-             reminders = currentUser.reminders
-         }
-         else{
-            self.loadReminders()
-        }
+        
         table.reloadData()
  
          
     }
-    
-    
-  
-
-        func loadReminders(){
+        func loadReminders() -> [reminder]{
 
             if let email = Auth.auth().currentUser?.email{
                                 db.collection(CONST.FSTORE.usersCollection).document(email).getDocument{
@@ -80,25 +74,27 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
 
             }
+            return allReminders
         }
+ 
         
     
     
         
 
      /* !!TO FIX !! */
-        func convertToDate(date: String)-> Date  {
-            let isoDate = date
-            print("date: \(isoDate)")
-
+        func convertToDate(date: String)-> Date? {
+            let strDate = date
+            
              let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            dateFormatter.calendar = Calendar(identifier: .gregorian)
-            let xdate = dateFormatter.date(from: isoDate)
+            dateFormatter.timeZone = TimeZone.current
+            dateFormatter.dateFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ssZZZ"
+            let xdate = dateFormatter.date(from: strDate)
             print("xdate: \(xdate)")
 
              return xdate!
         }
+    
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(true)
@@ -116,13 +112,14 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let reminder = reminders[indexPath.row]
         cell.textLabel?.text = reminder.title
+        print("\(reminder.title)", " ", "\(reminder.date)")
         let date = self.convertToDate(date: reminder.date)
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, YYYY"
-        cell.detailTextLabel?.text = "Due: " + formatter.string(from: date)
+        cell.detailTextLabel?.text = "Due: " + formatter.string(from: date!)
         
         //make due date red if overdue
-        if NSDate().earlierDate(self.convertToDate(date: reminder.date)) == self.convertToDate(date: reminder.date) {
+        if NSDate().earlierDate(self.convertToDate(date: reminder.date)!) == self.convertToDate(date: reminder.date) {
             cell.detailTextLabel?.textColor = UIColor.red
         }
         else if NSDate() as Date == self.convertToDate(date: reminder.date) {
@@ -164,17 +161,26 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 var dateComponents = DateComponents()
                 
+                var repeats = false
                 if frequency == "every month" {
                     dateComponents.day = calendar.component(.day, from: targetDate)
+                    repeats = true
                 }
                 else if frequency == "every year" {
                     dateComponents.month = calendar.component(.month, from: targetDate)
+                    repeats = true
                 }
                 else if frequency == "every week" {
                     dateComponents.weekday = calendar.component(.weekday, from: targetDate)
+                    repeats = true
+                }
+                else if frequency == "never" {
+                    dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate)
+                    repeats = false
                 }
                 
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true )
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: repeats )
+                
                 let request = UNNotificationRequest(identifier: "id_\(title)", content: content, trigger: trigger)
                 
                 UNUserNotificationCenter.current().add(request) { (error) in
@@ -183,8 +189,8 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                 }
                 let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                self.saveReminders(title: title, dueDate: formatter.string(from: date), frequency: frequency)
+                formatter.dateFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ssZZZ"
+                self.saveReminders(title: title, dueDate: formatter.string(from: date), frequency: frequency, identifier: "id_\(title)")
                 print("notification added: \(request.identifier)")
                     
                 }
@@ -194,16 +200,18 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     //save reminders to firebase
-    func saveReminders(title: String, dueDate: String, frequency: String) {
+    func saveReminders(title: String, dueDate: String, frequency: String, identifier: String) {
         print("trying to save reminder to firebase")
         let title = title
         let due_date = dueDate
         let frequency = frequency
+        let identifier = identifier
         let email = Auth.auth().currentUser?.email
         let docData : [String: Any] = [
                   CONST.FSTORE.reminder_title : title,
                   CONST.FSTORE.reminder_due_date : due_date,
-                  CONST.FSTORE.reminder_frequency : frequency
+                  CONST.FSTORE.reminder_frequency : frequency,
+            CONST.FSTORE.reminder_identifier : identifier
         ]
 
         db.collection(CONST.FSTORE.usersCollection).document(email!).updateData([
@@ -213,7 +221,19 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
       
     }
     
-    //allow delete
+    func removeFromFirebase(title: String){
+        if let email = Auth.auth().currentUser?.email{
+            db.collection("reminders").document(email).updateData(["id_\(title)": FieldValue.delete(),
+                ]){err in
+                    if let err = err{
+                        print("error deleting document: \(err)")
+                    } else{
+                        print("Document successfully updated")
+                    }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
@@ -223,6 +243,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
             let center = UNUserNotificationCenter.current()
             center.removePendingNotificationRequests(withIdentifiers: [toRemove.identifier])
             tableView.deleteRows(at: [indexPath], with: .fade)
+            removeFromFirebase(title: toRemove.title)
         }
     }
         

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,38 +17,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Qfe-Ir-fre">
-                                <rect key="frame" x="0.0" y="10" width="414" height="27"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchinglogo" translatesAutoresizingMaskIntoConstraints="NO" id="bJr-ie-BuX">
+                                <rect key="frame" x="-49" y="394" width="512" height="496"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchinglogo" translatesAutoresizingMaskIntoConstraints="NO" id="bJr-ie-BuX">
-                                <rect key="frame" x="-49" y="398" width="512" height="492"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="IpH-EC-MIW">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title" translatesAutoresizingMaskIntoConstraints="NO" id="IpH-EC-MIW">
                                 <rect key="frame" x="54.5" y="301" width="305" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Lo1-hA-a59">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Lo1-hA-a59">
                                 <rect key="frame" x="-6" y="863" width="414" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Qfe-Ir-fre">
+                                <rect key="frame" x="0.0" y="44" width="414" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.87058823529999996" green="0.86274509799999999" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="bJr-ie-BuX" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-49" id="5fZ-QK-ZIv"/>
-                            <constraint firstItem="bJr-ie-BuX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="49" id="9oH-Es-3Rl"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Lo1-hA-a59" secondAttribute="trailing" constant="6" id="C62-FC-7ga"/>
-                            <constraint firstItem="Qfe-Ir-fre" firstAttribute="firstBaseline" secondItem="Ze5-6b-2t3" secondAttribute="firstBaseline" constant="10" id="MnK-gr-YSr"/>
-                            <constraint firstItem="IpH-EC-MIW" firstAttribute="baseline" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-80" id="RMz-Do-jcA"/>
-                            <constraint firstItem="bJr-ie-BuX" firstAttribute="top" secondItem="IpH-EC-MIW" secondAttribute="bottom" constant="30" id="Uhk-my-hCF"/>
-                            <constraint firstItem="IpH-EC-MIW" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="VjL-1d-rOC"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="bJr-ie-BuX" secondAttribute="leading" constant="49" id="aOu-vM-d5r"/>
-                            <constraint firstItem="Qfe-Ir-fre" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="fPv-So-bwW"/>
-                            <constraint firstItem="bJr-ie-BuX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="kqa-8Z-GFu"/>
-                            <constraint firstAttribute="trailing" secondItem="bJr-ie-BuX" secondAttribute="trailing" constant="-49" id="l9D-E6-SFx"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="Lo1-hA-a59" secondAttribute="leading" constant="6" id="nbk-nn-1m8"/>
-                            <constraint firstItem="bJr-ie-BuX" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="28" id="vfR-zs-Bof"/>
-                            <constraint firstItem="Lo1-hA-a59" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="28" id="xch-oU-q56"/>
-                            <constraint firstItem="Lo1-hA-a59" firstAttribute="bottom" secondItem="bJr-ie-BuX" secondAttribute="bottom" id="zy5-5j-L97"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -60,5 +48,8 @@
         <image name="cat_frame" width="414" height="27"/>
         <image name="launchinglogo" width="414" height="492"/>
         <image name="title" width="305" height="67"/>
+        <namedColor name="backgroundColor">
+            <color red="1" green="0.97647058823529409" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
