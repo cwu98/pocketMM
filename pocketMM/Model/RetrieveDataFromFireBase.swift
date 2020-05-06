@@ -51,7 +51,7 @@ func getTransactionFromRange(startDate: String, endDate: String)->[Transaction]{
                         print("retrieved transactions")
                         print("transactions ", decodedData)
                         for transaction in decodedData.transactions {
-                            print(allTransactions.count)
+                            print("count: ",allTransactions.count)
                             if let date = dateFormatterGet.date(from: transaction.date){
                                 if(dateInterval.contains(date)) {
                                     allTransactions.append(

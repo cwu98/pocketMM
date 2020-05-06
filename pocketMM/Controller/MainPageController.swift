@@ -11,9 +11,6 @@ import Firebase
 
 class MainPageController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-  
-    
-    
     var accountNames: [String] = []
     var balances: [Double] = []
     @IBOutlet weak var textview: UITextView!
@@ -35,8 +32,8 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         var formatted = String(format: "$%.02f", balances[indexPath.row])
-        cell.textLabel?.text = accountNames[indexPath.row] + ":      " + formatted
-
+        cell.textLabel?.text = accountNames[indexPath.row] + ":"
+        cell.detailTextLabel?.text = formatted
         return cell
     }
     override func viewDidLoad() {
@@ -54,7 +51,6 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
        print("in main page controller")
         navigationItem.hidesBackButton = true
         
-//        loadTransactions()
         let today = Date()
         var startComponent = Calendar.current.dateComponents([.year, .month, .day], from: today)
         startComponent.month = 1
@@ -73,13 +69,16 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
             if let currentUser = user {
                 PlaidAPIManager.refreshTransactions(access_token: currentUser.access_token)
                 plaidAPIManager.getTransaction(accessToken: currentUser.access_token, itemId: currentUser.item_id, startDate: start, endDate: end)
-                getTransactionFromRange(startDate: start, endDate: end)
-                
+                let t = getTransactionFromRange(startDate: start, endDate: end)
+                    for transact in t {
+                               print(transact)
+                           }
             }
            
             
         }
-        print("loading transactions")
+       
+        
     }
 
     

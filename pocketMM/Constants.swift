@@ -37,6 +37,7 @@ struct CONST{
         static let reminder_title = "title"
         static let reminder_due_date = "due_date"
         static let reminder_frequency = "frequency"
+        static let reminder_identifier = "identifier"
         
         static let transactions = "transactions"
         static let item_id = "item_id"
