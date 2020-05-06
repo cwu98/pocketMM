@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class LoginController: UIViewController {
+    var firebaseManager = FirebaseManager()
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -18,6 +19,7 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorTextView.isHidden = true
+//        firebaseManager.userDelegate = self
     }
 
     @IBAction func loginPressed(_ sender: Any) {
@@ -34,8 +36,7 @@ class LoginController: UIViewController {
                 }
                 else{
                     print("logged in")
-//                    self.errorTextView.isHidden = true
-                    getUser()
+                    self.firebaseManager.getUser()
                     self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
                 }
               

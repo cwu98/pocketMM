@@ -21,6 +21,9 @@ class NewSpendingController: UIViewController {
     
     @IBOutlet var activeButton: [UIButton]!
     
+    
+    var firebaseManager = FirebaseManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,13 +46,12 @@ class NewSpendingController: UIViewController {
     }
     */
 
-    @IBAction func ActiveButton(_ sender: UIButton) {
-    activeButton.forEach({ $0.backgroundColor = nil})
-        sender.backgroundColor =  #colorLiteral(red: 0.9839375615, green: 0.8418782353, blue: 0.3591020703, alpha: 1)
 
-    }
     
     @IBAction func categorySelected(_ sender: UIButton) {
+        activeButton.forEach({ $0.backgroundColor = nil})
+        sender.backgroundColor =  #colorLiteral(red: 0.9839375615, green: 0.8418782353, blue: 0.3591020703, alpha: 1)
+        
         if let cat = sender.titleLabel?.text {
            category = cat
         }
@@ -61,7 +63,7 @@ class NewSpendingController: UIViewController {
             let dateFormatterGet = DateFormatter()
             dateFormatterGet.dateFormat = "yyyy-MM-dd"
             let date = dateFormatterGet.string(from: Date())
-            addTransaction(amount: amount, category: [cat] , item_id : currentUser.item_id
+            firebaseManager.addTransaction(amount: amount, category: [cat] , item_id : currentUser.item_id
             , transaction_id : NSUUID().uuidString, date: date)
             
             

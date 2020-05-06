@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,7 +13,7 @@
         <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusableCell" rowHeight="100" id="KGk-i7-Jjw" customClass="goalTableViewCell" customModule="pocketMM" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.90000000000000002" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -137,7 +136,7 @@
                         </subviews>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" name="backgroundGreen"/>
+                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 <constraints>
                     <constraint firstItem="rK3-vc-Hnb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Kcw-Lj-bu7"/>
                     <constraint firstItem="iLC-sN-kFH" firstAttribute="leading" secondItem="rK3-vc-Hnb" secondAttribute="trailing" id="L0T-Do-xCG"/>
@@ -168,8 +167,5 @@
     </objects>
     <resources>
         <image name="upload" width="415" height="421.5"/>
-        <namedColor name="backgroundGreen">
-            <color red="0.80299997329711914" green="0.96200001239776611" blue="0.60600000619888306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
     </resources>
 </document>
