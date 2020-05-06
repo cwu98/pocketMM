@@ -175,7 +175,6 @@ struct FirebaseManager {
                         let data = try JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
 
                         user = try decoder.decode(User.self, from: data)
-                        self.userDelegate?.didFinishGettingUser(user : user!)
 //                        PlaidAPIManager.getBalance(access_token: user!.access_token)
     //                    print(user!.transactions, balance, user!.limit, user!.reminders, user!.goals)
                         print("got user")
@@ -189,9 +188,9 @@ struct FirebaseManager {
                 }
             }
         }
-        else{
-            self.userDelegate?.didFailToGetUser()
-        }
+//        else{
+//            self.userDelegate?.didFailToGetUser()
+//        }
         
     }
     //get access to item_id via user

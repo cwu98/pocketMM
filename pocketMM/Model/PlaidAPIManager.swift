@@ -183,9 +183,9 @@ struct PlaidAPIManager{
                 self.transactionDelegate?.didFailToGetTransactions()
             }
         }
-        else{
-            self.transactionDelegate?.didFailToGetTransactions()
-        }
+//        else{
+//            self.transactionDelegate?.didFailToGetTransactions()
+//        }
        
     }
     func parseJsonItem(_ data : Data) -> ItemData? {
@@ -282,9 +282,9 @@ struct PlaidAPIManager{
                  self.balanceDelegate?.didFailToGetBalance()
             }
         }
-        else{
-             self.balanceDelegate?.didFailToGetBalance()
-        }
+//        else{
+//             self.balanceDelegate?.didFailToGetBalance()
+//        }
         
     }
     static func parseBalance(data: Data) -> AccountsData?{

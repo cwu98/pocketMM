@@ -94,8 +94,8 @@ extension AddGoalController: UIImagePickerControllerDelegate, UINavigationContro
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary;
-        uploadTextView.isHidden = false
-               uploadTextView.text = "tapped"
+//        uploadTextView.isHidden = false
+//               uploadTextView.text = "tapped"
         print("handling here\n ")
         present(picker, animated: true, completion: nil)
     }
