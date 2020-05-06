@@ -82,7 +82,7 @@ class NewSpendingController: UIViewController {
             
         }
         else{
-            let alert = UIAlertController(title: "Add New Spending", message: "Failed to add spending", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Add New Spending", message: "Failed to add the spending", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
