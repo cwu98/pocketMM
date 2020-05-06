@@ -12,9 +12,32 @@ import Firebase
 
 
 let db = Firestore.firestore()
+
+protocol PlaidTransactionDelegate{
+    func didFinishGettingTransactions(transactions : [Transaction])
+    func didFailToGetTransactions()
+}
+protocol PlaidItemDelegate{
+    func didFinishGettingItem(item_id : String, access_token : String)
+//    func couldnGetTransaction()
+}
+protocol PlaidRefreshTransactionDelegate{
+    func didFinishRedreshingTransactions(transactions : [Transaction])
+//    func couldnGetTransaction()
+}
+protocol PlaidBalanceDelegate{
+    func didFinishGettingBalance(accounts : AccountsData)
+    func didFailToGetBalance()
+}
+
 struct PlaidAPIManager{
     static let hostURL : String = "https://sandbox.plaid.com"
 //    lazy var itemData : ItemData? = nil
+    var transactionDelegate : PlaidTransactionDelegate?
+    var itemDelegate : PlaidItemDelegate?
+    var refreshTransactionDelegate : PlaidRefreshTransactionDelegate?
+    var balanceDelegate : PlaidBalanceDelegate?
+    
     func generateItemURL() -> String {
         let config = [
             "client_id": PLAID_CLIENT_ID,
@@ -54,12 +77,11 @@ struct PlaidAPIManager{
     }
 
     
-    func getItem(publicToken : String) -> ItemData? {
+    func getItem(publicToken : String) {
     
 //        let itemUrl = generateItemURL()
 //        if let url = URL(string: itemUrl){
         
-        var itemData : ItemData?
         if let url = URL(string: PlaidAPIManager.hostURL + "/item/public_token/exchange"){
             print(url)
             let session = URLSession(configuration: .default)
@@ -99,17 +121,7 @@ struct PlaidAPIManager{
                         }
                         
                         if let item = self.parseJsonItem(safeData){
-//                            print("item is ", item.access_token,  item.item_id)
-//                            Timer.scheduledTimer(withTimeInterval: 5, repeats: true){
-//                                timer in
-//                                let res = self.getTransaction(accessToken: item.access_token, itemId: item.item_id)
-//                                if res {
-//                                    timer.invalidates
-//                                }
-//                            }
-                            itemData = item
-//                            return item
-                            
+                            self.itemDelegate?.didFinishGettingItem(item_id: item.item_id, access_token: item.access_token)
                         }
                     }
                 }
@@ -117,16 +129,14 @@ struct PlaidAPIManager{
                 
             } catch {
                 print("error get item ", error.localizedDescription)
-//                return nil
             }
         }
-        return itemData
+    
     }
     
     func getTransaction(accessToken: String, itemId : String, startDate: String, endDate: String)
-    -> [Transaction]?{
+    {
         print("get transaction " + accessToken + " " + itemId)
-        var transactions : [Transaction]?
         if let url = URL(string: PlaidAPIManager.hostURL + "/transactions/get"){
             
             print(url)
@@ -163,16 +173,20 @@ struct PlaidAPIManager{
                         }
 
                         if let parsedTransactions = self.parseTransactions(safeData, itemId: itemId) {
-                            transactions = parsedTransactions
+                            self.transactionDelegate?.didFinishGettingTransactions(transactions: parsedTransactions)
                         }
                     }
                 }
                 task.resume()
             } catch {
                 print("error get transaction ", error.localizedDescription)
+                self.transactionDelegate?.didFailToGetTransactions()
             }
         }
-        return transactions
+        else{
+            self.transactionDelegate?.didFailToGetTransactions()
+        }
+       
     }
     func parseJsonItem(_ data : Data) -> ItemData? {
             print("parsing Json Item")
@@ -203,19 +217,19 @@ struct PlaidAPIManager{
                                     date: transactionData.date)
                 transactions.append(transaction)
                 
-                let docData : [String: Any] = [
-                    CONST.FSTORE.transaction_id : transaction.transaction_id,
-                    CONST.FSTORE.item_id : transaction.item_id,
-                    CONST.FSTORE.transaction_date : transaction.date,
-                    CONST.FSTORE.transaction_amount : transaction.amount,
-                    CONST.FSTORE.transaction_category : transaction.category,
-                    CONST.FSTORE.transaction_category_id : transaction.category_id
-                    ]
-                if let email = Auth.auth().currentUser?.email{
-                    db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
-                        CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
-                    ])
-                }
+//                let docData : [String: Any] = [
+//                    CONST.FSTORE.transaction_id : transaction.transaction_id,
+//                    CONST.FSTORE.item_id : transaction.item_id,
+//                    CONST.FSTORE.transaction_date : transaction.date,
+//                    CONST.FSTORE.transaction_amount : transaction.amount,
+//                    CONST.FSTORE.transaction_category : transaction.category,
+//                    CONST.FSTORE.transaction_category_id : transaction.category_id
+//                    ]
+//                if let email = Auth.auth().currentUser?.email{
+//                    db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
+//                        CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
+//                    ])
+//                }
                 
 
             }
@@ -227,7 +241,7 @@ struct PlaidAPIManager{
         }
     }
 
-    static func getBalance(access_token : String){
+    func getBalance(access_token : String){
         if let url = URL(string: PlaidAPIManager.hostURL + "/accounts/balance/get"){
             let session = URLSession(configuration: .default)
             var request : URLRequest = URLRequest(url: url)
@@ -249,7 +263,15 @@ struct PlaidAPIManager{
                         return
                     }
                     if let safeData = data {
-                        PlaidAPIManager.parseBalance(data: safeData)
+                        do{
+                            let jsonObject = try JSONSerialization.jsonObject(with: safeData)
+                            print("got balance data from Plaid")
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                        if let parsedAccountData = PlaidAPIManager.parseBalance(data: safeData){
+                            self.balanceDelegate?.didFinishGettingBalance(accounts : parsedAccountData)
+                        }
                     }
                 }
                 task.resume()
@@ -257,26 +279,30 @@ struct PlaidAPIManager{
             } catch {
                 print("error get balance from Plaid ", error.localizedDescription)
     //                return nil
+                 self.balanceDelegate?.didFailToGetBalance()
             }
         }
-        
+        else{
+             self.balanceDelegate?.didFailToGetBalance()
+        }
         
     }
-    static func parseBalance(data: Data){
+    static func parseBalance(data: Data) -> AccountsData?{
        do{
+            print("parsing balance")
             let decoder = JSONDecoder()
             let decodedData = try decoder.decode(AccountsData.self, from: data)
             balance = decodedData.accounts[0].balances.current
              print("balance is ",balance)
+            return decodedData
         }
         catch{
              print("error parsing balance from Plaid ", error.localizedDescription)
+            return nil
         }
-      
-        
         
     }
-    static func refreshTransactions(access_token : String){
+    func refreshTransactions(access_token : String){
         if let url = URL(string: PlaidAPIManager.hostURL + "/transactions/refresh"){
             let session = URLSession(configuration: .default)
             var request : URLRequest = URLRequest(url: url)

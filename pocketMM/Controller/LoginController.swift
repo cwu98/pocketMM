@@ -10,6 +10,9 @@ import UIKit
 import Firebase
 
 class LoginController: UIViewController {
+    var firebaseManager = FirebaseManager()
+    var plaidAPIManager = PlaidAPIManager()
+    var balanceAccounts : AccountsData?
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -18,6 +21,8 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorTextView.isHidden = true
+        firebaseManager.userDelegate = self
+        plaidAPIManager.balanceDelegate = self
     }
 
     @IBAction func loginPressed(_ sender: Any) {
@@ -34,14 +39,54 @@ class LoginController: UIViewController {
                 }
                 else{
                     print("logged in")
-//                    self.errorTextView.isHidden = true
-                    getUser()
-                    self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
+                    self.firebaseManager.getUser()
                 }
               
             }
             
         }
-        
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextScene =  segue.destination as! MainPageController
+
+        if (segue.identifier == CONST.loginSegue){
+            if let balances = balanceAccounts{
+                nextScene.balanceAccounts = balances.accounts
+            }
+            
+        }
+    }
+}
+extension LoginController : FirebaseUserDelegate{
+    func didFailToGetUser() {
+        DispatchQueue.main.async {
+           self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
+        }
+    }
+    
+    func didFinishGettingUser(user: User) {
+//        DispatchQueue.main.async {
+//           self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
+//        }
+        self.plaidAPIManager.getBalance(access_token: user.access_token)
+    }
+    
+}
+extension LoginController: PlaidBalanceDelegate{
+    func didFailToGetBalance() {
+        DispatchQueue.main.async {
+           self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
+        }
+    }
+
+    func didFinishGettingBalance(accounts: AccountsData) {
+        print("did finish getting balance in Log In Controller")
+        balanceAccounts = accounts
+        DispatchQueue.main.async {
+           self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
+        }
+
+    }
+
+
 }

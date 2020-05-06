@@ -40,6 +40,8 @@ extension SettingsController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CONST.settingsCellIdentifer, for: indexPath)
         cell.textLabel?.text = cells[indexPath.row]
+        cell.contentView.backgroundColor = #colorLiteral(red: 0.8920666575, green: 0.9419104457, blue: 0.98284477, alpha: 0.8003264127)
+        cell.contentView.layer.cornerRadius = 10
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

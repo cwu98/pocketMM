@@ -21,6 +21,9 @@ class NewSpendingController: UIViewController {
     
     @IBOutlet var activeButton: [UIButton]!
     
+    
+    var firebaseManager = FirebaseManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,7 +63,7 @@ class NewSpendingController: UIViewController {
             let dateFormatterGet = DateFormatter()
             dateFormatterGet.dateFormat = "yyyy-MM-dd"
             let date = dateFormatterGet.string(from: Date())
-            addTransaction(amount: amount, category: [cat] , item_id : currentUser.item_id
+            firebaseManager.addTransaction(amount: amount, category: [cat] , item_id : currentUser.item_id
             , transaction_id : NSUUID().uuidString, date: date)
             
             
