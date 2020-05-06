@@ -22,7 +22,7 @@ protocol PlaidItemDelegate{
 //    func couldnGetTransaction()
 }
 protocol PlaidRefreshTransactionDelegate{
-    func didFinishRedreshingTransactions(transactions : [Transaction])
+    func didFinishRefreshingTransactions(transactions : [Transaction])
 //    func couldnGetTransaction()
 }
 protocol PlaidBalanceDelegate{
@@ -43,7 +43,8 @@ struct PlaidAPIManager{
             "client_id": PLAID_CLIENT_ID,
             "secret": PLAID_SANDBOX_SECRET,
             "public_token":  PLAID_PUBLIC_KEY,
-            "product": "[auth, transactions]",
+            "product": "auth",
+            "product": "transactions",
             "selectAccount": "true",
             "clientName": "Test App",
             "isMobile": "true",
@@ -55,6 +56,11 @@ struct PlaidAPIManager{
         components.scheme = "https"
         components.host = PlaidAPIManager.hostURL
         components.path = "/item/public_token/exchange"
+//        for (key,value) in config {
+//            output +=  "\(key)=\(value)&"
+//            if(
+//            components.queryItems?.append(URLQueryItem(name: key, value: <#T##String?#>))
+//        }
         components.queryItems = config.map { URLQueryItem(name: $0, value: $1) }
         return components.string!
     }
@@ -175,6 +181,9 @@ struct PlaidAPIManager{
                         if let parsedTransactions = self.parseTransactions(safeData, itemId: itemId) {
                             self.transactionDelegate?.didFinishGettingTransactions(transactions: parsedTransactions)
                         }
+                        else{
+                            self.transactionDelegate?.didFailToGetTransactions()
+                        }
                     }
                 }
                 task.resume()
@@ -183,9 +192,9 @@ struct PlaidAPIManager{
                 self.transactionDelegate?.didFailToGetTransactions()
             }
         }
-//        else{
-//            self.transactionDelegate?.didFailToGetTransactions()
-//        }
+        else{
+            self.transactionDelegate?.didFailToGetTransactions()
+        }
        
     }
     func parseJsonItem(_ data : Data) -> ItemData? {
