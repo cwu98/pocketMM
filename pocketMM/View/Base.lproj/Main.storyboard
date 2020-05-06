@@ -81,10 +81,10 @@
                                         <rect key="frame" x="0.0" y="469" width="414" height="148.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1RQ-TZ-Avt">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="48.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
                                                 <subviews>
                                                     <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQj-gx-tqg">
-                                                        <rect key="frame" x="-100" y="-16.5" width="614" height="82"/>
+                                                        <rect key="frame" x="-100" y="-16" width="614" height="82"/>
                                                         <state key="normal" image="loginBKAcct">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -99,10 +99,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJy-vR-jS5">
-                                                <rect key="frame" x="0.0" y="56.5" width="414" height="51.5"/>
+                                                <rect key="frame" x="0.0" y="57.5" width="414" height="49.5"/>
                                                 <subviews>
                                                     <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lm-2g-aUg">
-                                                        <rect key="frame" x="29" y="-14" width="356" height="80"/>
+                                                        <rect key="frame" x="29" y="-15" width="356" height="80"/>
                                                         <state key="normal" image="createAcct">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -117,10 +117,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zca-Kb-cZU">
-                                                <rect key="frame" x="0.0" y="116" width="414" height="32.5"/>
+                                                <rect key="frame" x="0.0" y="115" width="414" height="33.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Error message" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lnp-LM-mhB">
-                                                        <rect key="frame" x="0.0" y="-10" width="414" height="53"/>
+                                                        <rect key="frame" x="0.0" y="-10" width="414" height="54"/>
                                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

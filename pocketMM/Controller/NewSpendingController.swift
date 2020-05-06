@@ -53,10 +53,7 @@ class NewSpendingController: UIViewController {
     */
 
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-           textField.resignFirstResponder()
-           return true
-       }
+   
     
     @IBAction func categorySelected(_ sender: UIButton) {
         activeButton.forEach({ $0.backgroundColor = nil})
