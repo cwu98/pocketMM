@@ -32,8 +32,15 @@ class NewSpendingController: UIViewController {
        dateFormatterGet.dateFormat = "yyyy/MM/dd"
        let date = dateFormatterGet.string(from: Date())
         datetextview.text = date
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
 
     /*
     // MARK: - Navigation
@@ -46,6 +53,10 @@ class NewSpendingController: UIViewController {
     */
 
 
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+           textField.resignFirstResponder()
+           return true
+       }
     
     @IBAction func categorySelected(_ sender: UIButton) {
         activeButton.forEach({ $0.backgroundColor = nil})
