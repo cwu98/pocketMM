@@ -12,8 +12,8 @@ import Firebase
 
 class NewSpendingController: UIViewController {
 
-    @IBOutlet weak var nameTextField: UITextView!
-    @IBOutlet weak var amountTextField: UITextView!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var amountTextField: UITextField!
     var category : String?
     @IBOutlet weak var datetextview: UITextView!
     
@@ -28,8 +28,9 @@ class NewSpendingController: UIViewController {
 
         self.datetextview.layer.cornerRadius = 25
         self.saveButton.layer.cornerRadius = 15
+        
        let dateFormatterGet = DateFormatter()
-       dateFormatterGet.dateFormat = "yyyy/MM/dd"
+       dateFormatterGet.dateFormat = "yyyy-MM-dd"
        let date = dateFormatterGet.string(from: Date())
         datetextview.text = date
         
@@ -66,11 +67,11 @@ class NewSpendingController: UIViewController {
     }
     
     @IBAction func saveButtonClicked(_ sender: UIButton) {
-        if let _ = nameTextField.text, let amount = Double(amountTextField.text), let cat = category,let currentUser = user {
+        if let _ = nameTextField.text, let amount = amountTextField.text, let cat = category,let currentUser = user {
             let dateFormatterGet = DateFormatter()
             dateFormatterGet.dateFormat = "yyyy-MM-dd"
             let date = dateFormatterGet.string(from: Date())
-            firebaseManager.addTransaction(amount: amount, category: [cat] , item_id : currentUser.item_id
+            firebaseManager.addTransaction(amount: Double(amount) as! Double, category: [cat] , item_id : currentUser.item_id
             , transaction_id : NSUUID().uuidString, date: date)
             
             firebaseManager.getUser()
