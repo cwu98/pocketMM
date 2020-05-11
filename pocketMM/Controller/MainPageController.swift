@@ -44,7 +44,8 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         let formatted = String(format: "$%.02f", balanceAccounts[indexPath.row].balances.current)
-        cell.textLabel!.text  = balanceAccounts[indexPath.row].name + ":      " + "\(formatted)"
+        cell.textLabel!.text  = balanceAccounts[indexPath.row].name + ": "
+        cell.detailTextLabel?.text = formatted
          cell.contentView.backgroundColor = #colorLiteral(red: 0.8920666575, green: 0.9419104457, blue: 0.98284477, alpha: 0.8003264127)
                cell.contentView.layer.cornerRadius = 10
         return cell
@@ -56,10 +57,10 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        dateFormatterGet.dateFormat = "MMM dd, yyyy"
         let date = dateFormatterGet.string(from: Date())
         datetextview.text = date
-        
+        datetextview.isEditable = false
         plaidAPIManager.refreshTransactionDelegate = self
         plaidAPIManager.balanceDelegate = self
         

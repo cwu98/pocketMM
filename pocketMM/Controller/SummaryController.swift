@@ -35,18 +35,16 @@ class SummaryController: UIViewController, UITextFieldDelegate {
     var year: Int = 0
     let arrayOfMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"]
     let categories = ["Entertainment", "Groceries", "Shopping", "Dining", "Utilities", "Rent", "Goals", "Miscellaneous"]
-    
-    //array of transaction data of type Transaction
+    var monthSpending: Double?
+
     var transactionData = [Transaction]()
-    var groupByCategory = [[Transaction]]()
-    //array to hold total spending per category... this is the data for pie chart
-    var totalSpendingByCategory = [Double]()
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("In summary controller")
-        groupByCategory = [ [], [], [], [], [], [], [], []]
-//        plaidAPIManger.transactionDelegate = self
+
+        //        plaidAPIManger.transactionDelegate = self
         firebaseManager.transactionsDelegate = self
         
         if(user == nil){
@@ -54,8 +52,6 @@ class SummaryController: UIViewController, UITextFieldDelegate {
             firebaseManager.getUser()
         }
         
-//        transactionData = user!.transactions
-        //
         monthLabel.delegate = self
         datePicker.onDateSelected = { (month: Int, year: Int) in
             let string = String  (format: "%02d/%d",month, year)
@@ -63,41 +59,22 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         }
         
         
-        //get current month and year
+        //display current month and year
         let date = Date()
+        print("curent date: \(date)")
         let calendar = Calendar.current
         month = calendar.component(.month, from: date)
         year = calendar.component(.year, from: date)
-        
-      
-        monthLabel.text = arrayOfMonths[month]
+        monthLabel.text = arrayOfMonths[month-1]
         yearLabel.text = "\(year)"
- createDatePicker()
+ 
+        createDatePicker()
         transactionData = user?.transactions as! [Transaction]
-print(transactionData)
-        //group based on category into dict [category_id : [...list of TransactionData objects with this category_id ] ]
 
-        for item in transactionData {
-          
-            groupByCategory[item.category_id].append(item)
-            
-        }
-       
-print("trying to print total spending by category")
-
-        for list in groupByCategory {
-            totalSpendingByCategory.append(list.reduce(0) { $0 + $1.amount})
-        }
-        totalSpendingByCategory[0] = 120.50
-        totalSpendingByCategory[5] = 1550.00
-        
-        print("count: ",totalSpendingByCategory.count)
-        print(totalSpendingByCategory)
-
-        updateChardData()
-        
+        displayForSelectedMonth()
         
     }
+    
     func createDatePicker() {
         //toolbar
         let toolbar = UIToolbar()
@@ -115,18 +92,38 @@ print("trying to print total spending by category")
 
         
         
-        self.view.endEditing(true)
         
     }
-  
     
     @objc func donePressed() {
         //format
        
         monthLabel.text = arrayOfMonths[datePicker.month-1]
         yearLabel.text = "\(datePicker.year)"
+        month = datePicker.month
+        year = datePicker.year
+        displayForSelectedMonth()
         
-        updateChardData()
+        monthLabel.endEditing(true)
+    }
+    
+    func getTransactionsByDateRange(startDate: Date, endDate: Date)  -> [Transaction]{
+        var tempArr : [Transaction] = []
+        print(startDate, " ", endDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        for transaction in transactionData {
+            var date = dateFormatter.date(from: transaction.date)
+            if (startDate ... endDate).contains(date!){
+
+                tempArr.append(transaction)
+            }
+        }
+        print("transactions in this date range")
+        for t in tempArr {
+            print(t)
+        }
+        return tempArr
     }
     
     func displayForSelectedMonth(){
@@ -139,33 +136,45 @@ print("trying to print total spending by category")
         comps2.month = 1
         comps2.day = -1
         var endDate = userCalendar.date(byAdding: comps2, to: startDate!)
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "yyyy-MM-dd"
-        let end = dateFormatterGet.string(from: endDate!)
-            
-               
-        let start = dateFormatterGet.string(from: startDate!)
-                print("date range: ", start, " ", end)
-        
+        var groupByCategory = [[Transaction]]()
+         var totalSpendingByCategory = [Double]()
+         var transactionsForMonth = [Transaction]()
+        transactionsForMonth = getTransactionsByDateRange(startDate: startDate!, endDate: endDate!)
+        groupByCategory = [ [], [], [], [], [], [], [], [] ]
+        for item in transactionsForMonth {
+             groupByCategory[item.category_id].append(item)
+         }
 
-
+         for list in groupByCategory {
+             totalSpendingByCategory.append(list.reduce(0) { $0 + $1.amount})
+         }
+         
+         totalSpendingByCategory[0] = 120.50 //dummy entertainment
+         totalSpendingByCategory[5] = 1550.00 //dummy rent
+         
+         print(totalSpendingByCategory)
+        monthSpending = totalSpendingByCategory.reduce(0){$0 + $1}
+        updateChartData(totalSpendingByCategory: totalSpendingByCategory)
     }
-    func updateChardData(){
-  //      displayForSelectedMonth()
+    
+    func updateChartData(totalSpendingByCategory : [Double]){
         pieChart.backgroundColor = .white
         var entries: [PieChartDataEntry] = []
         for i in 0..<totalSpendingByCategory.count {
             let dataEntry = PieChartDataEntry(value: totalSpendingByCategory[i], label: categories[i] )
             entries.append(dataEntry)
         }
-        let chartDataSet = PieChartDataSet(entries: entries, label:"Categories")
+        let chartDataSet = PieChartDataSet(entries: entries, label:"")
         
         let chartData = PieChartData(dataSet: chartDataSet)
-        //assign colors??
-        //let colors = [UIColor , UIColor, ...]
-        //chartDataSet.colors = colors as! [NSUIColor]
        
+        let formatter = NumberFormatter()
+        formatter.usesGroupingSeparator = true
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+        formatter.zeroSymbol = ""
         
+        chartData.setValueFormatter((DefaultValueFormatter(formatter: formatter)))
         let color1 = NSUIColor(hex: 0xC39BD3) //purple
         let color2 = NSUIColor(hex: 0xAED6F1) //blue
         let color3 = NSUIColor(hex: 0x76D7C4) //green
@@ -180,7 +189,7 @@ print("trying to print total spending by category")
 
         
         chartDataSet.drawIconsEnabled = false
-        chartDataSet.sliceSpace = 1
+        chartDataSet.sliceSpace = 3
         pieChart.data = chartData
         pieChart.chartDescription?.text = arrayOfMonths[month-1] //month to display
         pieChart.drawHoleEnabled = true
@@ -189,12 +198,23 @@ print("trying to print total spending by category")
         pieChart.legend.enabled = true
         pieChart.rotationEnabled = false
         pieChart.drawEntryLabelsEnabled = false
-        
+        chartDataSet.valueTextColor = .blue
+        pieChart.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
+        chartDataSet.valueLineColor = .gray
+       chartDataSet.valueLinePart1OffsetPercentage = 0.6
+    chartDataSet.valueLinePart1Length = 0.6
+              chartDataSet.valueLinePart2Length = 0.5
+               chartDataSet.yValuePosition = .outsideSlice
         let l = pieChart.legend
         l.horizontalAlignment = .center
         l.verticalAlignment = .bottom
         l.xEntrySpace = 0
         l.yEntrySpace = 8
+        let nf = NumberFormatter()
+        nf.usesGroupingSeparator = true
+        nf.currencySymbol = "$"
+        nf.numberStyle = .currency
+        pieChart.centerText = "Total: " + nf.string(from: NSNumber(value: monthSpending!))!
     }
 
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
@@ -208,6 +228,7 @@ print("trying to print total spending by category")
     }
     
 }
+
 extension SummaryController : FirebaseTransactionDelegate{
     func didFailToGetTransactions() {
         //

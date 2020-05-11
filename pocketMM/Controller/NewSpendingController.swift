@@ -30,9 +30,10 @@ class NewSpendingController: UIViewController {
         self.saveButton.layer.cornerRadius = 15
         
        let dateFormatterGet = DateFormatter()
-       dateFormatterGet.dateFormat = "yyyy-MM-dd"
+       dateFormatterGet.dateFormat = "MMM dd, yyyy"
        let date = dateFormatterGet.string(from: Date())
         datetextview.text = date
+        datetextview.isEditable = false
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
