@@ -176,12 +176,12 @@
 				E06E731324557CF500797988 /* SummaryController.swift */,
 				E06E731724557DDA00797988 /* SettingsController.swift */,
 				E06E730F245576E900797988 /* GoalPageController.swift */,
-				E06E731124557CA400797988 /* AddGoalController.swift */,
 				E0E0D4E4245C063E00852284 /* SetBillReminderController.swift */,
 				E7DCB1DC245F8BB700EA08CC /* AddReminderViewController.swift */,
 				E7DCB1DD245F8BB800EA08CC /* AlertPageController.swift */,
 				E0E0D4E6245C068300852284 /* SetLimitController.swift */,
 				4A7541A3245F90C500A1FB31 /* NewSpendingController.swift */,
+				E06E731124557CA400797988 /* AddGoalController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
