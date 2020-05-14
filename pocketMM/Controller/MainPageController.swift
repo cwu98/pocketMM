@@ -63,13 +63,14 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
         datetextview.isEditable = false
         plaidAPIManager.refreshTransactionDelegate = self
         plaidAPIManager.balanceDelegate = self
+        plaidAPIManager.transactionDelegate = self
         
         if let currentUser = user {
             print("had user and about to refresh transactions")
             plaidAPIManager.refreshTransactions(access_token: currentUser.access_token)
 //            plaidAPIManager.getBalance(access_token: currentUser.access_token)
         }
-        plaidAPIManager.transactionDelegate = self
+        
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -136,17 +137,13 @@ extension MainPageController : PlaidRefreshTransactionDelegate{
         dateFormatterGet.dateFormat = "yyyy-MM-dd"
         let end = dateFormatterGet.string(from: today)
         print(end)
-        DispatchQueue.main.async {
-            self.datetextview.text = end
-        }
         
          if let startDate = Calendar.current.date(from: startComponent){
            
             let start = dateFormatterGet.string(from: startDate)
             print("date", start, end)
-            let plaidAPIManager : PlaidAPIManager = PlaidAPIManager()
             if let currentUser = user {
-                plaidAPIManager.getTransaction(accessToken: currentUser.access_token, itemId: currentUser.item_id, startDate: start, endDate: end)
+                self.plaidAPIManager.getTransaction(accessToken: currentUser.access_token, itemId: currentUser.item_id, startDate: start, endDate: end)
 //                    getTransactionFromRange(startDate: start, endDate: end)
             }
            
@@ -158,10 +155,12 @@ extension MainPageController : PlaidRefreshTransactionDelegate{
 }
 extension MainPageController : PlaidTransactionDelegate{
     func didFinishGettingTransactions(transactions: [Transaction]) {
+        print("didFinishGettingTransactions", transactions.count)
         for transaction in transactions {
             firebaseManager.addTransaction(amount: transaction.amount, category: transaction.category, item_id : transaction.item_id
                 , transaction_id : transaction.transaction_id, date: transaction.date)
         }
+        self.firebaseManager.getUser()
         print("didFinishGettingTransactions")
     }
     

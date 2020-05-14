@@ -179,6 +179,7 @@ struct PlaidAPIManager{
                         }
 
                         if let parsedTransactions = self.parseTransactions(safeData, itemId: itemId) {
+                            print("got parsedTransacctions from getTransactions PlaidAPIManager", parsedTransactions.count)
                             self.transactionDelegate?.didFinishGettingTransactions(transactions: parsedTransactions)
                         }
                         else{
@@ -228,6 +229,7 @@ struct PlaidAPIManager{
                 
 
             }
+            print("parsed transactions", transactions.count)
             return transactions
         }
         catch{
