@@ -12,7 +12,6 @@ import Firebase
 
 
 let db = Firestore.firestore()
-let firebaseManager = FirebaseManager()
 
 protocol PlaidTransactionDelegate{
     func didFinishGettingTransactions(transactions : [Transaction])
@@ -226,8 +225,6 @@ struct PlaidAPIManager{
                                     transaction_id: transactionData.transaction_id,
                                     date: transactionData.date)
                 transactions.append(transaction)
-                
-                firebaseManager.addTransaction(amount: transactionData.amount, category: transactionData.category, item_id: itemId, transaction_id: transactionData.transaction_id, date: transactionData.date)
                 
 
             }
