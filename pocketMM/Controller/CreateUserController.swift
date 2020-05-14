@@ -61,6 +61,7 @@ class CreateUserController: UIViewController {
                  let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                  alert.addAction(okAction)
                  self.present(alert, animated: true, completion: nil)
+                    return
                 }
                 else{
                     self.errorTextView.isHidden = true
@@ -77,6 +78,7 @@ class CreateUserController: UIViewController {
                     self.db!.collection(CONST.FSTORE.usersCollection).document(email).setData(docData) { err in
                             if let err = err {
                                 print("Error writing document: \(err)")
+                                return
                             } else {
                                 print("Document user successfully written!")
                             }
