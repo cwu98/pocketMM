@@ -116,6 +116,10 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         print(startDate, " ", endDate)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let transactionData = user?.transactions else{
+            return []
+        }
+        self.transactionData = transactionData
         for transaction in transactionData {
             var date = dateFormatter.date(from: transaction.date)
             if (startDate ... endDate).contains(date!){
