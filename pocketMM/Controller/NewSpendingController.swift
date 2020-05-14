@@ -68,11 +68,12 @@ class NewSpendingController: UIViewController {
     }
     
     @IBAction func saveButtonClicked(_ sender: UIButton) {
-        if let _ = nameTextField.text, let amount = amountTextField.text, let cat = category,let currentUser = user {
+        if let _ = nameTextField.text, let amount = Double (amountTextField.text!), let cat = category,let currentUser = user {
             let dateFormatterGet = DateFormatter()
             dateFormatterGet.dateFormat = "yyyy-MM-dd"
             let date = dateFormatterGet.string(from: Date())
-            firebaseManager.addTransaction(amount: Double(amount) as! Double, category: [cat] , item_id : currentUser.item_id
+            
+            firebaseManager.addTransaction(amount: Double (amount) , category: [cat] , item_id : currentUser.item_id
             , transaction_id : NSUUID().uuidString, date: date)
             
             firebaseManager.getUser()
