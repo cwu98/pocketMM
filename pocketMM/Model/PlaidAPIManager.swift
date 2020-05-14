@@ -12,6 +12,7 @@ import Firebase
 
 
 let db = Firestore.firestore()
+let firebaseManager = FirebaseManager()
 
 protocol PlaidTransactionDelegate{
     func didFinishGettingTransactions(transactions : [Transaction])
@@ -22,7 +23,7 @@ protocol PlaidItemDelegate{
 //    func couldnGetTransaction()
 }
 protocol PlaidRefreshTransactionDelegate{
-    func didFinishRefreshingTransactions(transactions : [Transaction])
+    func didFinishRefreshingTransactions()
 //    func couldnGetTransaction()
 }
 protocol PlaidBalanceDelegate{
@@ -226,19 +227,7 @@ struct PlaidAPIManager{
                                     date: transactionData.date)
                 transactions.append(transaction)
                 
-//                let docData : [String: Any] = [
-//                    CONST.FSTORE.transaction_id : transaction.transaction_id,
-//                    CONST.FSTORE.item_id : transaction.item_id,
-//                    CONST.FSTORE.transaction_date : transaction.date,
-//                    CONST.FSTORE.transaction_amount : transaction.amount,
-//                    CONST.FSTORE.transaction_category : transaction.category,
-//                    CONST.FSTORE.transaction_category_id : transaction.category_id
-//                    ]
-//                if let email = Auth.auth().currentUser?.email{
-//                    db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
-//                        CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
-//                    ])
-//                }
+                firebaseManager.addTransaction(amount: transactionData.amount, category: transactionData.category, item_id: itemId, transaction_id: transactionData.transaction_id, date: transactionData.date)
                 
 
             }
@@ -332,8 +321,9 @@ struct PlaidAPIManager{
                         print(error!)
                         return
                     }
-                    
+                    self.refreshTransactionDelegate?.didFinishRefreshingTransactions()
                 }
+                
                 task.resume()
                 
             } catch {

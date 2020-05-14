@@ -65,6 +65,7 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
         plaidAPIManager.balanceDelegate = self
         
         if let currentUser = user {
+            print("had user and about to refresh transactions")
             plaidAPIManager.refreshTransactions(access_token: currentUser.access_token)
 //            plaidAPIManager.getBalance(access_token: currentUser.access_token)
         }
@@ -80,7 +81,6 @@ class MainPageController: UIViewController, UITableViewDelegate, UITableViewData
        print("in main page controller")
         navigationItem.hidesBackButton = true
 
-        print("loading transactions")
         
         
         refresher = UIRefreshControl()
@@ -124,8 +124,10 @@ extension MainPageController{
     
 }
 extension MainPageController : PlaidRefreshTransactionDelegate{
-    func didFinishRefreshingTransactions(transactions: [Transaction]) {
+    
+    func didFinishRefreshingTransactions() {
         
+        print("didFinishRefreshingTransactions")
         let today = Date()
         var startComponent = Calendar.current.dateComponents([.year, .month, .day], from: today)
         startComponent.month = 1
@@ -134,7 +136,10 @@ extension MainPageController : PlaidRefreshTransactionDelegate{
         dateFormatterGet.dateFormat = "yyyy-MM-dd"
         let end = dateFormatterGet.string(from: today)
         print(end)
-        datetextview.text = end
+        DispatchQueue.main.async {
+            self.datetextview.text = end
+        }
+        
          if let startDate = Calendar.current.date(from: startComponent){
            
             let start = dateFormatterGet.string(from: startDate)
@@ -157,7 +162,7 @@ extension MainPageController : PlaidTransactionDelegate{
             firebaseManager.addTransaction(amount: transaction.amount, category: transaction.category, item_id : transaction.item_id
                 , transaction_id : transaction.transaction_id, date: transaction.date)
         }
-        
+        print("didFinishGettingTransactions")
     }
     
     func didFailToGetTransactions() {

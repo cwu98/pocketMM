@@ -69,7 +69,11 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         yearLabel.text = "\(year)"
  
         createDatePicker()
-        transactionData = user?.transactions as! [Transaction]
+        guard let transactionData = user?.transactions else{
+            return
+        }
+        self.transactionData = transactionData
+//        transactionData = user?.transactions as! [Transaction]
 
         displayForSelectedMonth()
         
