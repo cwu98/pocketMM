@@ -18,7 +18,7 @@ class SettingsController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
 //        tableView.delaysContentTouches = false
-        tableView.isUserInteractionEnabled = true
+//        tableView.isUserInteractionEnabled = true
     }
 
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {

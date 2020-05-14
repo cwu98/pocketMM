@@ -56,6 +56,14 @@ class CreateUserController: UIViewController {
         self.createAccountPressed = true
         if let email = emailTextField.text, let password = passwordTextField.text{
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                if(email.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
+                    
+                    let alert = UIAlertController(title: "Create Account", message: "Please provide an email", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                                   alert.addAction(okAction)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
                 if let e = error{
                  let alert = UIAlertController(title: "Create Account", message: e.localizedDescription, preferredStyle: .alert)
                  let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
