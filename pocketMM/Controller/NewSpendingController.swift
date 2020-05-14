@@ -68,12 +68,24 @@ class NewSpendingController: UIViewController {
     }
     
     @IBAction func saveButtonClicked(_ sender: UIButton) {
-        if let _ = nameTextField.text, let amount = Double (amountTextField.text!), let cat = category,let currentUser = user {
+        if let _ = nameTextField.text, let amountStr = amountTextField.text, let cat = category,let currentUser = user {
+            
+            let decimalCharacters = CharacterSet.letters
+
+            let decimalRange = amountStr.rangeOfCharacter(from: decimalCharacters)
+
+            if decimalRange != nil{
+                let alert = UIAlertController(title: "Add New Spending", message: "Amount must be a number", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okAction)
+                present(alert, animated: true, completion: nil)
+                return
+            }
             let dateFormatterGet = DateFormatter()
             dateFormatterGet.dateFormat = "yyyy-MM-dd"
             let date = dateFormatterGet.string(from: Date())
             
-            firebaseManager.addTransaction(amount: Double (amount) , category: [cat] , item_id : currentUser.item_id
+            firebaseManager.addTransaction(amount: Double (amountStr)! , category: [cat] , item_id : currentUser.item_id
             , transaction_id : NSUUID().uuidString, date: date)
             
             firebaseManager.getUser()

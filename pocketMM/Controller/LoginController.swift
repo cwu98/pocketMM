@@ -30,8 +30,8 @@ class LoginController: UIViewController {
             Auth.auth().signIn(withEmail: email, password: password) {
                 authResult, error in
                 if let e = error{
-//                    self.errorTextView.isHidden = false
-//                    self.errorTextView.text = e.localizedDescription
+        //                    self.errorTextView.isHidden = false
+        //                    self.errorTextView.text = e.localizedDescription
                     let alert = UIAlertController(title: "Login", message: e.localizedDescription, preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alert.addAction(okAction)

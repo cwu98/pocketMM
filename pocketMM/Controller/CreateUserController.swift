@@ -96,7 +96,28 @@ class CreateUserController: UIViewController {
                                 print("Document user successfully written!")
                             }
                     }
+                    
                     print("createAccountPressed", self.finishedGettingTransaction)
+                    
+                    //Log in
+                    Auth.auth().signIn(withEmail: email, password: password) {
+                        authResult, error in
+                        if let e = error{
+                //                    self.errorTextView.isHidden = false
+                //                    self.errorTextView.text = e.localizedDescription
+                            let alert = UIAlertController(title: "Login", message: e.localizedDescription, preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        else{
+                            print("logged in")
+                            self.firebaseManager.getUser()
+                        }
+                      
+                    }
+                    
+                    
                     if(self.finishedGettingTransaction){
                         DispatchQueue.main.async {
                             print("linking from create user button" )

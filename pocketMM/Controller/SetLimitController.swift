@@ -52,8 +52,20 @@ class SetLimitController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
                 return
             }
+//            let decimalCharacters = CharacterSet.decimalDigits
+            let decimalCharacters = CharacterSet.letters
+
+            let decimalRange = limitPerMonth.rangeOfCharacter(from: decimalCharacters)
+
+            if decimalRange != nil{
+                let alert = UIAlertController(title: "Set Limit", message: "Limit must be a number", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okAction)
+                present(alert, animated: true, completion: nil)
+                return
+            }
             db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
-                "\(CONST.FSTORE.limit).\(category)" : Double(limitPerMonth)
+                "\(CONST.FSTORE.limit).\(category)" : Double(limitPerMonth)!
             ])
             firebaseManager.getUser()
             let alert = UIAlertController(title: "Set Limit", message: "Successfully to set limit of \(limitTextField.text!) for category \(categoryTextField.text!)", preferredStyle: .alert)
