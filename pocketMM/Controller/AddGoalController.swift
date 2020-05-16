@@ -29,19 +29,38 @@ class AddGoalController: UIViewController {
     }
     
     @IBAction func createGoalClicked(_ sender: UIButton) {
-        let name = nameTextField.text
-        let amountStr = amountTextField.text
+        
+       
         //String(data: image, encoding: .utf8)
         
-        if let image = imageUrl,  let amount = amountStr {
+        if let image = imageUrl,  let amountStr = amountTextField.text, let name = nameTextField.text {
 //            print(String(data: image, encoding: .utf8), image.base64EncodedString () )
             //let imageData = Data (base64Encoded: imageString)!
 //            let image = NSImage (data: imageData)!
-            
+            if(name.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+                amountStr.trimmingCharacters(in: .whitespacesAndNewlines) == "" ){
+                
+                let alert = UIAlertController(title: "Add Goal", message: "All fields must be filled", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                               alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            let decimalCharacters = CharacterSet.letters
+
+            let decimalRange = amountStr.rangeOfCharacter(from: decimalCharacters)
+
+            if decimalRange != nil{
+                let alert = UIAlertController(title: "Add Goal", message: "Amount must be a number", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okAction)
+                present(alert, animated: true, completion: nil)
+                return
+            }
             if let email = Auth.auth().currentUser?.email {
                 let docData : [String: Any] = [
                         CONST.FSTORE.goal_name : name,
-                        CONST.FSTORE.goal_amount : Double(amount),
+                        CONST.FSTORE.goal_amount : Double(amountStr)!,
                         CONST.FSTORE.goal_image : image
                     ]
                 db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
@@ -56,8 +75,9 @@ class AddGoalController: UIViewController {
                 present(alert, animated: true, completion: nil)
                 
             }
+        }
         else{
-            let alert = UIAlertController(title: "Uploading", message: "Something's gone wrong. Please try again!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Uploading", message: "Hmm we're looking for an image", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
@@ -65,7 +85,7 @@ class AddGoalController: UIViewController {
         }
             
         
-    }
+    
     }
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
         let firebaseAuth = Auth.auth()
@@ -171,10 +191,13 @@ extension AddGoalController: UIImagePickerControllerDelegate, UINavigationContro
                 let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
                   / Double(snapshot.progress!.totalUnitCount)
                   print("progress: ", percentComplete)
+                self.uploadTextView.isHidden = false
+                self.uploadTextView.text = "progress: \(percentComplete)"
             }
 
           uploadTask.observe(.success) { snapshot in
             // Upload completed successfully
+            self.uploadTextView.isHidden = true
               print("uploaded successfully")
           }
         }

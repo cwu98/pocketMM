@@ -32,6 +32,7 @@ class CreateUserController: UIViewController {
     var timer : Timer = Timer()
     var createAccountPressed = false
     var finishedGettingTransaction = false
+    var accountLinked = false
     override func viewDidLoad() {
         super.viewDidLoad()
         errorTextView.isHidden = true
@@ -56,11 +57,24 @@ class CreateUserController: UIViewController {
         self.createAccountPressed = true
         if let email = emailTextField.text, let password = passwordTextField.text{
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+               
+                if(email.trimmingCharacters(in: .whitespacesAndNewlines) == "" || !self.accountLinked){
+                    var message = "Please provide an email"
+                    if(!self.accountLinked){
+                        message = "Please wait for us to link your bank account"
+                    }
+                    let alert = UIAlertController(title: "Create Account", message: message, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                                   alert.addAction(okAction)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
                 if let e = error{
                  let alert = UIAlertController(title: "Create Account", message: e.localizedDescription, preferredStyle: .alert)
                  let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                  alert.addAction(okAction)
                  self.present(alert, animated: true, completion: nil)
+                    return
                 }
                 else{
                     self.errorTextView.isHidden = true
@@ -77,13 +91,36 @@ class CreateUserController: UIViewController {
                     self.db!.collection(CONST.FSTORE.usersCollection).document(email).setData(docData) { err in
                             if let err = err {
                                 print("Error writing document: \(err)")
+                                return
                             } else {
                                 print("Document user successfully written!")
                             }
                     }
+                    
                     print("createAccountPressed", self.finishedGettingTransaction)
+                    
+                    //Log in
+                    Auth.auth().signIn(withEmail: email, password: password) {
+                        authResult, error in
+                        if let e = error{
+                //                    self.errorTextView.isHidden = false
+                //                    self.errorTextView.text = e.localizedDescription
+                            let alert = UIAlertController(title: "Login", message: e.localizedDescription, preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        else{
+                            print("logged in")
+                            self.firebaseManager.getUser()
+                        }
+                      
+                    }
+                    
+                    
                     if(self.finishedGettingTransaction){
                         DispatchQueue.main.async {
+                            print("linking from create user button" )
                            self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
                         }
                     }
@@ -111,9 +148,20 @@ extension CreateUserController : PLKPlaidLinkViewDelegate, WKNavigationDelegate 
     
     
     func handleSuccessWithToken(_ publicToken: String, metadata: [String : Any]?) {
+       
+        DispatchQueue.main.async {
+           self.errorTextView.isHidden = true
+            self.errorTextView.text = "Give us a few seconds to link to your bank account"
+        }
+        
         plaidAPIManager.getItem(publicToken: publicToken)
     }
     func handleError(_ error: Error, metadata: [String : Any]?) {
+         DispatchQueue.main.async {
+            self.errorTextView.isHidden = true
+             self.errorTextView.text = "Can't link to your bank account. Please try again!"
+         }
+       
         let alert = UIAlertController(title: "Linking to Plaid Account", message: error.localizedDescription, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
@@ -145,6 +193,16 @@ extension CreateUserController : PLKPlaidLinkViewDelegate, WKNavigationDelegate 
 extension CreateUserController : PlaidItemDelegate{
     func didFinishGettingItem(item_id: String, access_token: String) {
         print("didFinishGettingItem")
+        DispatchQueue.main.async {
+           self.errorTextView.isHidden = true
+            //let user know bank account was linked successfully
+            let alert = UIAlertController(title: "Link Account", message: "Your bank account was successfully linked", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+            ///
+        }
+         
         let today = Date()
         //start of the year
         var startComponent = Calendar.current.dateComponents([.year, .month, .day], from: today)
@@ -160,6 +218,7 @@ extension CreateUserController : PlaidItemDelegate{
            let start = dateFormatterGet.string(from: startDate)
             plaidAPIManager.getTransaction(accessToken: access_token, itemId : item_id, startDate: start, endDate: end)
         }
+        self.accountLinked = true
     }
     
     
@@ -174,17 +233,21 @@ extension CreateUserController : PlaidTransactionDelegate{
                     , transaction_id : transaction.transaction_id, date: transaction.date)
             }
             firebaseManager.getUser()
+            DispatchQueue.main.async {
+                print("linking from get transactions" )
+               self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
+                
+            }
         }
         
-        DispatchQueue.main.async {
-           self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
-        }
+        
     }
     func didFailToGetTransactions(){
-        print("didFailToGetTransactions", finishedGettingTransaction)
+        print("didFailToGetTransactions", finishedGettingTransaction, createAccountPressed)
          finishedGettingTransaction = true
         if(createAccountPressed){
             DispatchQueue.main.async {
+                print("linking from fail transactions" )
                self.performSegue(withIdentifier: CONST.registerSegue, sender: self)
             }
             

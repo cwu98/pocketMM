@@ -22,7 +22,7 @@ protocol PlaidItemDelegate{
 //    func couldnGetTransaction()
 }
 protocol PlaidRefreshTransactionDelegate{
-    func didFinishRefreshingTransactions(transactions : [Transaction])
+    func didFinishRefreshingTransactions()
 //    func couldnGetTransaction()
 }
 protocol PlaidBalanceDelegate{
@@ -179,6 +179,7 @@ struct PlaidAPIManager{
                         }
 
                         if let parsedTransactions = self.parseTransactions(safeData, itemId: itemId) {
+                            print("got parsedTransacctions from getTransactions PlaidAPIManager", parsedTransactions.count)
                             self.transactionDelegate?.didFinishGettingTransactions(transactions: parsedTransactions)
                         }
                         else{
@@ -226,22 +227,9 @@ struct PlaidAPIManager{
                                     date: transactionData.date)
                 transactions.append(transaction)
                 
-//                let docData : [String: Any] = [
-//                    CONST.FSTORE.transaction_id : transaction.transaction_id,
-//                    CONST.FSTORE.item_id : transaction.item_id,
-//                    CONST.FSTORE.transaction_date : transaction.date,
-//                    CONST.FSTORE.transaction_amount : transaction.amount,
-//                    CONST.FSTORE.transaction_category : transaction.category,
-//                    CONST.FSTORE.transaction_category_id : transaction.category_id
-//                    ]
-//                if let email = Auth.auth().currentUser?.email{
-//                    db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
-//                        CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
-//                    ])
-//                }
-                
 
             }
+            print("parsed transactions", transactions.count)
             return transactions
         }
         catch{
@@ -332,8 +320,9 @@ struct PlaidAPIManager{
                         print(error!)
                         return
                     }
-                    
+                    self.refreshTransactionDelegate?.didFinishRefreshingTransactions()
                 }
+                
                 task.resume()
                 
             } catch {

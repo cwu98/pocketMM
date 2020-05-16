@@ -216,11 +216,15 @@ struct FirebaseManager {
             db.collection(CONST.FSTORE.usersCollection).document(email).updateData([
                 CONST.FSTORE.transactions : FieldValue.arrayUnion([docData])
             ])
+            print("uploaded transaction to firebase from addTransaction")
         }
         else{
             print("failed to add Transaction")
         }
     }
+
+        
+
 
 }
 

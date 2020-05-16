@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class NewSpendingController: UIViewController {
+class NewSpendingController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
@@ -25,7 +25,8 @@ class NewSpendingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        amountTextField.delegate = self
+        nameTextField.delegate = self
         self.datetextview.layer.cornerRadius = 25
         self.saveButton.layer.cornerRadius = 15
         
@@ -34,15 +35,17 @@ class NewSpendingController: UIViewController {
        let date = dateFormatterGet.string(from: Date())
         datetextview.text = date
         datetextview.isEditable = false
-        
+        /*
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+ */
     }
-    
+    /*
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+ */
 
     /*
     // MARK: - Navigation
@@ -66,13 +69,30 @@ class NewSpendingController: UIViewController {
         }
         
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     
     @IBAction func saveButtonClicked(_ sender: UIButton) {
-        if let _ = nameTextField.text, let amount = amountTextField.text, let cat = category,let currentUser = user {
+        if let _ = nameTextField.text, let amountStr = amountTextField.text, let cat = category,let currentUser = user {
+            
+            let decimalCharacters = CharacterSet.letters
+
+            let decimalRange = amountStr.rangeOfCharacter(from: decimalCharacters)
+
+            if decimalRange != nil{
+                let alert = UIAlertController(title: "Add New Spending", message: "Amount must be a number", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okAction)
+                present(alert, animated: true, completion: nil)
+                return
+            }
             let dateFormatterGet = DateFormatter()
             dateFormatterGet.dateFormat = "yyyy-MM-dd"
             let date = dateFormatterGet.string(from: Date())
-            firebaseManager.addTransaction(amount: Double(amount) as! Double, category: [cat] , item_id : currentUser.item_id
+            
+            firebaseManager.addTransaction(amount: Double (amountStr)! , category: [cat] , item_id : currentUser.item_id
             , transaction_id : NSUUID().uuidString, date: date)
             
             firebaseManager.getUser()
@@ -95,6 +115,7 @@ class NewSpendingController: UIViewController {
         
     }
 }
+
 
 extension NewSpendingController : FirebaseUserDelegate{
     func didFinishGettingUser(user: User) {
