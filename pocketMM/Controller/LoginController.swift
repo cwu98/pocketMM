@@ -60,10 +60,14 @@ class LoginController: UIViewController {
 extension LoginController : FirebaseUserDelegate{
     func didFailToGetUser() {
         print("did fail to get user in Log In Controller")
-        DispatchQueue.main.async {
-             
-           self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
-        }
+//        DispatchQueue.main.async {
+//
+//           self.performSegue(withIdentifier: CONST.loginSegue, sender: self)
+//        }
+        let alert = UIAlertController(title: "Login", message: "Failed loading user"n, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func didFinishGettingUser(user: User) {
