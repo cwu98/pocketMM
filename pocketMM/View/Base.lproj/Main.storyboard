@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cza-Og-Z63">
-                                <rect key="frame" x="0.0" y="88" width="414" height="776"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9a-lm-9bI" userLabel="topView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="104"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="103.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="8Ww-Ey-JDA">
                                                 <rect key="frame" x="0.0" y="5" width="414" height="27"/>
@@ -35,7 +35,7 @@
                                         </subviews>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKW-pk-hXM" userLabel="email">
-                                        <rect key="frame" x="0.0" y="112" width="414" height="104"/>
+                                        <rect key="frame" x="0.0" y="111.5" width="414" height="104"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O7z-K3-mi2">
                                                 <rect key="frame" x="43" y="59" width="326" height="30"/>
@@ -52,7 +52,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TG8-ao-eDN" userLabel="pwView">
-                                        <rect key="frame" x="0.0" y="224" width="414" height="104"/>
+                                        <rect key="frame" x="0.0" y="223.5" width="414" height="103.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fuN-qM-car">
                                                 <rect key="frame" x="43" y="9" width="326" height="25"/>
@@ -69,7 +69,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1RQ-TZ-Avt">
-                                        <rect key="frame" x="0.0" y="336" width="414" height="104"/>
+                                        <rect key="frame" x="0.0" y="335" width="414" height="104"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQj-gx-tqg">
                                                 <rect key="frame" x="54" y="5" width="307" height="41"/>
@@ -84,7 +84,7 @@
                                         </subviews>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJy-vR-jS5">
-                                        <rect key="frame" x="0.0" y="448" width="414" height="104"/>
+                                        <rect key="frame" x="0.0" y="447" width="414" height="103.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lm-2g-aUg">
                                                 <rect key="frame" x="118" y="5" width="178" height="40"/>
@@ -99,7 +99,7 @@
                                         </subviews>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zca-Kb-cZU">
-                                        <rect key="frame" x="0.0" y="560" width="414" height="104"/>
+                                        <rect key="frame" x="0.0" y="558.5" width="414" height="104"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Error message" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lnp-LM-mhB">
                                                 <rect key="frame" x="0.0" y="-10" width="414" height="54"/>
@@ -111,10 +111,10 @@
                                         </subviews>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scl-9T-THK">
-                                        <rect key="frame" x="0.0" y="672" width="414" height="104"/>
+                                        <rect key="frame" x="0.0" y="670.5" width="414" height="103.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="ox0-o4-ny3">
-                                                <rect key="frame" x="-207" y="50" width="828" height="54"/>
+                                                <rect key="frame" x="-207" y="49.5" width="828" height="54"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -922,13 +922,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ZDV-lj-DPH">
-                                <rect key="frame" x="0.0" y="88" width="414" height="0.0"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="38s-TN-7kn" userLabel="Logo View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="309.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lcc-mL-wMd">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="134"/>
+                                                <rect key="frame" x="0.0" y="155" width="414" height="134"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -939,10 +939,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ne-QS-RkI" userLabel="Email View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="309.5" width="414" height="77.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="user_good@nyu.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G9t-vh-CNn">
-                                                <rect key="frame" x="20" y="-17" width="374" height="34"/>
+                                                <rect key="frame" x="20" y="22" width="374" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                             </textField>
@@ -955,10 +955,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aI4-eI-6v4" userLabel="Password View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="387" width="414" height="77.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bPK-Ly-8TM">
-                                                <rect key="frame" x="16.5" y="-17" width="381" height="34"/>
+                                                <rect key="frame" x="16.5" y="22" width="381" height="34"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="pass_good">
                                                         <attributes>
@@ -977,7 +977,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLq-Hj-ST2" userLabel="Bottom View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="464.5" width="414" height="309.5"/>
                                         <subviews>
                                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SyK-wL-u9D">
                                                 <rect key="frame" x="110" y="62" width="194" height="96"/>

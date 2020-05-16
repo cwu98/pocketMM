@@ -26,6 +26,7 @@ class NewSpendingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "New Spending"
         self.datetextview.layer.cornerRadius = 25
         self.saveButton.layer.cornerRadius = 15
         
