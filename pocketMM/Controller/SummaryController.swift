@@ -19,15 +19,19 @@ struct tablecelldata {
     let amount : String!    //$ + number
 }
 
-class SummaryController: UIViewController, UITextFieldDelegate {
+class SummaryController: UIViewController, ChartViewDelegate, UITextFieldDelegate {
   
     var plaidAPIManger = PlaidAPIManager()
     var firebaseManager = FirebaseManager()
     
-    @IBOutlet weak var pieChart:PieChartView!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var pieChart: PieChartView!
     @IBOutlet weak var monthLabel: UITextField!
     @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
     
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var progressLabel: UILabel!
     var datePicker = MonthYearPickerView()
 
     var selectedMonth: String?
@@ -44,7 +48,6 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         print("In summary controller")
 
-        //        plaidAPIManger.transactionDelegate = self
         firebaseManager.transactionsDelegate = self
         
         if(user == nil){
@@ -52,10 +55,12 @@ class SummaryController: UIViewController, UITextFieldDelegate {
             firebaseManager.getUser()
         }
         
+        pieChart.delegate = self
+        pieChart.noDataText = "There is no data for the month and year selected"
         monthLabel.delegate = self
         datePicker.onDateSelected = { (month: Int, year: Int) in
             let string = String  (format: "%02d/%d",month, year)
-            print(string)
+            //print(string)
         }
         
         
@@ -73,10 +78,11 @@ class SummaryController: UIViewController, UITextFieldDelegate {
             return
         }
         self.transactionData = transactionData
-//        transactionData = user?.transactions as! [Transaction]
+
 
         displayForSelectedMonth()
         
+                
     }
     
     func createDatePicker() {
@@ -121,7 +127,7 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         }
         self.transactionData = transactionData
         for transaction in transactionData {
-            var date = dateFormatter.date(from: transaction.date)
+            let date = dateFormatter.date(from: transaction.date)
             if (startDate ... endDate).contains(date!){
 
                 tempArr.append(transaction)
@@ -139,11 +145,11 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         dateComponents.month = month
         dateComponents.year = year
         let userCalendar = Calendar.current
-        var startDate = userCalendar.date(from: dateComponents)
+        let startDate = userCalendar.date(from: dateComponents)
         var comps2 = DateComponents()
         comps2.month = 1
         comps2.day = -1
-        var endDate = userCalendar.date(byAdding: comps2, to: startDate!)
+        let endDate = userCalendar.date(byAdding: comps2, to: startDate!)
         var groupByCategory = [[Transaction]]()
          var totalSpendingByCategory = [Double]()
          var transactionsForMonth = [Transaction]()
@@ -156,20 +162,35 @@ class SummaryController: UIViewController, UITextFieldDelegate {
          for list in groupByCategory {
              totalSpendingByCategory.append(list.reduce(0) { $0 + $1.amount})
          }
-         
-         totalSpendingByCategory[0] = 120.50 //dummy entertainment
-         totalSpendingByCategory[5] = 1550.00 //dummy rent
-         
-         print(totalSpendingByCategory)
+         //default category label and progress bar for "Entertainment"
+          let formatter = NumberFormatter()
+          formatter.usesGroupingSeparator = true
+          formatter.currencySymbol = "$"
+          formatter.numberStyle = .currency
+          formatter.locale = Locale.current
+          categoryLabel.text = categories[0]
+        totalLabel.text = formatter.string(from: NSNumber(value: totalSpendingByCategory[0]))
+        var progress: Float
+          if user?.limit.entertainment ?? -1.0 >= 0.0 {
+            progressLabel.text = formatter.string(from: NSNumber(value: totalSpendingByCategory[0] ))! + " / " + formatter.string(from: NSNumber(value: user?.limit.entertainment ?? 0.0))!
+            progress = Float(totalSpendingByCategory[0]/(user?.limit.entertainment)! ?? 1.0)
+          }
+         else{
+          progressLabel.text = "Set budget limit in settings"
+            progress = 0.0
+          }
+        progressBar.setProgress(progress, animated: false)
+
+
         monthSpending = totalSpendingByCategory.reduce(0){$0 + $1}
         updateChartData(totalSpendingByCategory: totalSpendingByCategory)
     }
     
     func updateChartData(totalSpendingByCategory : [Double]){
-        pieChart.backgroundColor = .white
         var entries: [PieChartDataEntry] = []
         for i in 0..<totalSpendingByCategory.count {
-            let dataEntry = PieChartDataEntry(value: totalSpendingByCategory[i], label: categories[i] )
+            let dataEntry = PieChartDataEntry(value: totalSpendingByCategory[i], label: categories[i])
+            dataEntry.x = Double(i)
             entries.append(dataEntry)
         }
         let chartDataSet = PieChartDataSet(entries: entries, label:"")
@@ -183,6 +204,7 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         formatter.zeroSymbol = ""
         
         chartData.setValueFormatter((DefaultValueFormatter(formatter: formatter)))
+        chartData.setValueFont(.systemFont(ofSize: 11, weight: .light))
         let color1 = NSUIColor(hex: 0xC39BD3) //purple
         let color2 = NSUIColor(hex: 0xAED6F1) //blue
         let color3 = NSUIColor(hex: 0x76D7C4) //green
@@ -198,6 +220,16 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         
         chartDataSet.drawIconsEnabled = false
         chartDataSet.sliceSpace = 3
+        chartDataSet.valueTextColor = .blue
+        chartDataSet.drawValuesEnabled = false
+        /*
+        chartDataSet.valueLineColor = .gray
+        chartDataSet.valueLinePart1OffsetPercentage = 0.8
+        chartDataSet.valueLinePart1Length = 0.2
+        chartDataSet.valueLinePart2Length = 0.4
+        chartDataSet.yValuePosition = .outsideSlice
+        */
+        
         pieChart.data = chartData
         pieChart.chartDescription?.text = arrayOfMonths[month-1] //month to display
         pieChart.drawHoleEnabled = true
@@ -206,13 +238,10 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         pieChart.legend.enabled = true
         pieChart.rotationEnabled = false
         pieChart.drawEntryLabelsEnabled = false
-        chartDataSet.valueTextColor = .blue
+        pieChart.isUserInteractionEnabled = true
+        pieChart.highlightPerTapEnabled = true
         pieChart.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
-        chartDataSet.valueLineColor = .gray
-       chartDataSet.valueLinePart1OffsetPercentage = 0.6
-    chartDataSet.valueLinePart1Length = 0.6
-              chartDataSet.valueLinePart2Length = 0.5
-               chartDataSet.yValuePosition = .outsideSlice
+
         let l = pieChart.legend
         l.horizontalAlignment = .center
         l.verticalAlignment = .bottom
@@ -222,9 +251,61 @@ class SummaryController: UIViewController, UITextFieldDelegate {
         nf.usesGroupingSeparator = true
         nf.currencySymbol = "$"
         nf.numberStyle = .currency
-        pieChart.centerText = "Total: " + nf.string(from: NSNumber(value: monthSpending!))!
+        pieChart.centerText = "Total: \n" + nf.string(from: NSNumber(value: monthSpending!))!
+
     }
 
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        //print("index: \(entry.x) value: \(entry.y)\n")
+        let index : Int = Int(entry.x)
+        var limit: Double? = 0.0
+        switch index {
+        case 0:
+            limit = user?.limit.entertainment
+            break
+        case 1:
+            limit = user?.limit.groceries
+            break
+        case 2:
+            limit = user?.limit.shopping
+            break
+        case 3:
+            limit = user?.limit.dining
+            break
+        case 4:
+            limit = user?.limit.utilities
+            break
+        case 5:
+            limit = user?.limit.rent
+            break
+        case 6:
+            limit = user?.limit.goals
+            break
+        case 7:
+            limit = user?.limit.miscellaneous
+        default:
+            print("error")
+        }
+        let formatter = NumberFormatter()
+         formatter.usesGroupingSeparator = true
+         formatter.currencySymbol = "$"
+         formatter.numberStyle = .currency
+         formatter.locale = Locale.current
+         categoryLabel.text = categories[index]
+        totalLabel.text = formatter.string(from: NSNumber(value: entry.y))
+        var progress: Float
+         if limit ?? -1.0 >= 0.0 {
+            progressLabel.text = formatter.string(from: NSNumber(value: entry.y))! + " / " + formatter.string(from: NSNumber(value: limit ?? 1.0))!
+            progress = Float(entry.y/limit! ?? 1.0)
+
+         }
+        else{
+         progressLabel.text = "Set budget limit in settings"
+            progress = 0.0
+         }
+        progressBar.setProgress(progress, animated: false)
+
+    }
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
         let firebaseAuth = Auth.auth()
         do {

@@ -51,6 +51,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
  
          
     }
+    
     @objc func populate(){
         loadReminders()
     }
@@ -94,23 +95,21 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
     
         
 
-     /* !!TO FIX !! */
-        func convertToDate(date: String)-> Date? {
-            let strDate = date
-            
-             let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone.current
-            dateFormatter.dateFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ssZZZ"
-            let xdate = dateFormatter.date(from: strDate)
-            print("xdate: \(xdate)")
+    func convertToDate(date: String)-> Date? {
+        let strDate = date
+        
+            let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ssZZZ"
+        let xdate = dateFormatter.date(from: strDate)
+        print("xdate: \(xdate)")
 
-             return xdate!
-        }
+            return xdate!
+    }
     
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(true)
-        //table.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -122,13 +121,14 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        cell.detailTextLabel?.numberOfLines = 0
         let reminder = reminders[indexPath.row]
         cell.textLabel?.text = reminder.title
         print("\(reminder.title)", " ", "\(reminder.due_date)")
         let date = self.convertToDate(date: reminder.due_date)
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, YYYY"
-        cell.detailTextLabel?.text = "Due: " + formatter.string(from: date!)
+        cell.detailTextLabel?.text = "Due: " + formatter.string(from: date!) + "\n" + "Repeats: \(reminder.frequency)"
         
         //make due date red if overdue
         if NSDate().earlierDate(self.convertToDate(date: reminder.due_date)!) == self.convertToDate(date: reminder.due_date) {
@@ -153,7 +153,7 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
         
         addVC.title = "New Reminder"
         addVC.navigationItem.largeTitleDisplayMode = .never
-        addVC.completion = {title, date, frequency, alert in
+        addVC.completion = {title, date, frequency in
             DispatchQueue.main.async {
                 self.navigationController?.popToViewController(self, animated: true)
                 let newReminder = reminder(title: title, due_date: "\(date)", frequency: frequency, identifier: "id_\(title)")
@@ -166,7 +166,6 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
                 content.body = "pocketMM reminder"
                 content.sound = .default
                 
-                //TODO ALERT PART
                 
                 let calendar = Calendar.current
                 let targetDate = date
@@ -238,10 +237,10 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
         firebaseManager.getUser()
       
     }
-    
+    /*
     func removeFromFirebase(title: String){
         if let email = Auth.auth().currentUser?.email{
-            db.collection("reminders").document(email).updateData(["id_\(title)": FieldValue.delete(),
+            db.collection("users").document(email).updateData(["reminders": FieldValue.delete(),
                 ]){err in
                     if let err = err{
                         print("error deleting document: \(err)")
@@ -264,7 +263,8 @@ class AlertPageController: UIViewController, UITableViewDelegate, UITableViewDat
             removeFromFirebase(title: toRemove.title)
         }
     }
-        
+        */
+    
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
         let firebaseAuth = Auth.auth()
         do {

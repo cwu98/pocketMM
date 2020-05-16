@@ -15,29 +15,23 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
     @IBOutlet var dueDateField: UITextField!
     @IBOutlet var saveButton: UIBarButtonItem!
     @IBOutlet var frequencyField: UITextField!
-    @IBOutlet var alertMeField: UITextField!
     
     var frequencyPicker = UIPickerView()
-    var alertPicker = UIPickerView()
     
-    public var completion: ((String, Date, String, String) -> Void)?
+    public var completion: ((String, Date, String) -> Void)?
     
-    let freqArr = ["every month", "every week", "every year"]
-    let alertArr = ["1 day", "2 days", "3 days", "4 days", "5 days", "6 days", "1 week", "2 weeks"]
+    let freqArr = ["", "every month", "every week", "every year"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.isEnabled = false
         titleField.delegate  = self
         frequencyField.delegate = self
-        alertMeField.delegate = self
         //checkFields()
         frequencyPicker.delegate = self
         frequencyPicker.dataSource = self
         frequencyField.textAlignment = .center
-        alertPicker.delegate = self
-        alertPicker.dataSource = self
-        alertMeField.textAlignment = .center
+        createFrequencyPicker()
         createDatePicker()
         let calendar = Calendar(identifier: .gregorian)
         var comps = DateComponents()
@@ -49,11 +43,9 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
         datePicker.locale = NSLocale.current
         dueDateField.inputView = datePicker
 
-        frequencyField.inputView = frequencyPicker
-        alertMeField.inputView = alertPicker
+
         
         frequencyPicker.tag = 0
-        alertPicker.tag = 1
         
     }
     
@@ -66,9 +58,6 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
         if pickerView.tag == 0 {
             return freqArr.count
         }
-        else if pickerView.tag == 1 {
-            return alertArr.count
-        }
         return 0
     }
 
@@ -76,27 +65,20 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
         if pickerView.tag == 0 {
             return freqArr[row]
         }
-        else if pickerView.tag == 1 {
-            return alertArr[row]
-            
-        }
+   
         return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 0 {
             frequencyField.text = "Repeats: " + freqArr[row]
-            frequencyField.resignFirstResponder()
         }
-        else if pickerView.tag == 1 {
-            alertMeField.text = alertArr[row] + " before due date"
-            alertMeField.resignFirstResponder()
-        }
+     
     }
     
     func checkFields(){
         //disable save button if field is empty
-        if !titleField.hasText  || !dueDateField.hasText || !frequencyField.hasText || !alertMeField.hasText {
+        if !titleField.hasText  || !dueDateField.hasText || !frequencyField.hasText {
             saveButton.isEnabled = false
         }
         else{
@@ -110,12 +92,11 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
     }
     
     @IBAction func didTapSaveButton(){
-        if let titleText = titleField.text,
-            let freqText = frequencyField.text,
-            let alertMeText = alertMeField.text {
+        let titleText = titleField.text
+        let freqText = freqArr[frequencyPicker.selectedRow(inComponent: 0)]
             
-            completion?(titleText, datePicker.date, freqText, alertMeText)
-        }
+        completion?(titleText ?? "", datePicker.date, freqText)
+        
         print("save button tapped")
     }
     
@@ -135,11 +116,36 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
         //assign date picker to text field
         dueDateField.inputView = datePicker
         
-        //date picker mode
-        //datePicker.datePickerMode = .date
         
         self.view.endEditing(true)
         
+    }
+    
+    func createFrequencyPicker() {
+        //toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        
+        //bar button
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedFrequency))
+        toolbar.setItems([doneBtn], animated: true)
+             
+        //assign toolbar
+        frequencyField.inputAccessoryView = toolbar
+        
+        //assign date picker to text field
+        frequencyField.inputView = frequencyPicker
+     
+        self.view.endEditing(true)
+             
+        
+    }
+    
+    @objc func donePressedFrequency() {
+        frequencyField.endEditing(true)
+        frequencyField.resignFirstResponder()
+        textFieldDidEndEditing(frequencyField)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -153,13 +159,12 @@ class AddReminderViewController: UIViewController, UITextFieldDelegate, UIPicker
         formatter.timeStyle = .medium
         
         dueDateField.text = formatter.string(from: datePicker.date)
+        dueDateField.resignFirstResponder()
+        textFieldDidEndEditing(dueDateField)
     }
     
     
-    //set frequency
-    
-    
-    //remind me XXX days before
+ 
     
 
 }

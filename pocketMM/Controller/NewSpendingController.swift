@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class NewSpendingController: UIViewController {
+class NewSpendingController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
@@ -25,8 +25,9 @@ class NewSpendingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = "New Spending"
+        amountTextField.delegate = self
+        nameTextField.delegate = self
         self.datetextview.layer.cornerRadius = 25
         self.saveButton.layer.cornerRadius = 15
         
@@ -35,15 +36,17 @@ class NewSpendingController: UIViewController {
        let date = dateFormatterGet.string(from: Date())
         datetextview.text = date
         datetextview.isEditable = false
-        
+        /*
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+ */
     }
-    
+    /*
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+ */
 
     /*
     // MARK: - Navigation
@@ -66,6 +69,10 @@ class NewSpendingController: UIViewController {
            category = cat
         }
         
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     @IBAction func saveButtonClicked(_ sender: UIButton) {
@@ -109,6 +116,7 @@ class NewSpendingController: UIViewController {
         
     }
 }
+
 
 extension NewSpendingController : FirebaseUserDelegate{
     func didFinishGettingUser(user: User) {

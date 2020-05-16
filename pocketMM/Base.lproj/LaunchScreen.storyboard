@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="54"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat_frame" translatesAutoresizingMaskIntoConstraints="NO" id="Lo1-hA-a59">
-                                <rect key="frame" x="0.0" y="842" width="414" height="54"/>
+                                <rect key="frame" x="0.0" y="832" width="414" height="54"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" name="backgroundColor"/>
@@ -39,7 +39,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qfe-Ir-fre" secondAttribute="trailing" id="OZ1-Rx-HhY"/>
                             <constraint firstItem="bJr-ie-BuX" firstAttribute="top" secondItem="IpH-EC-MIW" secondAttribute="bottom" constant="26" id="Qla-tQ-Cy9"/>
                             <constraint firstItem="Qfe-Ir-fre" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="QqZ-zj-cjO"/>
-                            <constraint firstItem="Lo1-hA-a59" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="Tae-pZ-VbO"/>
+                            <constraint firstItem="Lo1-hA-a59" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" constant="-10" id="Tae-pZ-VbO"/>
                             <constraint firstItem="bJr-ie-BuX" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="XtH-vi-RuI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IpH-EC-MIW" secondAttribute="trailing" constant="55" id="Ydg-W9-h6i"/>
                             <constraint firstItem="bJr-ie-BuX" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="ete-OI-cf6"/>
