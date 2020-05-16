@@ -51,36 +51,35 @@ let item_id : String
         print("making transaction object")
         let category_id : Int
      
-        if category.contains("Arts and Entertainment") || category.contains("Adult Entertainment") || category.contains("Entertainment"){
+        if category.contains("Arts and Entertainment") || category.contains("Adult Entertainment") || category.contains("Entertainment") || category.contains("entertainment"){
             category_id = 0
             
             }
-        else if category.contains("Supermarkets and Groceries") || category.contains("Delis"){
+        else if category.contains("Supermarkets and Groceries") || category.contains("Delis") || category.contains("grocery") || category.contains("Groceries"){
             category_id = 1
         }
-        else if category.contains("Shops") || category.contains("Clothing and Accessories"){
+        else if category.contains("Shops") || category.contains("Clothing and Accessories") || category.contains("shopping"){
             category_id = 2
         }
-        else if category.contains("Restaurants") || category.contains("Food and Drink") {
+            else if category.contains("Restaurants") || category.contains("Food and Drink") || category.contains("dining"){
             category_id = 3
         }
-            else if category.contains("Utilities"){
-                category_id = 4
+        else if category.contains("Utilities") || category.contains("utilities"){
+            category_id = 4
         }
-            else if category.contains("Rent"){
-                category_id = 5
+        else if category.contains("Rent") || category.contains("rent") {
+            category_id = 5
         }
-            else if category.contains("goals"){
-                category_id = 6
+        else if category.contains("goals"){
+            category_id = 6
         }
             else {
-                category_id = 7
+            category_id = 7
         }
         
         self.amount = amount
         self.category = category
         self.category_id = category_id
-        print("category_id: \(category_id)")
         self.transaction_id = transaction_id
         self.date = date
         self.item_id = item_id
