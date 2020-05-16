@@ -79,6 +79,7 @@ class SummaryController: UIViewController, ChartViewDelegate, UITextFieldDelegat
         }
         self.transactionData = transactionData
 
+
         displayForSelectedMonth()
         
                 
